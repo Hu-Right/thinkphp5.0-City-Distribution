@@ -1,0 +1,64 @@
+<link rel="stylesheet" type="text/css" href="/assets/css/help-buy.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/mui.picker.min.css" />
+<style type="text/css">
+	.mui-content {
+		background: #fff;
+	}
+
+	.mui-content>.mui-table-view:first-child {
+		margin-top: 0;
+	}
+
+	.mui-bar {
+		border-bottom: 1px solid #dcdcdc;
+	}
+
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+		font-size: 15px;
+		font-weight: normal;
+		padding: 0 15px;
+	}
+
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+		border: none;
+		font-size: 16px;
+	}
+</style>
+<body>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">帮我办</h1>
+</header>
+
+<div class="mui-content help-buy-index">
+	<ul class="mui-table-view">
+		<li class="ul-li ul-li2">
+			<div style="overflow: hidden; line-height: 26px;">
+				<span class="left">服务类型：</span>
+			</div>
+
+			<!-- 服务类型 -->
+			<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted chanpin">
+				<div id="scroll" class="mui-scroll">
+					{volist name="$soninfo" id="vo"}
+					<a class="mui-control-item {$key == 0 ? 'mui-active':''}" data-id="{$vo.id}" >
+						{$vo.service_name}
+					</a>
+					{/volist}
+				</div>
+			</div>
+		</li>
+
+		<li class="ul-li" style="padding-top: 5px;">
+			<span class="left" style="line-height: 30px;">帮我办：</span>
+			<textarea id="textarea" placeholder="日常保洁、搬运、临时保姆、小时工、紧急求助...填写帮办需求"></textarea>
+			<!-- <input class="input-price" type="text" placeholder="请输入商品价格" style="text-align: right;"> -->
+		</li>
+	</ul>
+
+
+
+	<button id="next-btn" type="button">下一步</button>
+</div>
+<script src="/assets/js/frontend/placeorder/helpdostep1.js"></script>

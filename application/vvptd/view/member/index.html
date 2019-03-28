@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/member/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/home.css" />
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css" />
+		<style>
+            .mui-scroll .msg>div:first-child{
+                position: relative;
+            }
+            .files{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                opacity:0;
+            }
+            .anchorBL{display:none;}
+            .code .inpNum {
+                width: 60% !important;
+            }
+            #paizhao{
+                margin-right:25%;
+                float: right;
+                padding: 5px 5px 4px 5px;
+                background-color: #ccc;
+                border-radius: 20px;
+                font-size: 12px;
+            }
+
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-off-canvas-wrap mui-draggable">
+			<aside class="mui-off-canvas-left">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<header class="mui-bar mui-bar-nav scroll-header">
+							<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+						</header>
+						<div class="mui-content mc">
+							<div class="msg">
+								<div class="mui-pull-left">
+									<input type="file" class="files" accept="image/*" style="">
+                                    {if condition=" $data['avatar'] eq '' "}
+                                    <img class="imageup" src="__CDN__/assets/vvptd/member/img/touxiang.png" alt=""/>
+                                    {else/}
+                                    <img class="imageup" src="{$data['avatar']}" alt=""/>
+                                    <input type="file" class="files" accept="image/*">
+                                    {/if}
+								</div>
+
+								<div class="mui-pull-left xx" id="grzx">
+									{if condition=" $data['truename'] eq  '' "}
+                                    <p><span>{$data['mobile']}</span></p>
+                                    <p><span class="name"> </span> <span>{if condition=" $data['level_info']['level'] neq '' "}V{/if}{$data['level_info']['level']} {$data['level_info']['name']}</span></p>
+                                    {else/}
+                                    <p><span class="name">{$data['truename']} </span> <span>{if condition=" $data['level_info']['level'] neq '' "}V{/if}{$data['level_info']['level']} {$data['level_info']['name']}</span></p>
+                                    <p><span>{$data['mobile']}</span></p>
+                                    {/if}
+								</div>
+							</div>
+							<div class="balance" id="balance">
+								<div class="mui-pull-left">
+									<p>账户余额</p>
+									<p>{$data['money']}</p>
+								</div>
+								<div class="mui-pull-right credit">
+									<p>信用等级</p>
+									{$data['score']}
+								</div>
+							</div>
+							<div class="items">
+								<p id="order"><span class="mui-icon iconfont icon-dingdan1"></span> 订单中心</p>
+								<p id="vvteam"><span class="mui-icon iconfont icon-zhandui"></span> VV战队</p>
+								<p id="share"><span class="mui-icon iconfont icon-fenxiang"></span> 分享推荐</p>
+								<p id="remark"><span class="mui-icon iconfont icon-pingjia"></span> 评价管理</p>
+								<p id="task"><span class="mui-icon iconfont icon-renwuzhongxin"></span> 任务中心</p>
+								<p id="setting"><span class="mui-icon iconfont icon-shezhi"></span> 设置中心</p>
+								<p id="course"><span class="mui-icon iconfont icon-ganhuo_tab"></span> 跑腿教程</p>
+								<p id="help"><span class="mui-icon iconfont icon-bangzhu"></span> 帮助说明</p>
+								<p id="relitu"><span class="mui-icon iconfont icon-relitu"></span> 热力图</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</aside>
+			<div class="mui-inner-wrap mw">
+				<div class="mui-off-canvas-backdrop"></div>
+				<header class="mui-bar mui-bar-nav">
+					<div class="mui-pull-left tx">
+						{if condition=" $data['avatar'] eq '' "}
+                        <img class="touxiang" src="__CDN__/assets/vvptd/member/img/touxiang.png" alt="" />
+                        {else/}
+                        <img class="touxiang" src="{$data['avatar']}" alt="" />
+                        {/if}
+					</div>
+					<h1 class="mui-title">
+						<div id="segmentedControl" class="mui-segmented-control">
+							<a class="mui-control-item mui-active home-btn" href="#item1" style="margin-right: 20px;" id="shouye">首页</a>
+							<a class="mui-control-item get-order-btn" href="#item2" id="dingwei">接单</a>
+						</div>
+					</h1>
+                    <input type="hidden" id="rid" value="{$data['id']}">
+					<span class="mui-icon iconfont icon-xiaoxi mui-pull-right" id="message"></span>
+				</header>
+				<div id="content" class="mui-content">
+					<div style="height: 100%;">
+						<div id="item1" class="mui-control-content mui-active">
+							<!--<div id="scroll" class="mui-scroll-wrapper">
+								<div class="mui-scroll">-->
+							<section>
+								<div style="background-color: #FAFAFA;padding-top: 25px;">
+									<div class="today-in">
+										<p>今日收入</p>
+										<p>{if condition=" $tody['tody_money'] eq ''  "}0.00{else/}{$tody['tody_money']}{/if} <span>元</span></p>
+									</div>
+								</div>
+
+								<div class="order">
+									<div class="mui-pull-left">
+										<p>今日订单数</p>
+										<p class="ft">{$tody['todyordercount']}</p>
+									</div>
+									<div class="mui-pull-left total-order">
+										<p>总订单数</p>
+										<p class="ft">{$tody['totalordercount']}</p>
+									</div>
+									<div class="mui-pull-left">
+										<p>今日里程（千米）</p>
+										<p class="ft">{if condition=" $tody['tody_distance'] eq ''  "}0{else/}{$tody['tody_distance']}{/if}</p>
+									</div>
+								</div>
+							</section>
+							<!--</div>
+							</div>-->
+						</div>
+						<div id="item2" class="mui-control-content mapPage" style="height: 100%;">
+
+							<div class="mui-table-view">
+								<div class="mui-table-view-cell weizhi" id="new-dingwei">
+									<span>我的位置：</span><span id="now_address">河南省郑州市金水区未来路</span>
+									<span class="refresh mui-pull-right">
+										<span class="mui-icon iconfont icon-shuaxin" style="color: #10B6FF;"></span>
+										刷新
+									</span>
+								</div>
+
+							</div>
+							<div id="allmap" class="map1"></div>
+							<div class="getOrder">
+                                {if condition=" $data['is_receipt'] eq 0 "}
+                                <span class="order-start">开始接单</span><span class="order-end act">停止接单</span>
+                                {else/}
+                                <span class="order-start act">开始接单</span><span class="order-end ">停止接单</span>
+                                {/if}
+
+								<span><i class="mui-icon iconfont icon-jiance"></i>常规检测</span>
+							</div>
+
+
+						</div>
+						<div id="item2" class="mui-control-content order-main" style="height: 100%;">
+							
+							<div class="mui-scroll-wrapper">
+								<div class="mui-scroll">
+									<div id="allmap1" class="map2">
+                                    </div>
+                                    <div class="order-page">
+										<div class="mui-table-view">
+                                            <p style="position: absolute;left: 0;top: -35px;width: 100%;height: 35px;line-height: 35px;padding: 0 2%;background-color: rgba(16,182,225,0.7);font-size: 13px;color: #333;z-index: 999;">预计送达时间：10:15</p>
+
+                                            <div class="mui-table-view-cell order-current">
+												<span>当前订单：</span>
+												<span id="a-mai">帮买</span>
+                                                <!--<span id="paizhao">-->
+                                                    <!--&lt;!&ndash;<input type="file"  id="shiwu_img" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;opacity:0;">&ndash;&gt;-->
+                                                    <!--拍照</span>-->
+                                                <button type="button" class="mui-btn mui-btn-primary mui-pull-right btn" id="paizhao">拍照</button>
+												<button type="button" class="mui-btn mui-btn-primary mui-pull-right btn" id="woyijiuwei">我已就位</button>
+											</div>
+											<div class="mui-table-view-cell process">
+												<div>
+                                                    <input type="hidden" id="order_id_s">
+													<span class="mui-icon iconfont icon-tijiaodingdan"></span>
+													<p>接受订单</p>
+												</div>
+												<div>
+													<span class="mui-icon iconfont icon-dingdanjinhangzhong"></span>
+													<p>订单进行中</p>
+												</div>
+												<div>
+													<span class="mui-icon iconfont icon-dingdanyanzheng"></span>
+													<p>订单验证</p>
+												</div>
+												<div>
+													<span class="mui-icon iconfont icon-querenwancheng"></span>
+													<p>客户确定</p>
+												</div>
+											</div>
+											<div style="width: 100%;height: 10px;background-color: #fafafa;"></div>
+                                            <div class="mui-table-view-cell shiwu" style="display: none;">
+                                                <span>实物照片：</span><br>
+                                                <img style="width: 100%;height: 150px;" src="file:///var/mobile/Containers/Data/Application/F2FD37CF-FC82-42AB-8D68-3B1AE1318F10/Documents/Pandora/apps/HBuilder/doc/head.png?version=1544085956919" id="pho_paizhao">
+
+                                            </div>
+                                            <div style="width: 100%;height: 10px;background-color: #fafafa;"></div>
+											<div class="mui-table-view-cell code">
+												<span>订单验证码：</span>
+												<input class="inpNum" type="number" id="codes">
+												<button type="button" class="mui-btn mui-btn-primary mui-pull-right btn" id="code_true">确定</button>
+											</div>
+											<div class="mui-table-view-cell order-number">
+												<p><span>订单号码：<span id="a-ordernum">1234 5678 9101 1121</span></span><span class="mui-pull-right" id="a-time">2018-11-15 16:00:00</span></p>
+												<div class="order-number-msg">
+													<div class="mui-pull-left">
+														<img src="../../img/20180828162819.jpg" alt="" id="a-img">
+													</div>
+													<div class="mui-pull-left">
+														<p class="order-number-name" id="a-name">姓名</p>
+														<p id="phoneNumber">123 4567 8910</p>
+
+													</div>
+													<div class="mui-pull-right" id="telephone">
+														<span class="mui-icon iconfont icon-dianhua"></span>
+													</div>
+												</div>
+											</div>
+											<div class="mui-table-view-cell product-type">
+												<p>产品类型：<span id="a-type"> 随意购</span></p>
+												<div class="customer-request mui-row">
+													<p class="mui-col-xs-4 mui-col-sm-4">客户要求：</p>
+													<p class="mui-col-xs-8 mui-col-sm-8" id="a-detail">要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容</p>
+												</div>
+											</div>
+											<div class="mui-table-view-cell buy-address">
+												<p> <span class="order-type buy">买</span> 购买地址:</p>
+												<p id="a-address">详细地址详细地址详细地址详细地址详细地址详细地址详细地址</p>
+											</div>
+											<div class="mui-table-view-cell buy-address">
+												<p> <span class="order-type receive">收</span> 收获地址:</p>
+												<p id="a-endaddress">详细地址详细地址详细地址详细地址详细地址详细地址详细地址</p>
+											</div>
+											<div class="mui-table-view-cell buy-msg">
+												<p>购买时间：<span id="a-buytime"> 立即购买</span></p>
+											</div>
+											<div class="mui-table-view-cell buy-msg">
+												<p>商品预付：<span id="a-money"> 20元</span></p>
+											</div>
+											<div class="mui-table-view-cell buy-msg">
+												<p>距离：<span id="a-juli"> 1.8（公里）</span></p>
+											</div>
+										</div>
+										<div class="order-cost">
+											<p>订单金额：<span id="a-orderprice">30元</span></p>
+											<p>(含商品预付费用)</p>
+										</div>
+									</div>
+								</div>
+                                <input type="hidden" id="is_admin">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="order-qiang">
+					<div class="mui-table-view order-qiang-msg">
+						<div class="mui-table-view-cell order-number">
+							<div class="order-number-msg">
+								<div class="mui-pull-left">
+									<img src="../../img/20180828162819.jpg" alt="">
+								</div>
+								<div class="mui-pull-left">
+									<p class="order-number-name">姓名</p>
+									<p id="phoneNumber">123 4567 8910</p>
+								</div>
+								<div class="mui-pull-right tangle buy-tangle">
+									<span>买</span>
+								</div>
+							</div>
+						</div>
+						<div class="mui-table-view-cell product-type">
+							<p>产品类型：<span> 随意购</span></p>
+						</div>	
+						<div class="mui-table-view-cell product-type">
+							<div class="customer-request mui-row">
+								<p class="mui-col-xs-4 mui-col-sm-4">客户要求：</p>
+								<p class="mui-col-xs-8 mui-col-sm-8">要求内容要求内容要求内容要求内容要求内容要求内容要求内容要求内容</p>
+							</div>
+						</div>
+						<div class="mui-table-view-cell buy-address">
+							<p> <span class="order-type buy">买</span> 购买地址：<span> 肯德基（曼哈顿店）</span></p>
+							<p>详细地址详细地址详细地址详细地址详细地址详细地址详细地址</p>
+						</div>
+						<div class="mui-table-view-cell buy-address">
+							<p> <span class="order-type receive">收</span> 收获地址：<span> xx小区</span></p>
+							<p>详细地址详细地址详细地址详细地址详细地址详细地址详细地址</p>
+						</div>
+						<div class="mui-table-view-cell buy-msg">
+							<p>购买时间：<span> 立即购买</span></p>
+						</div>
+						<div class="mui-table-view-cell buy-msg">
+							<p>商品预付：<span> 20元</span></p>
+						</div>
+						<div class="mui-table-view-cell buy-msg">
+							<p>距离：<span> 1.8（公里）</span></p>
+						</div>
+						<div class="mui-table-view-cell buy-msg buy-msg-last">
+							<div class="order-cost">
+								<p>订单金额：<span>30元</span></p>
+								<p>(含商品预付费用)</p>
+							</div>
+						</div>
+						<div class="msg-btm get-btn">
+							<button type="button" class="mui-btn cancel-order">取消</button>
+							<button type="button" class="mui-btn get-btn-order qing-btn">抢单</button>
+						</div>
+					</div>
+				</div>
+			</div>
+            <div id="bdtts_div_id" style="display: none;"></div>
+		</div>
+
+			<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+		<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+		<script src="__CDN__/assets/vvptd/member/js/home.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            $('#paizhao').attr('disabled',true);
+           document.getElementById("shouye").addEventListener('tap', function() {
+               clearInterval(interval);
+           })
+            document.getElementById('paizhao').addEventListener('tap', function() {
+                if (mui.os.plus) {
+                    var a = [{
+                        title: "拍照"
+                    }];
+                    plus.nativeUI.actionSheet({
+                        title: "拍照",
+                        cancel: "取消",
+                        buttons: a
+                    }, function(b) { /*actionSheet 按钮点击事件*/
+                        switch (b.index) {
+                            case 0:
+                                break;
+                            case 1:
+                                getImage(); /*拍照*/
+                                break;
+                            default:
+                                break;
+                        }
+                    })
+                }
+            }, false);
+            function getImage() {
+                var c = plus.camera.getCamera();
+                c.captureImage(function(e) {
+                    plus.io.resolveLocalFileSystemURL(e, function(entry) {
+                        var s = entry.toLocalURL();
+                        upload(s);
+                    }, function(e) {
+                        console.log("读取拍照文件错误：" + e.message);
+                    });
+                }, function(s) {
+                    console.log("error" + s);
+                }, {
+                    filename: "_doc/head.png"
+                })
+            }
+            function upload(url){
+                var wt=plus.nativeUI.showWaiting();
+                var task=plus.uploader.createUpload(baseUrl+'/vvptd/member/upload',
+                        {method:"POST"},
+                        function(t,status){ //上传完成
+                            if(status==200){
+                                var order_id = $('#order_id_s').val();
+                                mui.ajax(baseUrl+'/vvptd/order/changeOrderimg',{
+                                    type: 'post',
+                                    data:{
+                                        img:t.responseText,
+                                        order_id:order_id
+                                    },
+                                    success: function (datas) {
+                                        console.log(JSON.stringify(datas));
+                                        if (datas.code == 1) {
+                                            wt.close(); //关闭等待提示按钮
+                                            $('#pho_paizhao').attr('src',t.responseText);
+                                            $('.shiwu').show();
+                                        }else {
+                                            layer.open({
+                                                content: datas.msg
+                                                , skin: 'msg'
+                                                , time: 2 //2秒后自动关闭
+
+                                            });
+                                        }
+                                    },error:function(){
+                                        layer.closeAll();
+                                        mui.alert('上传失败');
+                                    }
+                                })
+
+                            }else{
+                                alert("上传失败："+status);
+                                wt.close();//关闭等待提示按钮
+                            }
+                        }
+                );
+                task.addData('type','1');
+                task.addFile(url,{key:"file"});
+                task.start();
+            }
+            $('#shiwu_img').on('change',function(){
+                layer.open({
+                    type: 2,
+                    shadeClose:false
+                });
+                var formdata = new FormData();
+                formdata.append('file',this.files[0]);
+                mui.ajax('/vvptd/member/upload',{
+                    type:'post',
+                    data:formdata,
+                    processData:false,
+                    contentType:false,
+                    success: function (data) {
+                        if(data.code == 1){
+                            var order_id = $('#order_id_s').val();
+                            mui.ajax('/vvptd/order/changeOrderimg',{
+                                type: 'post',
+                                data:{
+                                    img:data.data.url,
+                                    order_id:order_id
+                                },
+                                success: function (datas) {
+                                    if (datas.code == 1) {
+                                        layer.closeAll();
+                                        $('#pho_paizhao').attr('src',data.data.url);
+                                        $('.shiwu').show();
+                                    } else {
+                                        layer.open({
+                                            content: datas.msg
+                                            , skin: 'msg'
+                                            , time: 2 //2秒后自动关闭
+
+                                        });
+                                    }
+                                },error:function(){
+                                    layer.closeAll();
+                                    mui.alert('上传失败');
+                                }
+                            })
+                        }else{
+                            layer.closeAll();
+                            layer.open({
+                                content:data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.closeAll();
+                        layer.open({
+                            content:'网络繁忙'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                })
+            })
+
+        </script>
+
+</html>

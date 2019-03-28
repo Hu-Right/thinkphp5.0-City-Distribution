@@ -1,0 +1,28 @@
+body {
+	background-color: #fff;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+	
+}
+ul,li{
+	list-style-type: none;
+}
+.head_left {
+	color: #858585;
+	width: 7px;
+	height: 13px;
+}
+.clear:after{
+	display: block;
+	content:"";
+	clear: both;
+	
+}
+.header {
+				border-bottom: 1px solid #DCDCDC;
+				background-color: #fff;
+				box-shadow: none;
+			}

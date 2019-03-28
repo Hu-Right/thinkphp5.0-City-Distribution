@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+		<style>
+			.content {
+				width: 300px;
+				height: 200px;
+				border-radius: 10px;
+				background: #fff;
+				position: absolute;
+				margin-top: -150px;
+				margin-left: -150px;
+				top: 50%;
+				left: 50%;
+			}
+			
+			.zd {
+				padding-bottom: 35px;
+				margin-top: 10px;
+				height: 22px;
+				font-size: 23px;
+				color: #333333;
+				font-weight: bold;
+				text-align: center;
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			.dw {
+				position: relative;
+			}
+			
+			.bh {
+				margin: 15px 0;
+				height: 13px;
+				font-size: 13px;
+				color: #333333;
+				text-align: center;
+			}
+			
+			input {
+				margin: 0;
+				margin-top: 15px;
+				width: 250px;
+				height: 40px;
+				font-size: 14px;
+			}
+			
+			input::-webkit-input-placeholder {
+				color: #858585;
+				font-size: 14px;
+			}
+			.input:after{
+				display: block;
+				content: 0/6;
+			}
+			a {
+				text-align: center;
+				font-size: 15px;
+				width: 50%;
+				line-height: 45px;
+				float: left;
+			}
+			
+			.btn_box a:nth-child(1) {
+				border-radius:0 0 0 10px;
+				background: #DCDCDC;
+				color: #858585;
+			}
+			.btn_box a:nth-child(2) {
+				border-radius:0 0 10px 0px;
+				background: #10B6FF;
+				color: #FFFFFF;
+			}
+			.btn_box {
+				position: relative;
+				bottom: -3px;
+			}
+			
+			.btn_box:after {
+				display: block;
+				clear: both;
+				content: "";
+			}
+			.xianzhi{
+				position: absolute;
+				color: #858585;
+				font-size: 14px;
+				top: 114px;
+				left: 240px;
+			}
+		</style>
+	</head>
+
+	<body class="mui-backdrop">
+		<div class="content">
+
+			<div class="zd">
+				创建战队
+			</div>
+			<div class="bh">
+				恭喜，您已满足创建战队条件！
+			</div>
+			<div class="xianzhi">
+				<span class="inp_length">0</span>/6
+			</div>
+			<input type="text" maxlength="6" name="" id="content" value="" / style="width: 250px; height: 40px; margin: 15px 25px;" placeholder="为你的团队起个名吧">
+			<div class="btn_box">
+				<a class="mui-action-back">取消</a>
+				<a id="cjzd">创建</a>
+			</div>
+			
+		</div>
+		
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script>
+			$(function(){
+				$('input').on('input',function(){
+					$('.inp_length').text($('input').val().length)
+				})
+					
+			})
+            document.getElementById('cjzd').addEventListener('tap', function() {
+                var name = $('#content').val();
+                if(name ==''){
+                    return false;
+                }
+                mui.ajax('/vvptd/team/addTeam',{
+                    type:"post",
+                    data:{
+                        name:name
+                    },success:function(data){
+                        if(data.code==1){
+                            mui.alert(data.msg);
+                            history.go(-1);
+                        }else{
+                            mui.alert(data.msg);
+                        }
+                    }
+                })
+
+            });
+		</script>
+	</body>
+
+</html>

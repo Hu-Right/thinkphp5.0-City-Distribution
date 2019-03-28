@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>账户余额</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/clear.border.css" />
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+		<style>
+            .mui-bar .tit-r{
+                position: absolute;
+                right: 15px;
+                display: block;
+                line-height: 44px;
+                color: #10B6FF;
+                font-size: 15px;
+            }
+        </style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">账户余额</h1>
+            <a class="tit-r txmx" href="/vvptd/member/cash_details_head">提现明细</a>
+		</header>
+		<div class="mui-content">
+			<div class="account-yue">
+				<div class="tishi">如果您没有提交保单，每天接的首单将自动向第三方缴纳2元作为保险费，提交保单请至“个人中心-点击手机号进入”补充资料。</div>
+				<div class="msg-box">
+					<p class="tit">当前账户余额(元)</p>
+					<p class="num">{$money}</p>
+					<!--<p class="ed">（不得低于200.00元余额）</p>-->
+				</div>
+				<ul class="mui-table-view shouyi-box o-h">
+					<li class="mui-table-view-cell li1">
+						今天总收益：<span class="money">{$todymoney}元</span>
+					</li>
+					
+					<li class="mui-table-view-cell">
+						累计收益：<span class="money">{$lj_money}元</span>
+					</li>
+				</ul>
+				<div class="zhu">注：提现金额将在1-2个工作日内到账</div>
+				<div class="zd-tit">账单明细 <span class="num">(最近100条明细)</span></div>
+			</div>
+			<a class="tixian-btn tx" href="/vvptd/member/putForward">提现</a>
+		</div>
+	</body>
+	<script src="__CDN__/assets/vvptd/setting/js/jquery.min.js"></script>
+	<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+  <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+	<script type="text/javascript">
+
+        mui('body').on('tap', 'a', function () {
+            if(this.getAttribute('href')!=null) {
+                mui.openWindow({
+                    url: baseUrl + this.getAttribute('href'),
+                    waiting: {
+                        autoShow: true,//自动显示等待框，默认为true
+                        title: '正在加载...'
+                    }
+                    //id: this.getAttribute('page-id')
+                });
+            }
+        });
+		//加载框距顶部距离
+		var _top = $(".account-yue").height()+ 45 + 'px';
+		console.log(_top)
+		//启用双击监听
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:baseUrl+'/vvptd/member/getRunMenAccount',
+				id:baseUrl+'/vvptd/member/getRunMenAccount',
+				styles:{
+					top: _top,
+					bottom: '45px',
+				}
+			}]
+		});
+	
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+	</script>
+
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>设置导航方式</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/iconfont.css" />
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+		<style type="text/css">
+			ul{
+				margin: 0;
+			}
+			/* p{margin: 0;} */
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">设置导航方式</h1>
+		</header>
+		
+		<div class="mui-content mapSet-main">
+			<div class="list">
+				<p class="tit">请选择地图软件：</p>
+				<ul class="ul">
+				 	<li class="li on">
+						<i class="iconfont icon-dui1"></i>
+						百度地图APP
+					</li>
+					<!--<li class="li">-->
+						<!--<i class="iconfont "></i>-->
+						<!--高德地图APP-->
+					<!--</li>-->
+				</ul>
+			</div>
+			<div class="list list1">
+				<p class="tit">请选择出行方式：</p>
+				<ul class="ul ul2">
+					<li class="li on">
+						<i class="iconfont icon-dui1"></i>
+						步行
+					</li>
+					<li class="li">
+						<i class="iconfont "></i>
+						公交
+					</li>
+					<li class="li">
+						<i class="iconfont "></i>
+						驾车
+					</li>
+				</ul>
+			</div>
+		    <input type="hidden" id="travel_mode" value="1">
+			<div class="gou-box">
+				<i class="iconfont icon-quan"></i>
+				<span>查看导航时不再提示</span>
+			</div>
+			
+			<button type="button" class="mui-btn add_bank">确 定</button>
+		</div>
+		
+
+	</body>
+    <script src="__CDN__/assets/vvptd/setting/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        var flag = true;
+        $(".gou-box").on('tap',function(){
+            if(flag){
+                $(this).css('color','#10B6FF').find('i').removeClass('icon-quan').addClass('icon-dui');
+                flag = false;
+            }else{
+                $(this).css('color','#858585').find('i').removeClass('icon-dui').addClass('icon-quan');
+                flag = true;
+            }
+        })
+
+        var map = "{$map}";
+        if(map == 1){
+            $('#travel_mode').val(map);
+            $(".list1 .ul .li").removeClass('on').find('i').removeClass('icon-dui1');
+            $(".list1 .ul .li").eq(0).addClass('on').find('i').addClass('icon-dui1');
+        }else if(map == 2){
+            $('#travel_mode').val(map);
+            $(".list1 .ul .li").removeClass('on').find('i').removeClass('icon-dui1');
+            $(".list1 .ul .li").eq(1).addClass('on').find('i').addClass('icon-dui1');
+        }else{
+            $('#travel_mode').val(map);
+            $(".list1 .ul .li").removeClass('on').find('i').removeClass('icon-dui1');
+            $(".list1 .ul .li").eq(2).addClass('on').find('i').addClass('icon-dui1');
+        }
+        // 接单设置
+        $(".list1 .ul .li").on('tap',function(){
+            var s = '';
+            if($(this).index() ==1){
+                s=2;
+            }else if($(this).index() ==2){
+                s=3;
+            }else{
+                s=1;
+            }
+            $('#travel_mode').val(s);
+            $(".list1 .ul .li").removeClass('on').find('i').removeClass('icon-dui1');
+            $(this).addClass('on').find('i').addClass('icon-dui1');
+        })
+        $('.add_bank').on('click',function(){
+            var map_type = 1;
+            var travel_mode = $('#travel_mode').val();
+            if(map_type == ''){
+                layer.open({
+                    content:'地图类型不能为空'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+
+                });
+                return false;
+            }
+            if(travel_mode == ''){
+                layer.open({
+                    content:'出行方式不能为空'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+
+                });
+                return false;
+            }
+            mui.ajax('/vvptd/setting/setMapType',{
+                type:'post',
+                data:{
+                    travel_mode:travel_mode,
+                    map_type:map_type
+                },
+                success: function (data) {
+                    if(data.code == 1){
+                        layer.open({
+                            content:data.msg
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                        setTimeout(function(){
+                            location.href='/vvptd/setting/setMapType';
+                        },500);
+                    }else{
+                        layer.open({
+                            content:data.msg
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                        setTimeout(function(){
+                            location.href='/vvptd/setting/setMapType';
+                        },500);
+                    }
+                },
+                error: function (data) {
+                    layer.open({
+                        content:'网络繁忙'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                    setTimeout(function(){
+                        location.href='/vvptd/setting/setMapType';
+                    },500);
+                }
+            })
+        })
+    </script>
+
+</html>

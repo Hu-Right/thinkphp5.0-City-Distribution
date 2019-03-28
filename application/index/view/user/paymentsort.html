@@ -1,0 +1,66 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{$title|default=''} – {:__('VV跑腿')}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/assets/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/member-set.css"/>
+    <script src="__CDN__/assets/js/mui.min.js"></script>
+    <script src="__CDN__/assets/layui/layui.all.js"></script>
+</head>
+
+<body>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">支付顺序</h1>
+</header>
+
+<div class="mui-content">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">系统将根据以上排序顺序付款</span>
+            <span class="vv-li-right"><span>拖动</span></span>
+        </li>
+    </ul>
+    <ul id="foo" class="mui-table-view">
+
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left"><span class="iconfont {$firsticon}"></span>
+                {$first}<span style="color: #fff;">,</span>
+            </span>
+            <span class="vv-li-right"><span class="mui-icon mui-icon-bars"></span></span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left"><span class="iconfont {$secondicon}"></span>
+                {$second}<span style="color: #fff;">,</span>
+            </span>
+            <span class="vv-li-right">
+                <span class="mui-icon mui-icon-bars"></span>
+            </span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left"><span class="iconfont {$thirdicon}"></span>
+                {$third}<span style="color: #fff;">,</span>
+            </span>
+            <span class="vv-li-right">
+                <span class="mui-icon mui-icon-bars"></span>
+            </span>
+        </li>
+
+    </ul>
+</div>
+<script src="/assets/js/frontend/user/Sortable.min.js"></script>
+<script src="/assets/js/frontend/user/paymentsort.js"></script>
+
+</body>
+
+</html>
+
+

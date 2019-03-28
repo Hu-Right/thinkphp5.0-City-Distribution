@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+
+<form class="layui-form seller-form" action="" method="POST">
+
+    <div class="la" style="background: white; height: 500xp;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 130px; margin-left:-35px; margin-top: 15px;">订单号：</label>
+                <div class="layui-input-inline seller-inline-2">
+                    <input type="text" name="order_num" placeholder="请输入订单号" autocomplete="off" class="layui-input" style="margin-top: 15px;">
+                </div>
+            </div> 
+ 
+              <script>
+              layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                
+                //执行一个laydate实例
+                laydate.render({
+                  elem: '#test1' //指定元素
+                });
+              });
+              </script>
+
+             <div class="layui-inline">
+                <label class="layui-form-label"style="width: 130px; margin-left:-35px;  margin-top: 15px;">下单时间：</label>
+                <div class="layui-input-inline seller-inline-4">
+                    <!-- <input type="text" name="date" id="date" placeholder="开始时间" autocomplete="off" class="layui-input" lay-key="1"> -->
+                    <input type="text" name="create_time" class="layui-input" placeholder="下单时间" id="test1"style="margin-top: 15px;">
+                </div>
+            </div> 
+           
+        </div>
+
+ 
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 130px; margin-left:-35px;">用户：</label>
+                <div class="layui-input-inline seller-inline-5">
+                    <input type="text" name="nickname" placeholder="用户名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 130px; margin-left:-35px;">手机号：</label>
+                <div class="layui-input-inline seller-inline-3">
+                    <input type="tel" name="mobile" placeholder="收货人手机号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="*"><i class="iconfont icon-chaxun"></i>筛选</button>
+                </div>
+            </div>
+        </div>
+         </div>
+    </form>
+<script>
+      var window_box;
+    layui.use(['table', 'layer', 'laydate', 'form'], function(){
+        var layer = layui.layer,
+            $ = layui.jquery,
+            table = layui.table,
+            laydate = layui.laydate,
+            form = layui.form;
+
+        //时间插件
+        laydate.render({
+            elem: '#date',
+            range: '到',
+            format: 'yyyy-MM-dd'
+        });
+})
+</script>
+
+ 
+<table class="layui-table">
+            <colgroup>
+              <col width="150">
+              <col width="200">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="thsort" data-field="id">ID</th>
+                <th class="thsort"  >订单号 </th>
+                <th class="thsort"  >用户名</th>                
+                <th class="thsort"  >城市</th>
+                <th class="thsort"  >类型</th>
+                <!-- <th class="thsort"  >备注</th> -->
+                <th class="thsort"  >订单金额</th>
+                <th class="thsort"  >订单时间</th>
+                <th class="thsort" >订单状态</th>
+                <th class="thsort" >联系方式</th>
+                  <th class="thsort">拍照图片</th>
+                <!-- <th class="thsort"  >订单地址</th> -->
+                <th>操作</th>
+              </tr> 
+            </thead>
+
+            
+            <tbody>
+                    {if condition="$count eq 0"}
+                    <tr class="text-c"><td colspan="12" style="text-align: center;">暂无相关数据</td></tr>
+                {else/}
+                    {foreach name="list" item="vo"}
+                    <tr>
+                        <!-- <td><input type="checkbox" name="id[]" value="{$vo.id}" />{$vo.id}</td> -->
+                        <td>{$vo.id}</td> 
+                        <td>{$vo.order_num}</td>                     
+                        <td>{$vo.nickname}</td>
+                        <td>{$vo.areaname}</td>
+                        <td>{$vo.service_name}</td>
+                        <!-- <td>{$vo.remake}</td> -->
+                        <td>{$vo.money}</td>
+                        <td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+                       
+
+                        <td> {if condition="($vo['status']) eq '0'"}待接单
+                                {elseif condition="($vo['status']) eq '1'"/}已接单
+                                {elseif condition="($vo['status']) eq '2'"/}待确认
+                                {elseif condition="($vo['status']) eq '3'"/}取消订单
+                                {elseif condition="($vo['status']) eq '4'"/}拒绝订单
+                                {elseif condition="($vo['status']) eq '5'"/}待评价
+                                {elseif condition="($vo['status']) eq '6'"/}订单完成
+                                {elseif condition="($vo['status']) eq '9'"/}待支付
+                                 {else/}拒绝订单
+
+                                 {/if}</td>
+                        <td>{$vo.mobile}</td>
+                        <td>{if condition="$vo.img eq ''"}
+                            无
+                            {else/}
+                            <a href="http://zs013.w209.madgg.com{$vo.img}" target="_blank">点击查看</a>
+                            {/if}</td>
+                        <!-- <td>{$vo.address}</td> -->
+                        <td>  
+                           <a href="#" onclick="seek({$vo.id})"> <span class="layui-badge layui-bg-green">查看</span> </a>
+                            {if condition="$vo.status eq 0"}
+                            <a href="{:url('dispatch/chooseRunman',array('id'=>$vo['id']))}"> <span class="layui-badge layui-bg-green">派送</span> </a>
+                            {/if}
+                            {if condition="($vo.status eq 9) OR ($vo.status eq 0) OR ($vo.status eq 1) OR ($vo.status eq 2)"}
+                            <a class="confirm" href="{:url('cancel_order',array('id'=>$vo['id']))}" onclick="return cancel_order(id)"> <span class="layui-badge layui-bg-green">取消订单</span> </a>
+                            {/if}
+                        </td>
+                        </tr>
+                    {/foreach}
+                {/if}
+                </tbody>
+            </table>
+            <!--分页开始-->
+            <div style="padding-top:15px;float: right; ">
+                <!--<div class="page"></div>-->
+                {$page}
+            </div>
+            <script>
+                function cancel_order(id) {
+                    if (confirm("您确定要取消吗?")) {
+
+                    } else {
+                        return false;
+                    }
+                }
+            
+        function seek(id){
+           layer.open({
+             type: 2,
+             shadeClose: true,
+             maxmin: true, 
+             title:'查看',
+             shade: 0.3,
+             area: ['893px', '600px'],
+             content: 'ordermanagement/seek/?id='+id
+
+   });
+          
+} 
+
+var order = 'desc';
+var field = 'id';
+
+ 
+// 排序
+ 
+    $(".layui-table").on('click', '.thsort', function(event) {
+        // var field=[];
+        event.preventDefault();
+        field = $(this).data("field"); 
+        //  alert(field);return;
+        if (order == 'desc') {
+           order = "asc";
+        } else if (order == 'asc') {
+           order = "desc";
+        }
+        /* Act on the event */
+        // 获取排序方式    
+    //   as=$("input[name='id[]']").val();
+    //    $("as").each(function() {
+    //      if (this.hidden) {
+    //        this.hidden= false;
+    //      } else {
+    //        this.hidden = true;
+    //        alert(as);
+    //      }
+    //    });
+    // function qqq(){
+        
+    //     for(i=0;i<$("table>tbody>tr>td:nth-child(1)").length;i++){
+    //         field.push($("table>tbody>tr>td:nth-child(1)").eq(i).text()) 
+    //     }
+      
+    // }
+    // qqq();
+    // console.log(data);
+    // alert(field);return false;
+        // if (order == 'desc') {
+        //    order = "asc";
+        // } else if (order == 'asc') {
+        //    order = "desc";
+        // }
+        // alert(order);
+        $.post('{:url("sort")}', {field: field, sort: order}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+           
+            $('.layui-table').html(data);
+        });
+    });
+ 
+
+  
+         </script>
+
+ 

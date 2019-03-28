@@ -1,0 +1,667 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>{$title}</title>
+		<link rel="stylesheet" type="text/css" href="/assets/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/iconfont.css" />
+
+		<script src="/assets/js/mui.min.js" type="text/javascript"></script>
+
+
+		<style type="text/css">
+			p{margin-bottom: 0;}
+			.cancel{
+				position: absolute;
+				right: 15px;
+				line-height: 44px;
+				color: #858585;
+				font-size: 14px;
+			}
+			.mui-table-view:before,.mui-table-view:after{
+				height: 0;
+			}
+			.BMap_Marker img{
+				height: 32px;
+			}
+			.anchorBL{
+				display: none;
+			}
+			.help-buy-wait .time-box{
+				padding: 26px 0;
+			}
+			.time-box .queren{
+				text-align: center;
+			}
+			.time-box .p-top{
+				font-size: 16px;
+				color: #333;
+				font-weight:bold;
+			}
+			.time-box .p-btm{
+				font-size: 12px;
+				color: #858585;
+				margin: 5px 0 15px;
+			}
+			.time-box .btn{
+				font-size: 15px;
+				border-radius: 20px;
+				border: 1px solid #10B6FF;
+				padding: 3px 15px 2px;
+			}
+			.time-box .btn1{
+				color: #10B6FF;
+				background: none;
+				margin-right: 15px;
+			}
+			.time-box .btn2{
+				color: #fff;
+				background: #10B6FF;
+			}
+			.help-buy-wait .order-msg .money-box{
+				margin: 0 15px;
+				padding: 11px 0;
+				border-bottom: 1px solid #DCDCDC;
+			}
+			.pinjia-box{
+				padding: 10px 15px 30px;
+				font-size: 14px;
+			}
+			.pinjia-box .left{
+				float: left;
+			}
+			.pinjia-box .right{
+				float: left;
+				max-width: calc(100% - 85px);
+			}
+			.pingjia-me,.pingjia-he{
+				overflow: hidden;
+			}
+			.pingjia-me p{
+				color: #333;
+			}
+			.pingjia-me p.con{
+				margin-top: 6px;
+			}
+			.pingjia-me img{
+				height: 12px;
+				margin-top: 5px;
+			}
+			.pingjia-he{
+				margin-top: 8px;
+			}
+			.pingjia-he p{
+				color: #858585;
+			}
+		</style>
+
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<style type="text/css">
+
+	</style>
+	<body>
+	{if condition="$orderInfo.status == 0"}
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="selfBack"></a>
+			<h1 class="mui-title">等待接单</h1>
+			<a class="cancel" id="cancel">取消订单</a>
+		</header>
+		
+		<div class="mui-content help-buy-wait">
+			<!-- 倒计时 -->
+			<div class="time-box">
+				<div class="main">
+					<p class="tit">等待接单</p>
+					{if condition="time() - $orderInfo['create_time'] > 15*60"}
+					<p id="time" class="con" style="font-size: 18px;font-weight:bold">
+						{$m}{$s}
+					</p>
+					{else /}
+					<p id="time" class="con" style="font-size: 18px;font-weight:bold">
+						<span id="min">{$m}</span>:<span id="sec">{$s}</span>
+					</p>
+					{/if}
+				</div>
+			</div>
+			<!-- 倒计时 end -->
+			
+			<!-- 进度 -->
+			<div class="process-box">
+				<div class="process on">
+					<i class="iconfont icon-tijiaodingdan"></i>
+					<p class="tit">提交订单</p>
+					<div class="xian"></div>
+				</div>
+				
+				<div class="process on">
+					<i class="iconfont icon-dengdaijiedan"></i>
+					<p class="tit">等待接单</p>
+					<div class="xian"></div>
+				</div>
+				<div class="process">
+					<i class="iconfont icon-dingdanjinhangzhong"></i>
+					<p class="tit">订单进行中</p>
+					<div class="xian"></div>
+				</div>
+				
+				<div class="process">
+					<i class="iconfont icon-dingdanyanzheng"></i>
+					<p class="tit">订单验证</p>
+					<div class="xian"></div>
+				</div>
+				<div class="process">
+					<i class="iconfont icon-querenwancheng"></i>
+					<p class="tit">确认完成</p>
+				</div>
+			</div>
+			<!-- 进度 end -->
+
+			<!-- 地图 -->
+			<div id="allmap" class="map-box">
+
+			</div>
+			<!-- 地图 end -->
+	{elseif condition="$orderInfo.status == 1 || $orderInfo.status == 2"/}
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单进行中</h1>
+		</header>
+
+		<div class="mui-content help-buy-wait">
+			<!-- 倒计时 -->
+			<div class="time-box">
+				<div class="main">
+					<p class="tit">订单验证码</p>
+					{if condition="empty($orderInfo.order_code)"/}
+					<p class="con" style="font-size: 18px;font-weight:bold">
+						等待就位
+					</p>
+					{else /}
+					<p class="con">
+						{$orderInfo.order_code}
+					</p>
+					{/if}
+				</div>
+				<p class="zhu">注：确定跑男完成了订单才能把验证码告知跑男哦！</p>
+			</div>
+			<!-- 倒计时 end -->
+
+			<!-- 进度 -->
+			<div class="process-box">
+				<div class="process on">
+					<i class="iconfont icon-tijiaodingdan"></i>
+					<p class="tit">提交订单</p>
+					<div class="xian"></div>
+				</div>
+
+				<div class="process on">
+					<i class="iconfont icon-dengdaijiedan"></i>
+					<p class="tit">等待接单</p>
+					<div class="xian"></div>
+				</div>
+				<div class="process on">
+					<i class="iconfont icon-dingdanjinhangzhong"></i>
+					<p class="tit">订单进行中</p>
+					<div class="xian"></div>
+				</div>
+
+				<div class="process">
+					<i class="iconfont icon-dingdanyanzheng"></i>
+					<p class="tit">订单验证</p>
+					<div class="xian"></div>
+				</div>
+				<div class="process">
+					<i class="iconfont icon-querenwancheng"></i>
+					<p class="tit">确认完成</p>
+				</div>
+			</div>
+			<!-- 进度 end -->
+
+			<!-- 地图 -->
+			<div id="allmap" class="map-box">
+				<div class="map"></div>
+
+
+			</div>
+			<!-- 地图 end -->
+	{elseif condition="$orderInfo.status == 3"/}
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">取消订单</h1>
+			</header>
+
+			<div class="mui-content help-buy-wait">
+				<!-- 倒计时 -->
+				<div class="time-box">
+					<div class="queren">
+						<p class="p-top">订单已取消</p>
+						<p class="p-btm">感谢您对VV跑腿的信任，期待再次光临！</p>
+					</div>
+				</div>
+				<!-- 倒计时 end -->
+
+				<!-- 进度 -->
+				<!--<div class="process-box">
+					<div class="process on">
+						<i class="iconfont icon-tijiaodingdan"></i>
+						<p class="tit">提交订单</p>
+						<div class="xian"></div>
+					</div>
+
+					<div class="process on">
+						<i class="iconfont icon-dengdaijiedan"></i>
+						<p class="tit">等待接单</p>
+						<div class="xian"></div>
+					</div>
+					<div class="process on">
+						<i class="iconfont icon-dingdanjinhangzhong"></i>
+						<p class="tit">订单进行中</p>
+						<div class="xian"></div>
+					</div>
+
+					<div class="process on">
+						<i class="iconfont icon-dingdanyanzheng"></i>
+						<p class="tit">订单验证</p>
+						<div class="xian"></div>
+					</div>
+					<div class="process on">
+						<i class="iconfont icon-querenwancheng"></i>
+						<p class="tit">确认完成</p>
+					</div>
+				</div>-->
+				<!-- 进度 end -->
+
+				<!-- 地图 -->
+				<div id="allmap" class="map-box">
+					<div class="map"></div>
+				</div>
+				<!-- 地图 end -->
+	{elseif condition="$orderInfo.status == 9"/}
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">等待支付</h1>
+		<a class="cancel" id="cancel">取消订单</a>
+	</header>
+
+	<div class="mui-content help-buy-wait">
+		<!-- 倒计时 -->
+		<div class="time-box">
+			<div class="queren">
+				<!--<p class="p-top">等待支付</p>-->
+				<p class="p-btm">请在15分钟内支付订单，否则订单将被取消</p>
+				<div class="btn-box">
+					<button class="btn btn1" type="button">去支付</button>
+					<!--<button class="btn btn2" type="button">取消订单</button>-->
+				</div>
+			</div>
+		</div>
+		<!-- 倒计时 end -->
+
+		<!-- 进度 -->
+		<!--<div class="process-box">
+			<div class="process on">
+				<i class="iconfont icon-tijiaodingdan"></i>
+				<p class="tit">提交订单</p>
+				<div class="xian"></div>
+			</div>
+
+			<div class="process on">
+				<i class="iconfont icon-dengdaijiedan"></i>
+				<p class="tit">等待接单</p>
+				<div class="xian"></div>
+			</div>
+			<div class="process on">
+				<i class="iconfont icon-dingdanjinhangzhong"></i>
+				<p class="tit">订单进行中</p>
+				<div class="xian"></div>
+			</div>
+
+			<div class="process on">
+				<i class="iconfont icon-dingdanyanzheng"></i>
+				<p class="tit">订单验证</p>
+				<div class="xian"></div>
+			</div>
+			<div class="process on">
+				<i class="iconfont icon-querenwancheng"></i>
+				<p class="tit">确认完成</p>
+			</div>
+		</div>-->
+		<!-- 进度 end -->
+
+		<!-- 地图 -->
+		<div id="allmap" class="map-box">
+			<div class="map"></div>
+		</div>
+		<!-- 地图 end -->
+	{else /}
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">完成订单</h1>
+		</header>
+
+		<div class="mui-content help-buy-wait">
+			<!-- 倒计时 -->
+			<div class="time-box">
+				<div class="queren">
+					<p class="p-top">订单已完成</p>
+					<p class="p-btm">感谢您对VV跑腿的信任，期待再次光临！</p>
+					<div class="btn-box">
+						{if condition="$orderInfo.status == 6"}
+						<button class="btn btn1" type="button">已评价</button>
+						{else /}
+						<button class="btn btn1" type="button" id="evaluate">去评价</button>
+						{/if}
+						<button class="btn btn2" type="button" id="again">再来一单</button>
+					</div>
+
+				</div>
+			</div>
+			<!-- 倒计时 end -->
+
+			<!-- 进度 -->
+			<div class="process-box">
+				<div class="process on">
+					<i class="iconfont icon-tijiaodingdan"></i>
+					<p class="tit">提交订单</p>
+					<div class="xian"></div>
+				</div>
+
+				<div class="process on">
+					<i class="iconfont icon-dengdaijiedan"></i>
+					<p class="tit">等待接单</p>
+					<div class="xian"></div>
+				</div>
+				<div class="process on">
+					<i class="iconfont icon-dingdanjinhangzhong"></i>
+					<p class="tit">订单进行中</p>
+					<div class="xian"></div>
+				</div>
+
+				<div class="process on">
+					<i class="iconfont icon-dingdanyanzheng"></i>
+					<p class="tit">订单验证</p>
+					<div class="xian"></div>
+				</div>
+				<div class="process on">
+					<i class="iconfont icon-querenwancheng"></i>
+					<p class="tit">确认完成</p>
+				</div>
+			</div>
+			<!-- 进度 end -->
+
+			<!-- 地图 -->
+			<div id="allmap" class="map-box">
+				<div class="map"></div>
+			</div>
+			<!-- 地图 end -->
+	{/if}
+			
+			<!-- 订单信息 -->
+			<div class="order-msg">
+				<ul class="mui-table-view">
+					{if condition="empty($runmenInfo) === false"}
+					<li class="mui-table-view-cell top" id="tag-three">
+						<img class="head-img left" src="{$runmenInfo.avatar!=''? $runmenInfo.avatar:'/assets/img/headimg.png'}" >
+						<div class="name-box">
+							<p class="name">{$runmenInfo.truename}</p>
+							<p class="star-box">
+								{for start="0" end="$runmenInfo.score" }
+								<img src="/assets/img/star1.png" >
+								{/for}
+								{for start="0" end="$runmenInfo.value" }
+								<img src="/assets/img/star2.png" >
+								{/for}
+							</p>
+							{if condition="empty($orderInfo['user_min']) === false"}
+							{php}
+							$yj_time = $orderInfo['accept_time']+$orderInfo['user_min']*60
+							{/php}
+							<p class="time">预计送达时间：<span id="yj_time">{$yj_time|date='H:i',###}</span></p>
+							{/if}
+						</div>
+						<input type="hidden" id="phone-three" value="{$runmenInfo.mobile}">
+						<span class="iconfont icon-dianhua"></span>
+					</li>
+					{/if}
+
+					<li class="mui-table-view-cell top">
+						<p>订单号码：<span>{$orderInfo.order_num}</span></p>
+						<p>下单时间：<span>{$orderInfo.create_time|date='Y-m-d H:i:s',###}</span></p>
+						<p class="tag">{$orderInfo.service_name}</p>
+					</li>
+					<!--<li class="mui-table-view-cell li">
+						<div class="div">
+							<p class="left">服务类型：</p>
+							<p class="right">随意购</p>
+						</div>
+					</li>-->
+					<li class="mui-table-view-cell li">
+						{php}
+						if($orderInfo['type'] == 1){
+						$tip = '购买';
+						}elseif($orderInfo['type'] == 2){
+						$tip = '跑腿';
+						}elseif($orderInfo['type'] == 3){
+						$tip = '办事';
+						}elseif($orderInfo['type'] == 4){
+						$tip = '排队';
+						}elseif($orderInfo['type'] == 5){
+						$tip = '取货';
+						}
+						{/php}
+						<p class="left">帮我{$tip}：</p>
+						<p class="right">{$orderInfo.content.details}</p>
+					</li>
+
+					<li class="mui-table-view-cell li">
+						<p class="left">备注：</p>
+						<p class="right">{$orderInfo.remake}</p>
+					</li>
+
+					{if condition="$orderInfo.name != '' AND $orderInfo.mobile != ''"}
+					<li class="mui-table-view-cell top" id="tag-one">
+						<p>发货人：<span>{$orderInfo.name}</span></p>
+						<p>联系方式：<span id="phone-one">{$orderInfo.mobile}</span></p>
+						<p class="tag" style="background: rgba(16,182,255,1);color:#fff;">拨&nbsp;号</p>
+					</li>
+					{/if}
+
+					{if condition="$orderInfo.content.name != '' AND $orderInfo.content.mobile != ''"}
+					<li class="mui-table-view-cell top" id="tag-two">
+						{php}
+							if($orderInfo['type'] == 1 || $orderInfo['type'] == 3 || $orderInfo['type'] == 4){
+								$name_text = '联系人';
+							}else{
+								$name_text = '收货人';
+							}
+						{/php}
+						<p>{$name_text}：<span>{$orderInfo.content.name}</span></p>
+						<p>联系方式：<span id="phone-two">{$orderInfo.content.mobile}</span></p>
+						<p class="tag" style="background: rgba(16,182,255,1);color:#fff;">拨&nbsp;号</p>
+					</li>
+					{/if}
+
+					{if condition="$orderInfo.end_address != ''"}
+					<li class="mui-table-view-cell li">
+						{php}
+						if($orderInfo['type'] == 5){
+						$icon = 'icon-dizhi-qu';
+						$note = '取货地址';
+						}elseif($orderInfo['type'] == 2){
+						$icon = 'icon-dizhi-fa';
+						$note = '发货地址';
+						}else{
+						$icon = 'icon-dizhi-mai';
+						$note = '购买地址';
+						}
+						{/php}
+						<span class="iconfont {$icon} left icon-top"></span>
+						<p class="left">{$note}：</p>
+						<div class="right">
+							<p class="p1">{$orderInfo.start_address}</p>
+							<!--<p class="p2">详细地址详细地址详细地址详细地址详细地址...</p>-->
+						</div>
+					</li>
+					{/if}
+					{if condition="$orderInfo.end_address != ''"}
+					<li class="mui-table-view-cell li">
+						{php}
+						if($orderInfo['type'] == 1 || $orderInfo['type'] == 2 || $orderInfo['type'] == 5){
+						$icon = 'icon-dizhi-shou';
+						$note = '收货地址';
+						}elseif($orderInfo['type'] == 3){
+						$icon = 'icon-dizhi-ban';
+						$note = '帮帮地址';
+						}elseif($orderInfo['type'] == 4){
+						$icon = 'icon-dizhi-pai';
+						$note = '排队地址';
+						}
+						{/php}
+						<span class="iconfont {$icon} left icon-btm"></span>
+						<p class="left">{$note}：</p>
+						<div class="right">
+							<p class="p1">{$orderInfo.end_address}</p>
+							<!--<p class="p2">详细地址详细地址详细地址详细地址详细地址...</p>-->
+						</div>
+					</li>
+					{else /}
+					<li class="mui-table-view-cell li">
+						{php}
+						if($orderInfo['type'] == 1 || $orderInfo['type'] == 2 || $orderInfo['type'] == 5){
+						$icon = 'icon-dizhi-shou';
+						$note = '收货地址';
+						}elseif($orderInfo['type'] == 3){
+						$icon = 'icon-dizhi-ban';
+						$note = '帮帮地址';
+						}elseif($orderInfo['type'] == 4){
+						$icon = 'icon-dizhi-pai';
+						$note = '排队地址';
+						}
+						{/php}
+						<span class="iconfont {$icon} left icon-btm"></span>
+						<p class="left">{$note}：</p>
+						<div class="right">
+							<p class="p1">{$orderInfo.start_address}</p>
+							<!--<p class="p2">详细地址详细地址详细地址详细地址详细地址...</p>-->
+						</div>
+					</li>
+					{/if}
+
+
+					<li class="mui-table-view-cell li">
+						{php}
+						if($orderInfo['type'] == 1){
+						$tip = '购买';
+						}elseif($orderInfo['type'] == 2){
+						$tip = '发货';
+						}elseif($orderInfo['type'] == 3){
+						$tip = '帮帮';
+						}elseif($orderInfo['type'] == 4){
+						$tip = '排队';
+						}
+						{/php}
+						<p class="left">{$tip}时间：</p>
+						<p class="right">{$orderInfo.content.service_time=='' ? '立即'.$tip : date("Y-m-d H:i:s",$orderInfo.content.service_time)}</p>
+					</li>
+
+					{if condition="$orderInfo.content.weight != ''"}
+					<li class="mui-table-view-cell li">
+						{php}
+						if($orderInfo['content']['weight'] == 25){
+						$html = '25kg以内';
+						}elseif($orderInfo['content']['weight'] == 30){
+						$html = '25kg-30kg';
+						}elseif($orderInfo['content']['weight'] == 40){
+						$html = '30kg-40kg';
+						}elseif($orderInfo['content']['weight'] > 40){
+						$html = $orderInfo['content']['weight'] . 'kg';
+						}
+						{/php}
+						<p class="left">物品重量：</p>
+						<p class="right">{$html}</p>
+					</li>
+					{/if}
+
+					{if condition="$orderInfo.content.line_time != ''"}
+					<li class="mui-table-view-cell li">
+						<p class="left">排队时长：</p>
+						<p class="right">{$orderInfo.content.line_time}</p>
+					</li>
+					{/if}
+
+					{if condition="$orderInfo.content.prepayment != ''"}
+					<li class="mui-table-view-cell li">
+						<p class="left">商品费用：</p>
+						<p class="right">{$orderInfo.content.prepayment}元</p>
+					</li>
+					{/if}
+
+					<li class="mui-table-view-cell li">
+						<p class="left">小费：</p>
+						<p class="right">{$orderInfo.content.fee}元</p>
+					</li>
+
+					<li class="mui-table-view-cell li">
+						<p class="left">优惠：</p>
+						<p class="right">{$orderInfo.content.discount}元</p>
+					</li>
+					<!--<li class="mui-table-view-cell li">
+						<p class="left">支付方式:</p>
+						<p class="right">微信支付</p>
+					</li>-->
+				</ul>
+			
+				<div class="money-box">
+					<p class="money">订单金额：<span>{$orderInfo.content.prepayment ? $orderInfo.content.prepayment+$orderInfo.money+$orderInfo.content.fee:$orderInfo.money+$orderInfo.content.fee}元</span></p>
+					<!--<p class="tishi">( 含商品预付费用 )</p>-->
+				</div>
+				{if condition="($orderInfo.status == 6)"}
+				<div class="pinjia-box">
+					<div class="pingjia-me">
+						<p class="left">我的评价：</p>
+						<div class="right">
+							<div class="star-box">
+								{for start="0" end="$evaluateInfo.start" }
+								<img src="/assets/img/star1.png" >
+								{/for}
+								{for start="0" end="$evaluateInfo.value" }
+								<img src="/assets/img/star2.png" >
+								{/for}
+							</div>
+							<p class="con">{$evaluateInfo.content}</p>
+						</div>
+					</div>
+					{if condition="$evaluateInfo.reply != ''"}
+					<div class="pingjia-he">
+						<p class="left">跑男回复：</p>
+						<p class="right">{$evaluateInfo.reply}</p>
+					</div>
+					{/if}
+				</div>
+				{/if}
+
+			</div>
+		</div>
+		<input type="hidden" class="id" id="id" value="{$orderInfo.id}">
+		<input type="hidden" class="status" id="status" value="{$orderInfo.status}">
+		<input type="hidden" id="order_type" value="{$orderInfo.type}">
+		<input type="hidden" id="start_lon" value="{$orderInfo.start_lon}">
+		<input type="hidden" id="start_lat" value="{$orderInfo.start_lat}">
+		<input type="hidden" id="end_lon" value="{$orderInfo.end_lon}">
+		<input type="hidden" id="end_lat" value="{$orderInfo.end_lat}">
+
+
+		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+		<script src="/assets/js/frontend/placeorder/order.map.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/assets/js/frontend/placeorder/orderdetails.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/assets/js/frontend/orderdetailspush.ajax.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

@@ -1,0 +1,229 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{$title|default=''} – {:__('VV跑腿')}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="/assets/css/mui.min.css" rel="stylesheet" />
+	<link href="/assets/css/mui.indexedlist.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="/assets/css/iconfont.css"/>
+	<script src="__CDN__/assets/js/mui.min.js"></script>
+	<script src="__CDN__/assets/layui/layui.all.js"></script>
+</head>
+
+<body>
+<style>
+	html,
+	body {
+		height: 100%;
+		overflow: hidden;
+	}
+	.mui-table-view-cell:after{
+		height: 1px;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">选择城市</h1>
+</header>
+<div class="mui-content">
+	<div id='list' class="mui-group-list">
+		<div class="mui-group-list-search mui-input-row mui-search" >
+			<input id="input_search" type="search" class="mui-input-clear mui-group-list-search-input" style="display: none;" placeholder="搜索城市">
+		</div>
+
+		<div class="mui-group-list-bar">
+			<a>A</a>
+			<a>B</a>
+			<a>C</a>
+			<a>D</a>
+			<a>E</a>
+			<a>F</a>
+			<a>G</a>
+			<a>H</a>
+			<a>I</a>
+			<a>J</a>
+			<a>K</a>
+			<a>L</a>
+			<a>M</a>
+			<a>N</a>
+			<a>O</a>
+			<a>P</a>
+			<a>Q</a>
+			<a>R</a>
+			<a>S</a>
+			<a>T</a>
+			<a>U</a>
+			<a>V</a>
+			<a>W</a>
+			<a>X</a>
+			<a>Y</a>
+			<a>Z</a>
+		</div>
+		<div class="mui-group-list-alert"></div>
+		<div class="mui-group-list-inner">
+			<div class="location-div-o">
+				<p class="blue-txt">定位城市</p>
+				<button class="public-b-btn"><span class="iconfont icon-dizhi"></span ><span id="loca-caty">郑州市</span></button>
+			</div>
+			<div id="hot-city" class="location-div-o  location-div-t public-clear-both">
+				<p class="blue-txt">热门城市</p>
+				<button class="hot-city">北京市</button>
+				<button class="hot-city">上海市</button>
+				<button class="public-margin-right-none hot-city">广州市</button>
+				<button class="hot-city">深圳市</button>
+				<button class="hot-city">郑州市</button>
+				<button class="public-margin-right-none hot-city">杭州市</button>
+				<button class="hot-city">苏州市</button>
+				<button class="hot-city">天津市</button>
+				<button class="public-margin-right-none hot-city">重庆市</button>
+			</div>
+			<div class="mui-group-list-empty-alert">没有数据</div>
+			<ul id="ul_city" class="mui-table-view">
+				<li data-group="A" class="mui-table-view-divider mui-group-list-group">A</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="A"}
+					<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="B" class="mui-table-view-divider mui-group-list-group">B</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="B"}
+					<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="C" class="mui-table-view-divider mui-group-list-group">C</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="C"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="D" class="mui-table-view-divider mui-group-list-group">D</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="D"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="E" class="mui-table-view-divider mui-group-list-group">E</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="D"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="F" class="mui-table-view-divider mui-group-list-group">F</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="F"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="G" class="mui-table-view-divider mui-group-list-group">G</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="G"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="H" class="mui-table-view-divider mui-group-list-group">H</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="H"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="J" class="mui-table-view-divider mui-group-list-group">J</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="J"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="K" class="mui-table-view-divider mui-group-list-group">K</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="K"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="L" class="mui-table-view-divider mui-group-list-group">L</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="L"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="M" class="mui-table-view-divider mui-group-list-group">M</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="M"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="N" class="mui-table-view-divider mui-group-list-group">N</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="N"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="P" class="mui-table-view-divider mui-group-list-group">P</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="P"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="Q" class="mui-table-view-divider mui-group-list-group">Q</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="Q"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="R" class="mui-table-view-divider mui-group-list-group">R</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="R"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="S" class="mui-table-view-divider mui-group-list-group">S</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="S"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="T" class="mui-table-view-divider mui-group-list-group">T</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="T"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="W" class="mui-table-view-divider mui-group-list-group">W</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="W"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="X" class="mui-table-view-divider mui-group-list-group">X</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="X"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="Y" class="mui-table-view-divider mui-group-list-group">Y</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="Y"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+				<li data-group="Z" class="mui-table-view-divider mui-group-list-group">Z</li>
+				{volist name="cityData" id="city"}
+					{eq name="$city['initial']" value="Z"}
+						<li class="mui-table-view-cell mui-group-list-item">{$city.areaname}</li>
+					{/eq}
+				{/volist}
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+
+<script src="/assets/js/frontend/city/index.js"></script>
+<script src="/assets/js/frontend/city/mui.indexedlist.js"></script>
+
+</html>
+

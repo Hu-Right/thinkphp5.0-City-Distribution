@@ -1,0 +1,210 @@
+body{ color:#333; font-size:13px;}
+
+input,select,textarea{color:#333;}
+
+.bg{ width:100%; height:100%; position:absolute; background:url(../images/bg.jpg) }
+
+.panel{background:#fff;}
+
+form .form-group:last-child{padding-bottom:0;}
+
+.passcode{position:absolute;right:0;bottom:0;height:32px;margin:1px;border-left:solid 1px #ddd;text-align:center;line-height:32px;border-radius:0 4px 4px 0;}
+
+ul,li{ list-style-type:none;}
+
+
+
+.lefter{position:relative;float:left;width:200px;margin-right:-200px;background:#e6f2fb;text-align:center;}
+
+.righter{float:right;width:100%;padding-top:15px;background:#e6f2fb;}
+
+.mainer{margin-left:200px;}
+
+.field-icon-right .icon{ bottom:0px; top:auto}
+
+.logo{ float:left; color:#FFF; margin-top:10px; line-height:45px;}
+
+.logo img{ float:left; margin-right:10px;}
+
+.loginbox { background:url(../images/tmbg-white.png); border:0px;}
+
+/********头部******/
+
+.header{height:70px; overflow:hidden; background:url(../images/bg.jpg) no-repeat 0 -500px; }
+.header h1{margin: 0;font-size: 24px;line-height: 50px;}
+/*
+.head-l{ float:left; margin-top:17px; margin-left:15px; }
+
+.head-l .button{ padding:8px 15px;}
+
+.head-l .bg-blue:hover{ background-color:#03b6fd;}*/
+
+.head-2{ float:right; margin-top:17px; margin-right:60px; }
+
+.leftnav{width:200px; height:100%; position:fixed; top:120px; left:0px;background: #fff;}
+
+/*.leftnav-title { height:50px; background:url(../images/bg.jpg) no-repeat 0 -1000px;  color:#FFF; padding-left:22px;  font-size:14px; line-height:50px;}*/
+.leftnav-title { height:50px;padding-left:22px;  font-size:16px; line-height:50px;width:200px;color: #FFFFFF;background-color: #F36A5A;}
+
+.leftnav-title span{ margin-right:10px;}
+
+.leftnav h2{margin:0;height: 60px;line-height: 60px;padding-left: 20px; /*padding:15px 0 15px 18px;*/ /*border-left:4px solid transparent;*/transition:all .1s ease-in-out; display:block; cursor:pointer; font-weight:400; font-size:16px; /*border-top:1px solid #b5cfd9;*/color: #54667a;}
+
+.leftnav h2.on{ color:#09c;border-left:4px solid #09c;background: #b8b8b8;}
+
+.leftnav .border-bottom{ border-bottom:1px solid #b5cfd9;}
+
+.leftnav h2 span{ margin-right:10px;font-size: 24px;}
+.leftnav h2 i{font-style: normal;float: right;margin-right: 10px;}
+.leftnav h2:hover{ color:#09c;border-left: 4px solid #09c;background: #b8b8b8;}
+
+.leftnav ul {display:none; padding:5px 0; opacity:1;}
+
+.leftnav ul li{ list-style-type:none;  }
+
+.leftnav ul li a{ display:block;padding-left:30px;line-height:30px;color: #918C8C;}
+
+.leftnav ul li span{ margin-right: 58px;float: right;}
+
+.leftnav ul li a:hover,.leftnav ul li a.on{ color:#09c;}
+
+
+
+/***主要内容***/
+
+.admin{background:#edf1f5;position:fixed;/*border-left:solid 1px #b5cfd9;border-top:solid 1px #b5cfd9;*/right:0;bottom:0;top:120px;left:200px; padding:10px; padding-right:0px; padding-bottom:0px; overflow:auto; /*padding-right:15px;*/}
+
+.content{width:100%;}
+
+.body-content{padding:20px 0; overflow:hidden;}
+
+.content .title{ border-bottom:1px solid #dfdfdf; line-height:35px; font-size:14px; font-weight:bold; color:#09c}
+
+.form-x .form-group .label{ width:10%;}
+
+.form-x .form-button { margin-left:10%;}
+
+.w50 { width:25%; float:left;}
+
+.form-x .tipss{ float:left; padding-left:10px; color:#888; line-height:42px;}
+
+.input-help { float:left; line-height:30px;}
+
+.input-help li{ float:left;margin-left:10px;}
+.nav_top{width: 100%;height:50px;line-height:50px;overflow: hidden;background:#fff;box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);}
+.nav_top div{float: left;}
+.bread{overflow: hidden;padding:0 20px;}
+.bread li{ float:left;}
+
+.label label{ font-weight:normal; color:#333;}
+
+.form-group{ margin-bottom:12px;}
+
+.button{ padding:10px 15px;}
+
+.form-group .field .file{ background:#FFF; border:0px;}
+
+.form-group .field input[type=radio]{ vertical-align:middle; line-height:35px; margin-right:5px;}
+
+.form-group .radio { line-height:35px;}
+
+.table th{ text-align:center;}
+
+.table td { vertical-align:middle;}
+
+.tip img{width:100px; height:100px;}
+
+.clear{ clear:both; overflow:hidden;}
+
+.pagelist {padding:10px 0; text-align:center;}
+
+.pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+
+.pagelist a{ margin:0 3px;}
+
+.pagelist span.current{ background:#09F; color:#FFF; border-color:#09F; margin:0 2px;}
+
+.pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+
+.pagelist label{ padding-left:15px; color:#999;}
+
+.pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+
+
+
+.search{ overflow:hidden;}
+
+.search li{float:left; margin-right:15px; line-height:35px;}
+
+
+
+.button.bg-main.icon-check-square-o{ padding:10px 30px;}
+
+.button.bg-main.icon-check-square-o:hover{ background:#08bbe1;}
+
+input[type="checkbox"], input[type="radio"]{ width:15px; height:15px; vertical-align:-3px; margin-right:5px;}
+
+
+
+textarea[name=content]{width:100%; height:500px; border:1px solid #ddd; border-radius:3px; -webkit-border-radius:3px;}
+
+
+.four_box{
+  padding: 10px 0;
+}
+.sm-st{
+    /*background: #fff;*/
+    cursor: pointer;
+    padding: 30px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+}
+.sm-st-icon{
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    line-height: 60px;
+    text-align: center;
+    font-size: 30px;
+    background: #eee;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    float: left;
+    margin-right: 10px;
+    color: #fff;
+}
+.sm-st-icon i{font-size: 45px;}
+.st-red {
+    background-color: transparent;
+}
+.sm-st-info {
+    font-size: 16px;
+    padding-top: 2px;
+    color: #fff;
+    font-weight: 600;
+}
+.sm-st-info span {
+    display: block;
+    font-size: 30px;
+}
+.bg_red{background: #f68484;}
+.bg_blue{background: #75b9e6;}
+.bg_green{background: #71d398;}
+.bg_teal{background: #97d3c5;}
+.bg_red:hover{background: #f35454;}
+.bg_blue:hover{background: #4aa3de;}
+.bg_green:hover{background: #4ac77c;}
+.bg_teal:hover{background: #73c4b1;}
+
+#chartspie:hover div,#chartscolumn:hover div{box-shadow: 0 0 10px #888888;}
+
+
+
+
+
+

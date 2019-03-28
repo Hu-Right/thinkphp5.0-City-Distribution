@@ -1,0 +1,84 @@
+<style>
+    .form-control{
+        width: 20%;
+    }
+</style>
+<div class="panel panel-default panel-intro">
+    <link rel="stylesheet" href="http://layui.hcwl520.com.cn/layui/css/layui.css?v=201801090202">
+    {:build_heading()}
+    <form id="add-form" class="form-horizontal form-ajax nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:url('chooseRunman')}" novalidate="novalidate">
+        <input type="hidden" name="id" value="{$id}">
+        <input type="hidden" id="runmanid" name="runman_id" value="">
+        <div class="form-group">
+            <label for="runman_id" class="control-label col-xs-12 col-sm-2">跑男ID:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="runman_id" id="runman_id" class="form-control" value="" disabled>
+            </div>
+        </div>
+        <div class="form-group layer-footer">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-12 col-sm-8">
+                <button type="submit" class="btn btn-success btn-embossed">确认派单</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="one" style="width: 100%;">
+                    <div id='allmap' style='width:100%; height:800px; position: relative;'></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=m5Z6uuCsaVKQ0lae7PNhNVZhptYX8mSA"></script>
+<script>
+
+    /* ---------百度地图的头部开始-------------- */
+    var map = new BMap.Map("allmap");
+    //开启鼠标滚轮缩放
+    map.enableScrollWheelZoom(true);
+    //设置地图默认的鼠标指针样式
+    map.setDefaultCursor("url('bird.cur')");
+    var geolocation = new BMap.Geolocation();
+    var point = new BMap.Point(116.331398,39.897445);
+    map.centerAndZoom(point,12); // 中心点
+    function myFun(result){
+        var cityName = result.name;
+        map.setCenter(cityName);
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+    geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+
+            map.panTo(r.point);
+            map.enableScrollWheelZoom(true);
+        } else {
+            alert('failed' + this.getStatus());
+        }
+    }, {
+        enableHighAccuracy : true
+    })
+
+    var json_data = {$freeman};
+    var pointArray = new Array();
+    for(var i=0;i<json_data.length;i++){
+        var myIcon = new BMap.Icon("/assets/img/freeman.png", new BMap.Size(26,26));//修改图标样式
+        var marker = new BMap.Marker(new BMap.Point(json_data[i].lon, json_data[i].lat),{icon:myIcon}); // 创建点
+        var content = json_data[i].id;
+        map.addOverlay(marker);//将标注添加到地图中
+        pointArray[i] = new BMap.Point(json_data[i].lon, json_data[i].lat);
+        addOpt(content,marker);
+    }
+
+    //已标注点鼠标移入事件
+    function addOpt(content,marker){
+        marker.addEventListener("click",function(e){
+            $('#runman_id').val(content);
+            $('#runmanid').val(content);
+        });
+    }
+    /* ---------百度地图的尾部结束-------------- */
+</script>

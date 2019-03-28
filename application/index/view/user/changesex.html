@@ -1,0 +1,35 @@
+<div id="content-container" class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {include file="common/sidenav" /}
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="page-header">{:__('修改性别')}</h2>
+                    <form id="changenkn-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">{:__('性别')}:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="radio">
+                                    <label for="row[gender]-1"><input id="row[gender]-0" name="gender" type="radio" value="0" checked> 保密</label>
+                                    <label for="row[gender]-1"><input id="row[gender]-1" name="gender" type="radio" value="1"> 男</label>
+                                    <label for="row[gender]-0"><input id="row[gender]-2" name="gender" type="radio" value="2"> 女</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group normal-footer">
+                            <label class="control-label col-xs-12 col-sm-2"></label>
+                            <div class="col-xs-12 col-sm-8">
+                                <button type="submit" class="btn btn-success btn-embossed">{:__('Submit')}</button>
+                                <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

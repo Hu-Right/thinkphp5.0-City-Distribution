@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的战队</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/mui.min.css">
+		<link href="__CDN__/assets/vvptd/setting/css/iconfont.css" rel="stylesheet" />
+
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+
+		<style>
+			html,
+			body {
+				background-color: #00131B;
+			}
+			.mui-bar{
+				background-color: #00131B;
+				border: none;
+			}
+			header.mui-bar{
+				border-bottom: 1px solid #10B6FF;
+			}
+			nav.mui-bar{
+				box-shadow: 0 -3px 5px rgba(16,182,255,.3);
+			}
+			
+			.mui-bar .mui-title,.mui-bar-nav.mui-bar .mui-icon{color: #FFFFFF;}
+			.mui-bar .tit-r{
+				position: absolute;
+				right: 15px;
+				display: block;
+				line-height: 44px;
+				color: #10B6FF;
+				font-size: 15px;
+			}
+			
+			.mui-bar-tab .mui-tab-item.mui-active{
+				color: #10B6FF;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">排行榜</h1>
+			<a class="tit-r zhan_jieshao" id="zdjss">战队介绍</a>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="/vvptd/team/teamRankingList">
+				<span class="iconfont icon-paihangbang mui-icon"></span>
+				<span class="mui-tab-label">排行榜</span>
+			</a>
+			<a class="mui-tab-item" href="/vvptd/team/myTeam">
+				<span class="iconfont icon-wodezhandui-xuanzhong mui-icon"></span>
+				<span class="mui-tab-label">我的战队</span>
+			</a>
+			<a class="mui-tab-item" href="/vvptd/team/myWarBao">
+				<span class="iconfont icon-wodezhanbao mui-icon"></span>
+				<span class="mui-tab-label">我的战报</span>
+			</a>
+		</nav>
+		
+		
+		
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			//mui初始化
+			mui.init();
+			var subpages = [
+                baseUrl+'/vvptd/team/teamRankingList',
+                baseUrl+'/vvptd/team/myTeam',
+                baseUrl+'/vvptd/team/myWarBao'
+			];
+			var subpage_style = {
+				top: '45px',
+				bottom: '55px'
+			};
+
+			var aniShow = {};
+
+			//创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				for (var i = 0; i < 3; i++) {
+					var temp = {};
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					} else {
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow, temp);
+					}
+					self.append(sub);
+				}
+			});
+
+			//当前激活选项
+			var activeTab = subpages[0];
+			var title = document.getElementById("title");
+			//选项卡点击事件
+			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				var targetTab = baseUrl+this.getAttribute('href');
+				if (targetTab == activeTab) {
+					return;
+				}
+				//更换标题
+				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+				//显示目标选项卡
+				//若为iOS平台或非首次显示，则直接显示
+				if (mui.os.ios || aniShow[targetTab]) {
+					plus.webview.show(targetTab);
+				} else {
+					//否则，使用fade-in动画，且保存变量
+					var temp = {};
+					temp[targetTab] = "true";
+					mui.extend(aniShow, temp);
+					plus.webview.show(targetTab, "fade-in", 300);
+				}
+				//隐藏当前;
+				plus.webview.hide(activeTab);
+				//更改当前活跃的选项卡
+				activeTab = targetTab;
+			});
+			//自定义事件，模拟点击“首页选项卡”
+			document.addEventListener('gohome', function() {
+				var defaultTab = document.getElementById("defaultTab");
+				//模拟首页点击
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			});
+
+		</script>
+
+		<script>
+			document.getElementById('zdjss').addEventListener('tap',function() {
+				mui.openWindow({
+					url: baseUrl+'/vvptd/team/teamJieshao',
+					id: 'zdjsll'
+				})
+			})
+			
+		</script>
+	</body>
+ 
+</html>

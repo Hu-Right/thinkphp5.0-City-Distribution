@@ -1,0 +1,39 @@
+<style>
+	.mui-content{
+		margin: 20px;
+	}
+	.head{
+		margin-bottom: 10px;
+		line-height: 160%;
+		color:#8f8f94;
+		text-align: center;
+		border-bottom: 1px solid #10B6FF;
+	}
+	.head span{
+		margin: 0 30px;
+	}
+	.content p{
+		font-size: 16px;
+		color:#333333!important;
+		line-height: 120%;
+	}
+	.content img{
+		width: 100%;
+	}
+</style>
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">{$title}</h1>
+</header>
+
+<div class="mui-content">
+
+	<div class="head">
+		<span class="author">{$data.uname}</span>
+		<!--<span class="time">{$data.create_time|date="Y-m-d H:i:s",###}</span>-->
+	</div>
+	<div class="content">
+		{$data.content}
+	</div>
+
+</div>

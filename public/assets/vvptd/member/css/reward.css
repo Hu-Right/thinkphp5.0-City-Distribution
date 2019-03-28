@@ -1,0 +1,55 @@
+.qr-code-box{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 10px;
+	box-shadow:#CCCCCC 0px 0px 5px 3px;
+}
+.mui-btn-outlined.mui-btn-blue, .mui-btn-outlined.mui-btn-primary{
+	color: #10B6FF;
+	border: #10B6FF 1px solid;
+	border-radius: 8px;
+}
+.qr-code-img{
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+}
+
+.p1,.p2{
+	color: #333333;
+	font-size: 14px;
+	line-height: 50px;
+}
+.p1{
+	font-size: 16px;
+	/* padding: 40px 0; */
+}
+.p2{
+	/* padding: 30px 0; */
+}
+
+/* 九宫格 */
+.mui-grid-view.mui-grid-9{
+	border: none;
+	background-color: #FFFFFF;
+	margin-top: 10px;
+}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+	border: none;
+	padding: 0px;
+}
+/* 微信图标 */
+.icon-weixin{
+	color: #2AC845;
+}
+.rule{
+	width: 100%;
+	text-align: center;
+	line-height: 50px;
+}
+p{
+	color: #333333;
+}

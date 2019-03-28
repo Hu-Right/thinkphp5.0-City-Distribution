@@ -1,0 +1,177 @@
+<div class="panel panel-default panel-intro">
+    <link rel="stylesheet" href="http://layui.hcwl520.com.cn/layui/css/layui.css?v=201801090202">
+    {:build_heading()}
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh')}
+                        <a class="btn btn-success btn-add" onclick="add_notice()" data-toggle="dropdown"><i class="fa fa-plus"></i>增加</a>
+                    </div>
+                    <form method="post" action="{:\\think\\Url::build($Request.action)}" >
+                        <div class="col-sm-3"  style=" width:300px; margin-top:-42px;text-align: center; margin-left: 600px;">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入公告标题" class="input-sm form-control" name="title" value="{$Request.param.title}">
+                                <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm btn-primary">搜索</button>
+                    </span>
+                            </div>
+                        </div>
+                    </form>
+                    <style>
+                        .table th{
+                            text-align: center;
+                        }
+                        .table td{
+                            text-align: center;
+                        }
+                    </style>
+
+                    <!--表格开始-->
+                    <form action="{:url('delslect')}" method="post" name="updateSort" id="updateSort" >
+                        <div class="table-responsive">
+                            <table class="table  table-bordered table-hover" width="60%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>公告类型</th>
+                                    <th>公告标题</th>
+                                    <th>地区</th>
+                                    <th>公告内容</th>
+                                    <th>插入时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {if condition="$count eq 0"}
+                                <tr class="text-c"><td colspan="14">暂无相关数据</td></tr>
+                                {else/}
+                                {foreach name="notice" item="vo"}
+                                <tr>
+                                    <td><input type="checkbox" name="id[]" value="{$vo.id}" />{$vo.id}</td>
+                                    <td>
+                                        {if condition="$vo.type eq 1"}
+                                        用户端接收
+                                        {elseif condition="$vo.type eq 2"/}
+                                        配送端接收
+                                        {elseif condition="$vo.type eq 3"/}
+                                        全部接收
+                                        {/if}
+                                    </td>
+                                    <td>{$vo.title}</td>
+                                    <td>{$vo.areaname}</td>
+                                    <td><a style="color: blue;" href="#" onclick="show_notice({$vo.id})">点击查看详情</a></td>
+                                    <td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+                                    <td>
+                                        {if condition="$vo.status eq 1"}
+                                        <span class="text-success"><i class="fa fa-circle"></i> 正常</span>
+                                        {elseif condition="$vo.status eq 0"/}
+                                        <span class="text-gray"><i class="fa fa-circle"></i> 隐藏</span>
+                                        {/if}
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="edit_notice({$vo.id})"><i class="fa fa-pencil">编辑</i></a>
+                                        <a class="confirm" href="{:url('des',array('id'=>$vo['id']))}" onclick="return des(id)">
+                                            <i class="fa fa-trash">删除</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/if}
+                                </tbody>
+                            </table>
+                            <!--分页开始-->
+                            <div style="padding-top:15px;float: right; ">
+                                <!--<div class="page"></div>-->
+                                {$page}
+                            </div>
+                            <!--分页结束-->
+                        </div>
+                        <div class="padding border-bottom">
+                            <button type="button" class="layui-btn" id="checkall"><span class="iconfont icon-htmal5icon22"></span>全选</button>
+                            <button type="submit" class="layui-btn layui-btn-danger" onclick="return delslect()"><span class="iconfont icon-shanchu"></span>批量删除</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--多选删除-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    function add_notice() {
+        layer.open({
+            type: 2,
+            title: '添加公告',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['893px', '600px'],
+            content: "/admin/notice/add_notice"
+        });
+    }
+
+    function edit_notice(id){
+        layer.open({
+            type: 2,
+            shadeClose: true,
+            maxmin: true,
+            title:'编辑',
+            shade: 0.3,
+            area: ['850px', '600px'],
+            content: '/admin/notice/edit_notice/?id='+id
+        });
+    }
+
+    function show_notice(id) {
+        layer.open({
+            type: 2,
+            shadeClose: true,
+            maxmin: true,
+            title:'公告详情',
+            shade: 0.3,
+            area: ['850px', '600px'],
+            content: '/admin/notice/show_notice/?id='+id
+        });
+    }
+
+    function des(id) {
+        if (confirm("您确定要删除吗?")) {
+
+        } else {
+            return false;
+        }
+    }
+
+    $("#checkall").click(function() {
+        $("input[name='id[]']").each(function() {
+            if (this.checked) {
+                this.checked = false;
+            } else {
+                this.checked = true;
+            }
+        });
+    })
+
+
+    function delslect() {
+        var Checkbox = false;
+        $("input[name='id[]']").each(function() {
+            if (this.checked == true) {
+                Checkbox = true;
+            }
+        });
+        if (Checkbox) {
+            var t = confirm("您确认要删除选中的内容吗？");
+            if (t == false) return false;
+        } else {
+            layer.alert('请选择您要删除的内容!', {icon: 2});
+            return false;
+        }
+    }
+</script>

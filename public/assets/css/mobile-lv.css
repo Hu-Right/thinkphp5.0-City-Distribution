@@ -1,0 +1,45 @@
+/* 头部 */
+body,
+.mui-bar-nav{
+	background-color: #000000;
+	color: #333333 !important;
+	box-shadow: none;
+}
+.mui-bar{
+	box-shadow: none;
+}
+.mui-bar-nav a{
+	color: #FFFFFF;
+}
+.mui-bar-nav h1 {
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: 800;
+}
+.mui-bar-nav{
+	border-bottom: 1px solid #000000;
+}
+/* 消息提示 */
+.mui-toast-container{
+	bottom: 50%;
+}
+/* 主体 */
+
+ ul ,li {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.mui-content>.mui-table-view:first-child{
+	margin-top: 0px;
+}
+.mui-table-view-cell:after{
+	height: 0px;
+}
+img{
+	height: auto;
+	width: 100%;
+}
+.mui-content{
+	background-color: #000000;
+}

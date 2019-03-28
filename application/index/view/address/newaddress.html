@@ -1,0 +1,162 @@
+
+<style type="text/css">
+	.mui-table-view:after,
+	.mui-table-view:before {
+		height: 0;
+	}
+
+	.mui-control-content {
+		height: 190px;
+		background: #fff;
+	}
+
+	.city {
+		display: inline;
+	}
+
+	header .right-btn {
+		font-size: 14px;
+		position: absolute;
+		right: 15px;
+		line-height: 44px;
+		color: #333333;
+	}
+
+	.map-box {
+		position: relative;
+	}
+
+	.map-box img.bz {
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		top: calc(50% - 30px);
+		left: calc(50% - 15px);
+		z-index: 5;
+	}
+
+	#new-dingwei {
+		position: absolute;
+		bottom: 240px;
+		left: 15px;
+		background: #fff;
+		font-size: 20px;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		border-radius: 50%;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+	<h1 class="mui-title">地址选择 &bull; <div id="vv-city" class="city"><span id="vv-city-info"></span><i class="iconfont icon-xiala"
+																									   style="font-size: 11px;"></i></div>
+	</h1>
+
+	<a class="right-btn" id="sure-btn">确定</a>
+</header>
+
+<div class="mui-content select-ads">
+	<div class="msg-box">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell" id="go-search">
+				<div id="ads" class="ads">
+					<p class="left">取货地址：</p>
+					<div class="right" style="color: #10B6FF;">点击获取地址</div>
+					<!-- 此处注释有用 -->
+					<!-- <p class="ads1">xx小区</p>
+                    <p class="ads2">河南省郑州市金水区未来路街道河南省郑州市金水区未来路街道</p> -->
+				</div>
+				<span class="iconfont icon-fangdajing"></span>
+			</li>
+			<li class="mui-table-view-cell">
+				<p class="left">详细地址：</p>
+				<div class="right">
+					<input id="ads-detail" class="input" type="text" placeholder="门牌号、楼层、房间号">
+				</div>
+			</li>
+			<li class="mui-table-view-cell">
+				<p class="left">联系人：</p>
+				<div class="right">
+					<input id="name" class="input" type="text" placeholder="联系人姓名">
+				</div>
+			</li>
+			<li class="mui-table-view-cell">
+				<p class="left">联系方式：</p>
+				<div class="right">
+					<input id="phone" class="input" type="number" placeholder="联系人电话">
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 地图 -->
+	<div class="map-box">
+		<img class="bz" src="/assets/img/dingwei.png">
+		<div id="map" class="map">
+
+		</div>
+		<span id="new-dingwei" class="iconfont icon-019suodingweizhi"></span>
+	</div>
+	<!-- 地图 end -->
+
+	<!-- 地址列表 -->
+	<div class="ads-box-box">
+		<div id="segmentedControl" class="mui-segmented-control">
+			<a class="mui-control-item mui-active" href="#item1">
+				<i class="iconfont icon-dizhi"></i>
+				<span>附近的点</span>
+			</a>
+			<!--<a class="mui-control-item" href="#item2">
+				<i class="iconfont icon-shiliangzhinengduixiang"></i>
+				<span>常用地址</span>
+			</a>-->
+		</div>
+		<div class="tab-body">
+			<!-- 附近的点 -->
+			<div id="item1" class="mui-control-content mui-active">
+				<div id="scroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul id="fj-list" class="mui-table-view">
+							<!-- <li class="mui-table-view-cell">
+                                <p class="ads1">xx小区1</p>
+                                <p class="ads2">河南省郑州市金水区未来路街道</p>
+
+                                <span class="iconfont icon-xing_xu"></span>
+                            </li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- 常用地址 -->
+			<!--<div id="item2" class="mui-control-content">
+				<ul class="mui-table-view">
+					{if condition="empty($addressInfo)"}
+					&lt;!&ndash; 无常用地址 &ndash;&gt;
+					<p class="tishi" style="text-align: center; line-height: 90px;">您还没有设置常用地址</p>
+					{else /}
+					&lt;!&ndash; 有常用地址 &ndash;&gt;
+					{volist name="addressInfo" id="address"}
+					<li class="mui-table-view-cell">
+						<p class="ads1">{$address.address_head}</p>
+						<p class="ads2">{$address.address}</p>
+					</li>
+					{/volist}
+
+					{/if}
+				</ul>
+			</div>-->
+
+			<input id="addresstype" type="hidden" value="{$type}">
+			<input id="id" type="hidden" value="{$id}">
+
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<script src="/assets/js/frontend/address/newaddress.js"></script>

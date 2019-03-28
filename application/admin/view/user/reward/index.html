@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <link rel="stylesheet" href="/assets/css/admin.css">
+        <link rel="stylesheet" href="/assets/css/pintuer.css">
+		<title></title>
+     
+	</head>
+<body>
+<div class="panel admin-panel">
+
+ <form method="post" class="form-x" action="">  
+
+<div class="panel-head" id="add"><strong><span class="iconfont icon-icon-xiugai"></span>推荐累计人数奖金设置</strong></div>
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐一人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['five_yun']}" name="five_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐三人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['fifteen_yun']}" name="fifteen_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+	
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐六人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['twenty_yun']}" name="twenty_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐十人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['thirtyfive_yun']}" name="thirtyfive_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐二十人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['fifty_yun']}" name="fifty_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐五十人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['onehundredandfive_yun']}" name="onehundredandfive_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+
+    <br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐一百人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['twohundredandsixty_yun']}" name="twohundredandsixty_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+ 
+    <br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>每增一百人：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['fivehundredclouds_yun']}" name="fivehundredclouds_yun">
+			<div class="tips" title="">元</div>
+		</div>
+	</div>
+
+
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>推荐累计封顶人数设置</strong></div>
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>人数封顶设置：</label>
+		</div>
+    
+        <div class="field">
+			<input type="text" class="input w50" value="{$list['thousand']}" name="thousand">
+			<div class="tips" title="">人</div>
+    
+        </div>
+
+
+	</div>
+
+
+
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>推荐好友注册</strong></div>
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐一个好友注册金额设置：</label>
+		</div>
+        <div class="field">
+			<input type="text" class="input w50" value="{$list['one_yun']}" name="one_yun">
+			<div class="tips" title="">元</div>
+        </div>
+    </div>
+    
+ 
+    <br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐好友完成首单奖励：</label>
+		</div>
+        <div class="field">
+			<input type="text" class="input w50" value="{$list['five_yun']}" name="five_yun">
+			<div class="tips" title="">元</div>
+        </div>
+	</div>
+
+    <br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐好友每天最高奖励：</label>
+		</div>
+        <div class="field">
+			<input type="text" class="input w50" value="{$list['threemore']}" name="threemore">
+			<div class="tips" title="">元</div>
+        </div>
+	</div>
+
+    <br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>推荐好友累计封顶金额设置：</label>
+		</div>
+        <div class="field">
+			<input type="text" class="input w50" value="{$list['fivehundred']}" name="fivehundred">
+			<div class="tips" title="">元</div>
+        </div>
+	</div>
+
+
+
+  
+	
+	 <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="btn btn-success  size-L radius" type="submit"> 确认修改</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body></html>

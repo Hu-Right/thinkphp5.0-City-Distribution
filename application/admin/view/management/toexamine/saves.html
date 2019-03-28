@@ -1,0 +1,104 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+<form class="layui-form" action="" enctype="multipart/form-data" method="POST" > <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="width: 130px; margin-left:-35px;">提现姓名:</label>
+      <div class="layui-input-block" style="width:260px;">
+        <input type="text" name="mobile" value="{$list['true_name']}" id="mobile" disabled="disabled" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+ 
+    <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">提现手机号:</label>
+            <div class="layui-input-block" style="width:260px;">
+              <input type="text" name="truename" value="{$list['mobile']}"    id="truename" disabled="disabled" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+      
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">提现金额:</label>
+            <div class="layui-input-block" style="width:260px;">
+              <input type="text" name="truename" value="{$list['money']}"  disabled="disabled" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">银行名称:</label>
+            <div class="layui-input-block" style="width:260px;">
+              <input type="text" name="truename" value="{$list['bank_name']}"  disabled="disabled" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">银行卡号:</label>
+            <div class="layui-input-block" style="width:260px;">
+              <input type="text" name="truename" value="{$list['bank_card']}"  disabled="disabled" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">申请时间:</label>
+            <div class="layui-input-block" style="width:260px;">
+              <input type="text" name="truename" value="{$list.add_time|date="Y-m-d:H:i:s",###}"  disabled="disabled" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+            <div class="layui-form-item">
+      
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">申请状态:</label>
+            <div class="layui-input-block" style="width:290px;"> 
+                  
+                <input <?php if($list['status'] == "1") echo 'checked="checked"'; ?> type="radio" name="status"value="1" />成功				
+                <input <?php if($list['status'] == "2") echo 'checked="checked"'; ?> type="radio" name="status"value="2" />提现中
+                <input <?php if($list['status'] == "3") echo 'checked="checked"'; ?> type="radio" name="status"value="3" />拒绝     
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="*" type="submit">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+  </form>
+ 
+  <script>
+   layui.use(['layer','form'],function(){
+			form = layui.form;
+			layer = layui.layer;
+			$ = layui.jquery;
+      form.render();
+		});
+    
+    //各种基于事件的操作，下面会有进一步介绍
+ 
+        
+  </script>
+ <script>
+ form.on('submit(filter)',function(data){
+  // layer.msg(JSON.stringify(data.field));
+  //   return false;
+});
+ $('#pro').change(function(){
+    $.ajax({
+        type:"post",
+        url:"{:url('add')}",
+        data:'pro_id='+$('#pro').val(),
+        dataType:"text",
+        success:function(data){
+            $('#city').html(data);
+        }
+    });
+});
+
+ 
+ 
+ </script>
+
+ 
+
+
+
+     

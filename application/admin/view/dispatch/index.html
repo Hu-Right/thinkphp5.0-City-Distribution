@@ -1,0 +1,470 @@
+<style>
+    .form-control{
+        width: 30%;
+    }
+</style>
+
+
+<form id="add-form" class="form-horizontal form-ajax nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:url('index')}" novalidate="novalidate">
+    <div class="form-group">
+        <label for="" class="control-label col-xs-12 col-sm-2">城市地区:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select id="province" name="province" class="form-control">
+                <option value="0">请选择省</option>
+                {foreach name="province" item="vo"}
+                <option value="{$vo.id}">{$vo.areaname}</option>
+                {/foreach}
+            </select>
+            <select id="city" name="city" onchange="get_county()" class="form-control">
+                <option value="0">请选择市</option>
+            </select>
+            <select id="county" name="county" class="form-control">
+                <option value="0">请选择县/区</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="top_service" class="control-label col-xs-12 col-sm-2">服务类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select id="top_service" name="top_service" class="form-control">
+                <option value="0">请选择高级类别</option>
+                {foreach name="top_service" item="vo"}
+                    <option value="{$vo.id}">{$vo.service_name}</option>
+                {/foreach}
+            </select>
+            <select id="middle_service" name="middle_service" class="form-control">
+                <option value="0">请选择中级类别</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="order_message">
+        <div class="form-group" id="nearbuy">
+            <label for="nearbuy" class="control-label col-xs-12 col-sm-2">是否就近购买:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="radio" name="nearbuy" value="0" checked>否
+                <input type="radio" name="nearbuy" value="1">是
+            </div>
+        </div>
+
+        <div class="form-group" id="user_name">
+            <label for="user_name" class="control-label col-xs-12 col-sm-2">联系人:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="user_name" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group" id="user_mobile">
+            <label for="user_mobile" class="control-label col-xs-12 col-sm-2">联系人电话:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="user_mobile" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group" id="consignee">
+            <label for="consignee" class="control-label col-xs-12 col-sm-2">收货人:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="consignee" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group" id="consignee_mobile">
+            <label for="consignee_mobile" class="control-label col-xs-12 col-sm-2">收货人电话:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="consignee_mobile" class="form-control">
+            </div>
+        </div>
+
+        <input type="hidden" name="start_lon" id="start_lon" value="">
+        <input type="hidden" name="start_lat" id="start_lat" value="">
+        <div class="form-group" id="buy_pick_lineup_address">
+            <label for="buy_pick_lineup_address" class="control-label col-xs-12 col-sm-2">购买/取货/办事/排队地址:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" onclick="open_startmap()" id="start_address" placeholder="点击获取地址" name="buy_pick_lineup_address" class="form-control">
+            </div>
+        </div>
+
+        <input type="hidden" name="end_lon" id="end_lon" value="">
+        <input type="hidden" name="end_lat" id="end_lat" value="">
+        <div class="form-group" id="collect_address">
+            <label for="collect_address" class="control-label col-xs-12 col-sm-2">收货地址:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" onclick="open_endmap()" id="end_address" placeholder="点击获取地址" name="collect_address" class="form-control">
+            </div>
+        </div>
+        <div style="margin-left: 17%;">
+            <div id="allmap" style="width:500px; height:400px; position: relative; display: none;"></div>
+        </div>
+
+        <input type="hidden" name="spacing" id="spacing" value="">
+
+        <!--<div class="form-group" id="goods_price">
+            <label for="goods_price" class="control-label col-xs-12 col-sm-2">商品价格:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="goods_price" class="form-control">
+            </div>
+        </div>-->
+
+        <div class="form-group" id="line_time">
+            <label for="line_time" class="control-label col-xs-12 col-sm-2">排队时间（小时）:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="line_time" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group" id="linetime_text">
+            <label for="linetime_text" class="control-label col-xs-12 col-sm-2">排队时长:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="linetime_text" class="form-control" placeholder="如：1小时30分钟">
+            </div>
+        </div>
+
+        <div class="form-group" id="weight">
+            <label for="weight" class="control-label col-xs-12 col-sm-2">物品重量（kg）:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input type="text" name="weight" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group" id="matter">
+            <label for="matter" class="control-label col-xs-12 col-sm-2">事项及要求:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea name="matter" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <!--<div class="form-group" id="remark">
+            <label for="remark" class="control-label col-xs-12 col-sm-2">备注:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea name="remark" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+        </div>-->
+    </div>
+
+    <div class="form-group layer-footer">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed">提交</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=m5Z6uuCsaVKQ0lae7PNhNVZhptYX8mSA"></script>
+<script>
+    $('#middle_service').hide();
+    $('#order_message').hide();
+    $('#top_service').change(function () {
+        var high_id = $('#top_service').val();
+        if (high_id == 0){
+            $('#middle_service').hide();
+            $('#middle_service').empty();
+            $('#order_message').hide();
+            //alert('请选择服务类型');
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "{:url('get_middle_service')}",
+            data: {'high_id': high_id},
+            datatype: "text",
+            success: function (data) {
+                if (data != '') {
+                    $('#middle_service').show();
+                    $('#middle_service').empty();
+                    $('#middle_service').append(data);
+                } else {
+                    $('#middle_service').hide();
+                    $('#middle_service').empty();
+                    //$('#order_message').hide();
+                }
+            }
+        });
+
+        if (high_id == 1){
+            $('#order_message').show();
+            $('#nearbuy').show();
+            $('#user_name').show();
+            $('#user_mobile').show();
+            $('#buy_pick_lineup_address').show();
+            $('#collect_address').show();
+            //$('#goods_price').show();
+            $('#matter').show();
+            $('#consignee').hide();
+            $('#line_time').hide();
+            $('#linetime_text').hide();
+            $('#weight').hide();
+            $('#consignee_mobile').hide();
+            $('#remark').hide();
+        }
+
+        if (high_id == 2){
+            $('#order_message').show();
+            $('#user_name').show();
+            $('#user_mobile').show();
+            $('#consignee').show();
+            $('#consignee_mobile').show();
+            $('#buy_pick_lineup_address').show();
+            $('#collect_address').show();
+            $('#weight').show();
+            $('#goods_price').hide();
+            $('#line_time').hide();
+            $('#linetime_text').hide();
+            $('#nearbuy').hide();
+            $('#remark').hide();
+            //$('#matter').hide();
+        }
+
+        if (high_id == 3){
+            $('#order_message').show();
+            $('#user_name').show();
+            $('#user_mobile').show();
+            $('#buy_pick_lineup_address').show();
+            $('#matter').show();
+            $('#nearbuy').hide();
+            $('#consignee').hide();
+            $('#weight').hide();
+            $('#line_time').hide();
+            $('#linetime_text').hide();
+            $('#consignee_mobile').hide();
+            $('#collect_address').hide();
+            //$('#goods_price').hide();
+            $('#remark').hide();
+        }
+
+        if (high_id == 4){
+            $('#order_message').show();
+            $('#user_name').show();
+            $('#user_mobile').show();
+            $('#buy_pick_lineup_address').show();
+            $('#matter').show();
+            $('#line_time').show();
+            $('#linetime_text').show();
+            $('#nearbuy').hide();
+            $('#consignee').hide();
+            $('#weight').hide();
+            $('#consignee_mobile').hide();
+            $('#collect_address').hide();
+            //$('#goods_price').hide();
+            $('#remark').hide();
+        }
+
+        if (high_id == 5){
+            $('#order_message').show();
+            $('#user_name').show();
+            $('#user_mobile').show();
+            $('#consignee').show();
+            $('#consignee_mobile').show();
+            $('#buy_pick_lineup_address').show();
+            $('#collect_address').show();
+            $('#weight').show();
+            $('#goods_price').hide();
+            $('#line_time').hide();
+            $('#linetime_text').hide();
+            $('#nearbuy').hide();
+            $('#remark').hide();
+            //$('#matter').hide();
+        }
+    });
+
+    $('#city').hide();
+    $('#county').hide();
+    $('#province').change(function () {
+        //alert(11111);
+        var province_id = $('#province').val();
+        if (province_id == 0){
+            $('#city').hide();
+            $('#city').empty();
+            $('#county').hide();
+            $('#county').empty();
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "{:url('get_city')}",
+            data: {'province_id': province_id},
+            datatype: "text",
+            success: function (data) {
+                if (data != ''){
+                    $('#city').show();
+                    $('#city').empty();
+                    $('#city').append(data);
+                    get_county();
+                } else{
+                    $('#city').hide();
+                    $('#city').empty();
+                    $('#county').hide();
+                    $('$county').empty();
+                }
+            }
+        })
+
+    });
+
+    function get_county() {
+        $('#county').hide();
+        $('#city').ready(function () {
+            var city_id = $('#city').val();
+            if (city_id == 0){
+                $('county').hide();
+                $('county').empty();
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{:url('get_county')}",
+                data: {'city_id': city_id},
+                datatype: "text",
+                success: function (data) {
+                    if (data != ''){
+                        $('#county').show();
+                        $('#county').empty();
+                        $('#county').append(data);
+                    } else{
+                        $('#county').hide();
+                        $('$county').empty();
+                    }
+                }
+            })
+        })
+    };
+</script>
+<script>
+     function open_startmap() {
+        if (document.getElementById('allmap').style.display == 'none') {
+            document.getElementById('allmap').style.display = 'block';
+            var map = new BMap.Map("allmap");
+            //开启鼠标滚轮缩放
+            map.enableScrollWheelZoom(true);
+            //设置地图默认的鼠标指针样式
+            map.setDefaultCursor("url('bird.cur')");
+            var geoc = new BMap.Geocoder(); //地址解析对象
+            var geolocation = new BMap.Geolocation();
+            var point = new BMap.Point(116.331398, 39.897445);
+            map.centerAndZoom(point, 12); // 中心点
+            function myFun(result) {
+                var cityName = result.name;
+                map.setCenter(cityName);
+            }
+
+            var myCity = new BMap.LocalCity();
+            myCity.get(myFun);
+            geolocation.getCurrentPosition(function (r) {
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+
+                    map.panTo(r.point);
+                    map.enableScrollWheelZoom(true);
+                } else {
+                    alert('failed' + this.getStatus());
+                }
+            }, {
+                enableHighAccuracy: true
+            })
+
+            map.addEventListener("click", function (e) {
+                map.clearOverlays();
+                //获取经纬度
+                var mPoint = new BMap.Point(e.point.lng, e.point.lat);
+                console.log(mPoint);
+                document.getElementById('start_lon').value = e.point.lng;
+                document.getElementById('start_lat').value = e.point.lat;
+                geoc.getLocation(e.point, function (rs) {
+                    var addComp = rs.addressComponents;
+                    var address = addComp.province + addComp.city
+                        + addComp.district + addComp.street
+                        + addComp.streetNumber;
+                    if (confirm("确定要地址是" + address + "?")) {
+                        document.getElementById('start_address').value = address;
+                        document.getElementById('allmap').style.display = 'none';
+                    }
+                });
+                var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat)); // 创建点
+                map.addOverlay(marker);//将标注添加到地图中
+            })
+        }
+    }
+
+
+     function open_endmap() {
+         if (document.getElementById('allmap').style.display == 'none') {
+             document.getElementById('allmap').style.display = 'block';
+             var map = new BMap.Map("allmap");
+             //开启鼠标滚轮缩放
+             map.enableScrollWheelZoom(true);
+             //设置地图默认的鼠标指针样式
+             map.setDefaultCursor("url('bird.cur')");
+             var geoc = new BMap.Geocoder(); //地址解析对象
+             var geolocation = new BMap.Geolocation();
+             var point = new BMap.Point(116.331398, 39.897445);
+             map.centerAndZoom(point, 12); // 中心点
+             function myFun(result) {
+                 var cityName = result.name;
+                 map.setCenter(cityName);
+             }
+
+             var myCity = new BMap.LocalCity();
+             myCity.get(myFun);
+             geolocation.getCurrentPosition(function (r) {
+                 if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+
+                     map.panTo(r.point);
+                     map.enableScrollWheelZoom(true);
+                 } else {
+                     alert('failed' + this.getStatus());
+                 }
+             }, {
+                 enableHighAccuracy: true
+             })
+
+             map.addEventListener("click", function (e) {
+                 map.clearOverlays();
+                 //获取经纬度
+                 var mPoint = new BMap.Point(e.point.lng, e.point.lat);
+                 console.log(mPoint);
+                 document.getElementById('end_lon').value = e.point.lng;
+                 document.getElementById('end_lat').value = e.point.lat;
+                 geoc.getLocation(e.point, function (rs) {
+                     var addComp = rs.addressComponents;
+                     var address = addComp.province + addComp.city
+                         + addComp.district + addComp.street
+                         + addComp.streetNumber;
+                     if (confirm("确定要地址是" + address + "?")) {
+                         document.getElementById('end_address').value = address;
+                         document.getElementById('allmap').style.display = 'none';
+                     }
+                 });
+                 var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat)); // 创建点
+                 map.addOverlay(marker);//将标注添加到地图中
+                 get_spacing();
+             })
+             function get_spacing() {
+                 var start_lon = document.getElementById('start_lon').value;
+                 var start_lat = document.getElementById('start_lat').value;
+                 var end_lon = document.getElementById('end_lon').value;
+                 var end_lat = document.getElementById('end_lat').value;
+
+                 var p1 = new BMap.Point(start_lon, start_lat);
+                 var p2 = new BMap.Point(end_lon, end_lat);
+                 var output = "";
+                 var searchComplete = function (results) {
+                     if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
+                         return;
+                     }
+                     var plan = results.getPlan(0);
+                     output += plan.getDistance(true) + "\n";             //获取距离
+                 }
+                 var driving = new BMap.RidingRoute(map, {
+                     renderOptions: {map: map, autoViewport: true},
+                     onSearchComplete: searchComplete,
+                     onPolylinesSet: function () {
+                         document.getElementById('spacing').value = output.replace('公里','');
+                     }
+                 });
+                 driving.search(p1, p2);
+             }
+         }
+     }
+
+
+</script>
+

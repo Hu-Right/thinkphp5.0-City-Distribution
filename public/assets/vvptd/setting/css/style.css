@@ -1,0 +1,560 @@
+.f-l{
+	float: left;
+}
+.f-r{
+	float: right;
+}
+.o-h{
+	overflow: hidden;
+}
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+
+/* 背景底色 */
+body{
+	background-color: #FFFFFF;
+	color: #333333;
+}
+.mui-content{
+	background-color: #fff;
+}
+/* 头部样式 */
+.mui-bar{
+	background-color: #fff;
+	box-shadow: none;
+    border-bottom: 1px solid #DCDCDC;
+}
+.mui-bar .mui-action-back{
+	color: #858585;
+}
+.mui-bar .mui-title{
+	color: #333333;
+}
+/* 列表样式修改 */
+.mui-content>.mui-table-view:first-child{
+	margin-top: 0;
+}
+/* 列表边框 */
+.mui-table-view:before{	
+	background-color: #DCDCDC;
+}
+.mui-table-view:after{
+	background-color: #DCDCDC;
+}
+.mui-table-view-cell:after{
+	left: 0;
+	background-color: #DCDCDC;
+}
+.mui-input-group .mui-input-row:after{
+	left: 0;
+}
+/* 灰色分割条 */
+.hui-bg{
+	height: 12px;
+	background: #FAFAFA;
+}
+
+/* 设置中心 */
+.setting-main .upload{
+	color: #10B6FF;
+	float: right;
+	font-size: 15px;
+}
+
+/* 提现账户 */
+.account-main .top-ul{
+	overflow: hidden;
+	text-align: center;
+	font-size: 16px;
+	padding: 20px 0;
+}
+.account-main .top-ul .li{
+	width: 50%;
+	float: left;
+}
+.account-main .top-ul .li1{
+	border-left: 1px solid #858585;
+	color: #FF7751;
+	font-size: 18px;
+}
+.account-main .card-list{
+	font-size: 15px;
+}
+.account-main .card-list .btn{
+	float: right;
+	font-size: 13px;
+	color: #858585;
+}
+.account-main .card-list .span{
+	margin-right: 12px;
+}
+.account-main .mui-table-view:before{
+	background-color: #fff;
+}
+.account-main .top-ul.mui-table-view:after{
+	background-color: #fff;
+}
+.account-main .add-card{
+	display: block;
+	float: right;
+	color: #10B6FF;
+	font-size: 13px;
+	padding: 12px 15px;
+}
+
+/* 订单中心 */
+.order-main .mui-table-view-cell .top{
+	line-height: 30px;
+}
+.order-main .mui-table-view-cell .type{
+	font-size: 16px;
+	margin-right: 10px;
+}
+.order-main .mui-table-view-cell .time{
+	color: #858585;
+	font-size: 14px;
+}
+.order-main .mui-table-view-cell .process{
+	float: right;
+	font-size: 15px;
+}
+.order-main .mui-table-view-cell .process1{
+	color: #FF7751;
+}
+.order-main .mui-table-view-cell .process2{
+	color: #10B6FF;
+}
+.order-main .mui-table-view-cell .process3{
+	color: #858585;
+}
+.order-main .mui-table-view-cell .center{
+	line-height: 22px;
+}
+.order-main .mui-table-view-cell .center .p{
+	font-size: 14px;
+	color: #333333;
+	margin-left: 5px;
+	float: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 90%;
+}
+.order-main .mui-table-view-cell .center .phone{
+	margin-left: 10px;
+}
+.order-main .mui-table-view-cell .btm{
+	margin-top: 10px;
+	overflow: hidden;
+}
+.order-main .mui-table-view-cell .btm .p2{
+	line-height: 28px;
+	font-size: 12px;
+	color: #858585;
+}
+.order-main .mui-table-view-cell .btm .black{
+	color: #333333;
+}
+
+.order-main .mui-table-view-cell .btm .money{
+	font-size: 18px;
+}
+
+
+/* 设置导航方式 */
+.mapSet-main .list{
+	border-bottom: 1px solid #DCDCDC;
+	padding: 15px 15px 20px;
+}
+.mapSet-main .list .tit{
+	font-size: 15px;
+	color: #333;
+}
+.mapSet-main .list .ul{
+	overflow: hidden;
+}
+.mapSet-main .list .li{
+	width:120px;
+	height:27px;
+	background: #EEEEEE;
+	border-radius:5px;
+	font-size: 13px;
+	border: 1px solid #EEEEEE;
+	color: #858585;
+	text-align: center;
+	line-height: 25px;
+	float: left;
+	margin-right: 12px;
+}
+.mapSet-main .list .li .icon-dui1{
+	font-size: 13px;
+}
+.mapSet-main .list .on{
+	border: 1px solid #10B6FF;
+	color: #10B6FF;
+	background: #FFFFFF;
+}
+.mapSet-main .list .ul2 .li{
+	width: 60px;
+}
+.mapSet-main .gou-box{
+	float: left;
+	color: #858585;
+	font-size: 12px;
+	line-height: 24px;
+	margin: 20px 15px 40px;
+}
+.mapSet-main .gou-box .iconfont{
+	font-size: 14px;
+	font-weight: bold;
+	float: left;
+	margin-right: 5px;
+}
+.mapSet-main .mui-btn{
+	display: block;
+	width: calc(100% - 30px);
+	margin: 0 auto;
+	height: 45px;
+	background: #10B6FF;
+	border-radius: 20px;
+	color: #fff;
+	font-size: 18px;
+}
+
+
+/* 任务中心 */
+.task-main .title{
+	margin: 0;
+	line-height: 50px;
+	margin: 0 15px;
+	font-size: 17px;
+	color: #333333;
+	font-weight:bold;
+	border-bottom: 1px solid #DCDCDC;
+}
+.task-main li{
+	border-bottom: 1px solid #DCDCDC;
+	padding: 10px 0 8px;
+	margin: 0 15px;
+}
+.task-main li .tit{
+	font-size: 14px;
+	color: #333333;
+	line-height: 22px;
+}
+.task-main li .num{
+	color: #10B6FF;
+	font-size: 12px;
+	margin-top: 2px;
+	line-height: 20px;
+}
+.task-main li .btn{
+	width: 66px;
+	font-size: 12px;
+	padding: 0;
+	height: 24px;
+	line-height: 24px;
+	border-radius: 15px;
+	margin-top: 10px;
+}
+.task-main li .btn1{
+	color: #10B6FF;
+	border: 1px solid #10B6FF;
+}
+.task-main li .btn2{
+	color: #FFF;
+	border: 1px solid #FF7751;
+	background: #FF7751;
+}
+
+
+/* 账户余额 */
+.account-yue .tishi{
+	background: #FF7751;
+	color: #fff;
+	font-size: 12px;
+	padding: 6px 15px;
+	line-height: 18px;
+}
+.account-yue .msg-box{
+	padding: 20px 10px;
+	background:rgba(16,182,255,1);
+	text-align: center;
+}
+.account-yue .msg-box p{
+	color: #fff;
+	margin: 0;
+}
+.account-yue .msg-box p.tit{
+	font-size: 14px;
+}
+.account-yue .msg-box p.num{
+	font-size: 26px;
+	line-height: 36px;
+}
+.account-yue .msg-box p.ed{
+	font-size: 12px;
+}
+.account-yue .shouyi-box li{
+	width: 50%;
+	color: #858585;
+	float: left;
+	font-size: 14px;
+	padding: 0;
+	line-height: 44px;
+	text-align: center;
+}
+.account-yue .shouyi-box li.li1{
+	border-right: 1px solid #DCDCDC;
+}
+.account-yue .shouyi-box li .money{
+	font-size: 17px;
+	color: #FF7751;
+}
+.account-yue .zhu{
+	background: #EEEEEE;
+	font-size: 12px;
+	padding: 2px 15px;
+	color: #858585;
+}
+.account-yue .zd-tit{
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #DCDCDC;
+	/* position: absolute;
+	width: 100%;
+	top: 0; */
+}
+.account-yue .zd-tit .num{
+	position: absolute;
+	right: 15px;
+	font-size: 12px;
+	color: #858585;
+}
+.tixian-btn{
+	display: block;
+	width: 100%;
+	height: 45px;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	line-height: 45px;
+	color: #fff;
+	background: #10B6FF;
+	font-size: 18px;
+}
+
+/* 账单详情 */
+.bill-details .top,.bill-details .btm{
+	padding: 10px 15px;
+	border-bottom: 1px solid #DCDCDC;
+}
+.bill-details .top{
+	font-size: 15px;
+	line-height: 50px;
+}
+.bill-details .top .right{
+	font-size: 20px;
+}
+.bill-details .btm{
+	font-size: 13px;
+}
+.bill-details .li{
+	line-height: 32px;
+}
+.bill-details .left{
+	color: #858585;	
+}
+.bill-details .right{
+	float: right;
+}
+
+
+/* 帮助说明 */
+.help-main .list{
+	margin: 0 15px;
+	padding: 20px 0 10px;
+	border-bottom: 1px solid #DCDCDC;
+}
+.help-main .list .tit{
+	font-size: 16px;
+	font-weight:bold;
+	color: #333333;
+}
+.help-main .list li{
+	padding: 6px 15px;
+	font-size: 15px;
+}
+
+
+/* 余额提现 */
+.cash-main .top li{
+	float: left;
+	text-align: center;
+	padding: 20px 0;
+	width: calc(50% - 1px);
+}
+.cash-main .top li.li2{
+	width: 1px;
+}
+.cash-main .top li.li2 .border{
+	height: 20px;
+	background: #858585;
+	margin-top: 10px;
+}
+.cash-main .top li .p1{
+	font-size: 16px;
+	color: #333333;
+	line-height: 22px;
+}
+.cash-main .top li .p2{
+	font-size: 13px;
+	color: #858585;
+	line-height: 18px;
+}
+.cash-main .top li.li1{
+	font-size: 22px;
+	color: #FF7751;
+	line-height: 40px;
+}
+.cash-main .mui-input-row{
+	border-bottom: 1px solid #DCDCDC;
+	padding: 4px 0;
+}
+.cash-main .tishi{
+	color: #FF7751;
+	font-size: 13px;
+	padding: 15px;
+}
+.cash-main .mui-btn{
+	background: #10B6FF;
+	color: #FFFFFF;
+	position: absolute;
+	bottom: 0;
+	border-radius: 0;
+	margin: 0;
+	padding: 12px 0;
+	border: none;
+}
+
+
+/* 提现明细 */
+.cash-details .mui-table-view-cell{
+	border-bottom: 1px solid #DCDCDC;
+}
+.cash-details li p{
+	color: #333333;
+	font-size: 15px;
+	line-height: 20px;
+}
+.cash-details li .time{
+	font-size: 13px;
+	color: #858585;
+}
+.cash-details li .f-r p{
+	line-height: 30px;
+}
+.cash-details li .f-r p.money{
+	font-size: 18px;
+}
+.cash-details li .f-r p.status1{
+	color: #10B6FF;
+}
+.cash-details li .f-r p.status2{
+	color: #FF7751;
+}
+.cash-details li .f-r p.status3{
+	color: #858585;
+}
+
+
+/* 我的战队 */
+.myteam p{
+	margin: 0;
+}
+.myteam .top-box {
+	text-align: center;
+	padding: 77px 0 30px;
+}
+.myteam .top-box .p1{
+	color: #10B6FF;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+.myteam .top-box .p2{
+	color: #FFF;
+	font-size: 13px;
+}
+.myteam .add-team{
+	width: 150px;
+	margin: 0 auto;
+	text-align: center;
+	color: #FF7751;
+	font-size: 16px;
+	padding-top: 30px;
+}
+.myteam .add-team .iconfont{
+	margin-right: 10px;
+	font-size: 20px;
+}
+.myteam .search-box {
+	padding: 15px 15px 0;
+	
+}
+.myteam .mui-search{
+	width: 80%;
+}
+.myteam .mui-search input[type=search]{
+	background: rgba(16,182,255,.3);
+	color: #fff;
+}
+/* .myteam .mui-search .mui-placeholder{
+	color: rgba(255,255,255,.3);
+	text-align: left;
+} */
+/* .mui-search .mui-placeholder .mui-icon{
+	margin: 0 10px;
+} */
+.myteam .search-btn{
+	background: #10B6FF;
+    border-color: #10B6FF;
+    color: #00131B;
+}
+.myteam .team-list .mui-table-view{
+	background: none;
+}
+.myteam .team-list .li-head{
+	overflow: hidden;
+	line-height: 45px;
+	border-bottom: 1px solid #10B6FF;
+}
+.myteam .team-list .mui-table-view li{
+	float: left;
+	width: 25%;
+	padding: 0;
+	text-align: center;
+	font-size: 15px;
+	color: #10B6FF;
+}
+.myteam .team-list #list li{
+	overflow: hidden;
+	width: 100%;
+	/* height: 45px; */
+	line-height: 45px;
+	border-bottom: 1px solid rgba(16,182,255,.5);
+}
+.myteam #list li p{
+	float: left;
+	width: 25%;
+	color: #fff;
+	font-size: 14px;
+}
+#list .btn{
+	padding: 3px 10px;
+	margin-top: 10px;
+	background-color: #00131B;
+	color: #FF7751;
+	border: 1px solid #FF7751;
+	border-radius: 31px;
+}

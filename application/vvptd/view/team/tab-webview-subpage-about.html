@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/iconfont.css">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/mui.min.css">
+		</script>
+		<style>
+			html,
+			body {
+				background-color: #00131B;
+			}
+			
+			.mui-content {
+				background-color: #00131B;
+			}
+			
+			.zhandui_head {
+				position: absolute;
+				top: 5%;
+				left: 50%;
+				margin-left: -92px;
+				width: 184px;
+				height: 27px;
+				border-radius: 12.5px;
+				border: 1px solid #FF7751;
+			}
+			
+			.zhandui_head>div {
+				float: left;
+				width: 50%;
+			}
+			
+			.btn_zd {
+				text-align: center;
+				line-height: 25px;
+				font-size: 15px;
+				color: #00131B;
+				border-radius: 12.5px 0 0 12.5px;
+				background: #FF7751;
+			}
+			
+			.btn_gr {
+				text-align: center;
+				line-height: 25px;
+				font-size: 15px;
+				color: #FF7751;
+				border-radius: 0 12.5px 12.5px 0;
+				background: #00131B;
+			}
+			
+			.jiangbei {
+				background: #00131B;
+				text-align: center;
+				margin-top: 80px;
+				width: 100%;
+				height: 80px;
+			}
+			
+			.jiangbei>div {
+				width: 33.33%;
+				float: left;
+			}
+			
+			.jiangbei img {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				margin-left: -23px;
+			}
+			
+			.dg {
+				height: 60px;
+				position: relative;
+			}
+			
+			.font {
+				text-align: center;
+				margin-top: 5px;
+			}
+			
+			.font div:nth-child(1) {
+				font-size: 11px;
+				color: #FF7751;
+			}
+			
+			.font div:nth-child(2) {
+				font-size: 8px;
+				color: #858585;
+			}
+			
+			.shijian {
+				margin-top: 5px;
+				line-height: 50px;
+				background: #00131B;
+				text-align: center;
+				font-size: 11px;
+				color: #ffffff;
+			}
+        .shijian1 {
+            margin-top: 5px;
+            line-height: 50px;
+            background: #00131B;
+            //text-align: center;
+            font-size: 11px;
+            color: #ffffff;
+        }
+			.sanbang {
+				width: 80%;
+				height: 30px;
+				margin: 20px 10%;
+				margin-top: 0px;
+				background: #10B6FF;
+				border-radius: 5px;
+			}
+			
+			.sanbang>div {
+				position: relative;
+				width: 33.33%;
+				text-align: center;
+				color: #ffffff;
+				float: left;
+				line-height: 30px;
+				font-size: 14px;
+			}
+			
+			.sanbang>div>div {
+				width: 25px;
+				height: 1px;
+				background: #fff;
+				position: absolute;
+				bottom: 4px;
+				left: 50%;
+				margin-left: -12.5px;
+			}
+			
+			.paiming {
+				height: 35px;
+				width: 100%;
+				border-top: 1px #10B6FF solid;
+				border-bottom: 1px #10B6FF solid;
+			}
+			
+			.paiming>div {
+				width: 33.33%;
+				text-align: center;
+				line-height: 35px;
+				color: #ffffff;
+				float: left;
+				font-size: 13px;
+			}
+			
+			.paiming_zd {
+				padding: 20px;
+				background: #00131B;
+				position: relative;
+			}
+			
+			.paiming_zd:after {
+				display: block;
+				content: "";
+				clear: both;
+			}
+			
+			.paiming_zd>div {
+				width: 40%;
+				margin: 5%;
+				float: left;
+				height: 150px;
+				background: rgb(51, 66, 73);
+				border-radius:5px ;
+			}
+			.gr img{
+				border-radius:50% ;
+			}
+			.yj{
+				color: #E1E1E2;
+				font-size: 15px;
+				top: -10px;
+				left: 50%;
+				margin-left: -17px;
+			}
+			.gj{
+				color: #E5CA5D;
+				font-size: 17px;
+				top: -30px;
+				left: 50%;
+				margin-left: -17px;
+			}
+			.jj{
+				color: #CAA000;
+				font-size: 15px;
+				top: -10px;
+				left: 50%;
+				margin-left: -17px;
+			}
+			.geren{
+				margin-top: 100px;
+			}
+			.gr>div:nth-child(1){
+				position: absolute;
+				
+			}
+			.grid{
+				margin-top: 5px;
+				color:#FF7751 ;
+				font-size: 12px;
+			}
+			.geren_img img{
+				border-radius:50% ;
+				width: 55px;
+				height: 55px;
+			}
+			.geren_number{
+				text-align: center;
+				padding: 10px 0;
+				font-size: 15px;
+				color: #FF7751;
+			}
+			.geren_img{
+				text-align: center;
+				padding: 10px 0;
+			}
+			.geren_id{
+				text-align: center;
+				font-size:13px ;
+				color: #FFFFFF;
+			}
+			.zhandui_bg{
+				position: relative;
+			}
+			.zhandui_bg>img{
+				
+				position: absolute;
+				top: 10%;
+				left: 50%;
+				margin-left: -37%;
+			}
+			.pm{
+				position: relative;
+				margin-top: 19%;
+				text-align: center;
+				font-size: 11px;
+				color: #F13E33;
+			}
+			.zdm{
+				top: 2px;
+				position: relative;
+				height: 15px;
+				text-align: center;
+				font-size: 11px;
+				color: #fff;
+				line-height: 15px;
+			}
+			.zdbh{
+				margin-top: 2px;
+				position: relative;
+				color: #333333;
+				font-size: 9px;
+				text-align: center;
+			}
+			.line_2{
+				background: #FFFFFF;
+				width: 80%;
+				height: 1px;
+				margin: 0 auto;
+				margin-top: 28px;
+			}
+			.zddz{
+				
+				margin-top: 5px;
+				text-align: center;
+				color: #fff;
+			}
+			.zddz img{
+				
+				position: relative;
+				top: -3px;
+				width: 18px;
+				height: 18px;
+				border-radius:50% ;
+				vertical-align:bottom;
+			}
+			.zddz span:nth-child(3){
+				padding-left: 5px;
+				font-size: 10px;
+			}
+			.zddz span:nth-child(2){
+				padding-left: 5px;
+				font-size: 11px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="zhandui_head">
+				<div class="btn_zd">
+					战队榜
+				</div>
+				<div class="btn_gr">
+					个人榜
+				</div>
+			</div>
+			<div class="zdd" >
+				<div class="jiangbei zhandui">
+					<div>
+						<div class="dg">
+							<img src="__CDN__/assets/vvptd/setting/img/yjjb.png" / width="45px" height="43px">
+						</div>
+						<div class="font">
+							<div id='yj_name'>
+								战队名
+							</div>
+							<div>
+								战队编号：<span id="yj_num">00000</span>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="dg">
+							<img src="__CDN__/assets/vvptd/setting/img/gjjb.png" / width="53px" height="55px">
+						</div>
+						<div class="font">
+							<div id='gj_name'>
+								战队名
+							</div>
+							<div>
+								战队编号：<span id="gj_num">00000</span>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="dg">
+							<img src="__CDN__/assets/vvptd/setting/img/jjjb.png" / width="43px" height="45px">
+						</div>
+						<div class="font">
+							<div id="jj_name">
+								战队名
+							</div>
+							<div>
+								战队编号：<span id="jj_num">00000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="jiangbei geren" style="display: none;">
+					<div>
+						<div class="dg gr">
+							<div class="yj">
+								亚军
+							</div>
+							<img src="__CDN__/assets/vvptd/member/img/touxiang.png" id="yj_p_img"  width="45px" height="45px">
+						</div>
+						<div class="grid" id="yj_p_name">
+							张师傅
+						</div>
+					</div>
+					<div>
+						<div class="dg gr">
+							<div class="gj">
+								冠军
+							</div>
+							<img src="__CDN__/assets/vvptd/member/img/touxiang.png" id="gj_p_img"  width="65px" height="65px" style="margin-left: -35px;">
+						</div>
+						<div class="grid" id="gj_p_name">
+							张师傅
+						</div>
+					</div>
+					<div>
+						<div class="dg gr">
+							<div class="jj">
+								季军
+							</div>
+							<img src="__CDN__/assets/vvptd/member/img/touxiang.png" id="jj_p_img" width="45px" height="45px">
+						</div>
+						<div class="grid" id="jj_p_name">
+							张师傅
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				<div class="shijian">
+					统计时间:<span>{$time}</span>
+				</div>
+				<div class="sanbang">
+					<div id="ri">
+						日榜
+						<div></div>
+					</div>
+					<div id="zhou">
+						周榜
+						<div></div>
+					</div>
+					<div id="yue">
+						月榜
+						<div></div>
+					</div>
+				</div>
+				<div class="paiming">
+					<div id="danshu">
+						<span>·</span>单数排行<span>·</span>
+					</div>
+					<div id="licheng">
+						<span>·</span>里程排行<span>·</span>
+					</div>
+					<div id="shouru">
+						<span>·</span>收入排行<span>·</span>
+					</div>
+				</div>
+				<div class="paiming_zd zhandui zhandui_xm">
+
+				</div>
+				
+				<div class="paiming_zd grrr grrr_list" style="display: none;">
+
+				</div>
+
+			</div>
+        <input type='hidden' id='type' value='1'>
+        <input type='hidden' id='float' value='1'>
+		</div>
+	</body>
+	<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script>
+		
+	</script>
+	<script type="text/javascript">
+        mui.init();
+
+        document.getElementById('ri').addEventListener('tap', function() {
+            $('#type').val(1);
+            var float = $('#float').val();
+            if(float == 1) {
+                getTaskList(1, 1);
+            }else{
+                getTaskListP(1,1);
+            }
+        });
+        document.getElementById('zhou').addEventListener('tap', function() {
+            $('#type').val(2);
+            var float = $('#float').val();
+            if(float == 1) {
+                getTaskList(2,1);
+            }else{
+                getTaskListP(2,1);
+            }
+        });
+        document.getElementById('yue').addEventListener('tap', function() {
+            $('#type').val(3);
+            var float = $('#float').val();
+            if(float == 1) {
+                getTaskList(3,1);
+            }else{
+                getTaskListP(3,1);
+            }
+        });
+        document.getElementById('danshu').addEventListener('tap', function() {
+            var type = $('#type').val();
+            var float = $('#float').val();
+            if(float == 1) {
+                getTaskList(type,1);
+            }else{
+                getTaskListP(type,1);
+            }
+        });
+        document.getElementById('licheng').addEventListener('tap', function() {
+            var type = $('#type').val();
+            var float = $('#float').val();
+            if(float == 1) {
+                getTaskList(type,2);
+            }else{
+                getTaskListP(type,2);
+            }
+        });
+        document.getElementById('shouru').addEventListener('tap', function() {
+            var type = $('#type').val();
+            var float = $('#float').val();
+            if(float == 1) {
+                getTaskList(type,3);
+            }else{
+                getTaskListP(type,3);
+            }
+        });
+        getTaskList(1,1);
+        function getTaskList(type,status){
+            mui.ajax('/vvptd/team/teamRankingList',{
+                type:'post',
+                data:{
+                    type:type,
+                    status:status
+                },
+                success: function (data) {
+                    if(data.data.length>0){
+                        var arr  = data.data;
+                        var html = '';
+                        for(var i =0;i<arr.length;i++){
+                            if(i==0){
+                                $('#gj_name').html(arr[i].name);
+                                $('#gj_num').html(arr[i].id);
+                            }
+                            if(i==1){
+                                $('#yj_name').html(arr[i].name);
+                                $('#yj_num').html(arr[i].id);
+                            }
+                            if(i==2){
+                                $('#jj_name').html(arr[i].name);
+                                $('#jj_num').html(arr[i].id);
+                            }
+                            html+='<div class="zhandui_bg">';
+                            html+='<img src="__CDN__/assets/vvptd/setting/img/zhandui-ph.png" alt="" / width="75%">';
+                            html+='<div class="pm">';
+                            html+='· '+arr[i].id+'·';
+                            html+='</div>';
+                            html+='<div class="zdm">'+arr[i].name+' </div>';
+                            html+='<div class="zdbh">'+arr[i].id+'</div>';
+                            html+='<div class="line_2"></div>';
+                            html+='<div class="zddz"><img src="'+arr[i].avatar+'" alt="" />';
+                            html+='<span>队长</span><span>'+arr[i].username+'</span>';
+                            html+='</div>';
+                            html+='</div>';
+                        }
+
+                        $('.zhandui_xm').html(html);
+                    }
+                },
+                error: function (data) {
+                    layer.open({
+                        content:'网络繁忙'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                }
+            })
+        }
+        getTaskListP(1,1);
+        function getTaskListP(type,status){
+            mui.ajax('/vvptd/team/runmenRankingList',{
+                type:'post',
+                data:{
+                    type:type,
+                    status:status
+                },
+                success: function (data) {
+                    if(data.data.length>0){
+                        var arr  = data.data;
+                        var html = '';
+                        for(var i =0;i<arr.length;i++){
+                            if(i==0){
+                                $('#gj_p_name').html(arr[i].truename);
+                                if(arr[i].avatar!=''){
+                                    $('#gj_p_img').attr('src',arr[i].avatar);
+                                }else{
+                                    $('#gj_p_img').attr('src','__CDN__/assets/vvptd/member/img/touxiang.png');
+                                }
+
+                            }
+                            if(i==1){
+                                $('#yj_p_name').html(arr[i].truename);
+                                if(arr[i].avatar!=''){
+                                    $('#yj_p_img').attr('src',arr[i].avatar);
+                                }else{
+                                    $('#yj_p_img').attr('src','__CDN__/assets/vvptd/member/img/touxiang.png');
+                                }
+                            }
+                            if(i==2){
+                                $('#jj_p_name').html(arr[i].truename);
+                                if(arr[i].avatar!=''){
+                                    $('#jj_p_img').attr('src',arr[i].avatar);
+                                }else{
+                                    $('#jj_p_img').attr('src','__CDN__/assets/vvptd/member/img/touxiang.png');
+                                }
+                            }
+                            html+='<div>';
+                            html+='<div class="geren_number">·'+arr[i].id+'·</div>';
+                            html+='<div class="geren_img">';
+                            if(arr[i].avatar!='') {
+                                html += '<img src="' + arr[i].avatar + '" alt="" />';
+                            }else{
+                                html += '<img src="__CDN__/assets/vvptd/member/img/touxiang.png" alt="" />';
+                            }
+                            html+='</div>';
+                            html+='<div class="geren_id">'+arr[i].truename+'</div>';
+                            html+='</div>';
+                        }
+
+                        $('.grrr_list').html(html);
+                    }
+                },
+                error: function (data) {
+                    layer.open({
+                        content:'网络繁忙'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                }
+            })
+        }
+		$(function() {
+			$(".btn_zd").click(function(){
+            $('#float').val(1);
+			$(".btn_zd").css({
+				background:"#FF7751",
+				color:"#00131B"
+			})
+			$(".btn_gr").css({
+				background:"#00131B",
+				color:"#FF7751"
+			})
+			$(".geren").hide();
+			$(".zhandui").show();
+			$(".grrr").hide();
+		})
+		$(".btn_gr").click(function(){
+            $('#float').val(2);
+			$(".btn_gr").css({
+				background:"#FF7751",
+				color:"#00131B"
+			});
+			$(".btn_zd").css({
+				background:"#00131B",
+				color:"#FF7751"
+			})
+			$(".geren").show();
+			$(".grrr").show();
+			$(".zhandui").hide();
+		})
+			$(".paiming>div").eq(0).css("color", "#10B6FF")
+			$(".paiming>div").each(function(i, e) {
+				$(e).click(function() {
+					$(".paiming>div>span").css("display", "none")
+					$(".paiming>div").css("color", "#FFFFFF")
+					$(e).find("span").css({
+						display: "inline",
+						color: "#10B6FF",
+					})
+					$(e).css("color", "#10B6FF")
+				})
+			})
+			//
+
+			//
+			xuanxiang(".sanbang>div>div", ".sanbang>div")
+			//
+			//
+			function xuanxiang(a, b){
+				$(a).css("display", "none")
+				$(a).eq(0).css("display", "block")
+				$(b).each(function(i, e) {
+					$(e).click(function() {
+						$(a).css("display", "none")
+
+						$(a).eq(i).css("display", "block")
+					})
+				})
+			}
+			//
+		})
+	</script>
+
+</html>

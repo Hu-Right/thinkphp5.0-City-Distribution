@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #fff;
+			}
+			.mui-bar {
+				box-shadow: none;
+				background-color: white;
+			}
+			.mui-bar a {
+				color: #858585;
+			}
+			.mui-bar .mui-title {
+				color: #333;
+			}
+			.mui-bar span {
+				font-size: 15px;
+				line-height: 44px;
+				color: #10B6FF;
+			}
+			.mui-content {
+				background-color: white;
+			}
+			.mui-content .bg {
+				width: 100%;
+				height: 250px;
+				background: url(__CDN__/assets/vvptd/member/img/dnegjibg.png) no-repeat;
+				background-size: 100% 100%;
+				text-align: center;
+			}
+			.bg img {
+				width: 95px;
+				height: 95px;
+				margin-top: 48px;
+			}
+			.bg p:nth-child(2) {
+				margin-top: 25px;
+				font-size: 20px;
+				color: #E0AF00;
+			}
+			.bg p:nth-child(3) {
+				
+				color: #fff;
+			}
+			.experience {
+				padding: 18px;
+				border-bottom: 10px solid #eee;
+			}
+			.experience:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.experience span:first-child {
+				font-size: 18px;
+				color: #333333;
+			}
+			.experience span:last-child {
+				font-size: 14px;
+				color: #858585;
+			}
+			.mui-table-view .mui-table-view-cell span {
+				color: #333;
+				font-size: 14px;
+			}
+			.mui-table-view:before {
+				height: 0;
+			}
+			.mui-table-view-cell:after, .mui-table-view:after {
+				left: 0;
+				background-color: #DCDCDC;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">等级管理</h1>
+		    <span class="mui-pull-right" id="guize">规则</span>
+		</header>
+		<div class="mui-content">
+			<div class="bg">
+				<img src="/{$arr['level']['img']}" alt="" />
+				<p>V{$arr['level']['level']} {$arr['level']['name']}</p>
+				<p>经验值：{$data['experience_num']}</p>
+			</div>
+			<div class="experience">
+				<span class="mui-pull-left">经验值明细</span>
+				<span class="mui-pull-right">近30天</span>
+			</div>
+			<ul class="mui-table-view">
+                {foreach name="recode" item="vo"}
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">{$vo['detail']}</span>
+					<span class="mui-pull-right">{if condition=" $vo['type'] eq 1 "}+{else/}-{/if}{$vo['num']}</span>
+				</li>
+				<!--<li class="mui-table-view-cell">-->
+					<!--<span class="mui-pull-left">每天在线2小时</span>-->
+					<!--<span class="mui-pull-right">+2</span>-->
+				<!--</li>-->
+				<!--<li class="mui-table-view-cell">-->
+					<!--<span class="mui-pull-left">取消订单</span>-->
+					<!--<span class="mui-pull-right">-10</span>-->
+				<!--</li>-->
+                {/foreach}
+			</ul>
+		</div>
+		<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+            document.getElementById('guize').addEventListener('tap', function() {
+                mui.openWindow({
+                    url: baseUrl+'/vvptd/member/guize',
+                    id: 'task'
+                })
+            });
+		</script>
+	</body>
+
+</html>

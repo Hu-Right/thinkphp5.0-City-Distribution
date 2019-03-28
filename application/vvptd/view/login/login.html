@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/login/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/login/css/login.css"/>
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>-->
+		    <h1 class="mui-title" style="color: #333333;">登录</h1>
+		    <span class="mui-right register" style="float: right;color: #10B6FF;line-height: 44px;font-size: 13px;">注册跑男</span>
+		</header>
+		<section class="mui-content">
+			<form class="mui-input-group">
+			    <div class="mui-input-row">
+			        <label>手机号</label>
+			        <input type="text" id="mobile" class="mui-input-clear" placeholder="请输入您的手机号码">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>登录密码</label>
+			        <input type="password" id="password" class="mui-input-clear password" placeholder="请输入密码">
+			    </div>
+			</form>
+			<div class="btn">
+				<button type="button" class="mui-btn mui-btn-primary login">登&nbsp; 陆</button>
+				<p class="find_password">忘记密码</p>
+			</div>
+			<p class="btm">VV跑腿 | 跑男版</p>	
+		</section>
+		<script src="__CDN__/assets/vvptd/login/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+		<script type="text/javascript">
+			mui.init();
+            //登陆
+            $('.login').on('click',function(){
+                var mobile = $('#mobile').val();
+                if(mobile == ''){
+                    layer.open({
+                        content: '请输入手机号'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                var password = $('#password').val();
+                if(password == ''){
+                    layer.open({
+                        content: '请输入密码'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+//                layer.open({
+//                    type: 2
+//                    ,content: '登陆中'
+//                    ,shadeClose:false
+//                });
+                $.ajax({
+                    url: "/vvptd/login/login",
+                    type: 'post',
+                    data: {mobile: mobile, password: password},
+                    success: function (data) {
+//                        layer.closeAll();
+                        if (data.code == 1) {
+                            layer.open({
+                                content: data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+                                ,success: function(elem){
+                                    localStorage.setItem('token',data.data)
+                                    setTimeout(function(){
+                                        location.href='/vvptd/member/index';
+                                    },500);
+
+                                }
+                            });
+
+                        } else {
+                            layer.open({
+                                content: data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.closeAll();
+                        layer.open({
+                            content: '网络异常'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                });
+
+            })
+            //跳转注册
+            $('.register').on('click',function(){
+                location.href='/vvptd/login/register';
+            })
+            //忘记密码跳转
+            $('.find_password').on('click',function(){
+                location.href='/vvptd/login/find_password';
+            })
+		</script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            var p=$(window).height();
+            $(window).on("resize",function(){
+                if($(window).height()<(p-20)){
+                    $('.btm').css("display","none")
+                }else{
+                    $('.btm').css("display","block")
+                }
+            })
+        </script>
+	</body>
+
+</html>

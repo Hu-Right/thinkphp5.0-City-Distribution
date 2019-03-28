@@ -1,0 +1,52 @@
+<!--多图上传样式-->
+<link rel="stylesheet" type="text/css" href="/assets/libs/webuploader/css/webuploader.css" />
+<link rel="stylesheet" type="text/css" href="/assets/libs/webuploader/examples/image-upload/style.css" />
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">意见反馈</h1>
+</header>
+<div class="vv-pd-20">
+	<div class="mui-row">
+		<form action="" method="post">
+			<textarea id="content" rows="5" placeholder="意见反馈"></textarea>
+
+			<div id="container">
+				<!--头部，相册选择和格式选择-->
+
+				<div id="uploader">
+					<div class="queueList">
+						<div id="dndArea" class="placeholder">
+							<div id="filePicker"></div>
+							<p>单次最多可选4张</p>
+						</div>
+					</div>
+					<div class="statusBar" style="display:none;">
+						<div class="progress">
+							<span class="text">0%</span>
+							<span class="percentage"></span>
+						</div>
+						<div class="btns">
+							<div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--<div class="mui-input-row">
+				<input type="text" class="mui-input-clear" placeholder="留下手机号码或邮箱号">
+			</div>-->
+
+		</form>
+		<button class="public-g-btn btn-block" id="submit">提交</button>
+	</div>
+</div>
+
+
+<!--多图上传-->
+<script src="/assets/libs/webuploader/examples/image-upload/jquery.js"></script>
+<script src="/assets/libs/webuploader/dist/webuploader.js"></script>
+<script src="/assets/libs/webuploader/examples/image-upload/upload.js"></script>
+
+<script src="/assets/js/frontend/user/advise.js"></script>
+

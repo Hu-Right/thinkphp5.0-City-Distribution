@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现账户</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/iconfont.css" />
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">提现账户</h1>
+		</header>
+		
+		<div class="mui-content account-main">
+			<ul class="top-ul mui-table-view">
+				<li class="li">账户余额</li>
+				<li class="li li1">{$user['money']}元</li>
+			</ul>
+			<div class="hui-bg"></div>
+			<ul class="card-list mui-table-view">
+                {foreach name="data" item="vo"}
+				<li class="mui-table-view-cell">
+					<span class="type span">{$vo['bank_name']}</span>
+					<span class="card span">{$vo['bank_card']}</span>
+					<span class="name span">{$vo['true_name']}</span>
+					<span class="btn" onclick="deleteCard({$vo['id']})">解除绑定</span>
+				</li>
+                {/foreach}
+		        <!--<li class="mui-table-view-cell">-->
+		         	<!--<span class="type span">招商银行卡</span>-->
+		         	<!--<span class="card span">00000000000</span>-->
+		         	<!--<span class="name span">*名</span>-->
+		         	<!--<span class="btn">解除绑定</span>-->
+		        <!--</li>-->
+				<!--<li class="mui-table-view-cell">-->
+				 	<!--<span class="type span">中国银行卡</span>-->
+				 	<!--<span class="card span">00000000000</span>-->
+				 	<!--<span class="name span">*名</span>-->
+				 	<!--<span class="btn">解除绑定</span>-->
+				<!--</li>-->
+			</ul>
+			
+			<a class="add-card" href="#">
+				<i class="iconfont icon-jia"></i>
+				<span class="add_brand">添加银行卡</span>
+			</a>
+		</div>
+	</body>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+        function deleteCard(id){
+            mui.ajax("/vvptd/setting/operationReflect",{
+                type: 'post',
+                data:{
+                    reflect_id:id,
+                    type:'delete'
+                },
+                success: function (data) {
+                    if(data.code == 1){
+                        layer.open({
+                            content:'解除成功'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                        setTimeout(function(){
+                            location.href='/vvptd/setting/setReflect';
+                        },500);
+                    }
+                },
+                error: function (data) {
+                    layer.open({
+                        content:'网络繁忙'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                }
+            });
+        }
+        //忘记密码跳转
+        $('.add_brand').on('click',function(){
+            location.href='/vvptd/setting/add_bank';
+        })
+    </script>
+</html>

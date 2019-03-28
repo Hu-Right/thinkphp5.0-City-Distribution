@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/mui.min.css">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/clear.border.css" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/style.css"/>
+
+		<style type="text/css">
+			.task-main li{
+				margin: 0;
+				padding: 8px 15px;
+			}
+			.task-main li .tit{
+				line-height: 20px;
+			}
+			.task-main li .num{
+				margin-top: 0;
+				line-height: 16px;
+				color: #858585;
+			}
+			.task-main li .f-r{
+				line-height: 36px;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper task-main">
+			<!--  -->
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view list">
+					<!--<li class="mui-table-view-cell">-->
+						<!--<div class="f-l">-->
+							<!--<p class="tit">帮买订单-收入</p>-->
+							<!--<p class="num">2018-10-23 12:30:10</p>-->
+						<!--</div>-->
+						<!--<div class="f-r">10.00元</div>-->
+					<!--</li>-->
+					<!--<li class="mui-table-view-cell">-->
+						<!--<div class="f-l">-->
+							<!--<p class="tit">帮买订单-收入</p>-->
+							<!--<p class="num">2018-10-23 12:30:10</p>-->
+						<!--</div>-->
+						<!--<div class="f-r">10.00元</div>-->
+					<!--</li>-->
+				</ul>
+			</div>
+		</div>
+		<script src="__CDN__/assets/vvptd/setting/js/jquery.min.js"></script>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+      <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script>
+            getTaskList();
+            function getTaskList(){
+                mui.ajax('/vvptd/member/getRunMenAccount',{
+                    type:'post',
+                    data:{
+                    },
+                    success: function (data) {
+//                        console.log(data.data);
+//                        return false;
+                        if(data.data.length>0){
+                            var arr  = data.data;
+                            var html = '';
+                            for(var i =0;i<arr.length;i++){
+                                html+='<li class="mui-table-view-cell" data-id="'+arr[i].id+'">';
+                                html+='<div class="f-l">';
+                                if(arr[i].type == 1){
+                                    html+='<p class="tit">'+arr[i].detail+'-收入</p>';
+                                }else{
+                                    html+='<p class="tit">'+arr[i].detail+'-支出</p>';
+                                }
+                                html+='<p class="num">'+arr[i].add_time+'</p>';
+                                html+='</div>';
+                                html+='<div class="f-r">'+arr[i].money+'元</div>';
+                                html+='</li>';
+                            }
+
+                            $('.list').html(html);
+                            $(".mui-table-view-cell").on('tap',function(){
+
+                                mui.openWindow({
+                                    url:baseUrl+'/vvptd/member/bill_details?id='+$(this).attr('data-id')
+//                                    extras:{id:$(this).attr('data-id')} //传参
+
+                                    // 提示:接收参数
+                                    // var self=plus.webview.currentWebview();//获取当前窗体对象
+                                    // var receiveID=self.id;//接收A页面传入的id参数值
+                                })
+                            })
+                        }
+                    },
+                    error: function (data) {
+                        layer.open({
+                            content:'网络繁忙'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                })
+            }
+            //跳转详情页面
+            function getGoToDetail(id){
+                mui.openWindow(baseUrl+'/vvptd/member/bill_details/id/'+id);
+//                location.href='/vvptd/member/bill_details/id/'+id;
+            }
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for (var i = cells.length, len = i + 5; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<div class="f-l">'
+//									+		'<p class="tit">帮买订单-收入</p>'
+//									+		'<p class="num">2018-10-23 12:30:10</p>'
+//									+	'</div>'
+//									+	'<div class="f-r">10.00元</div>';
+//						table.appendChild(li);
+//					}
+				}, 1500);
+			}
+			
+			// 账单明细
+
+			
+		</script>
+	</body>
+
+</html>

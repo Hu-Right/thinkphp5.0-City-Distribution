@@ -1,0 +1,89 @@
+/* 头部 */
+body,
+.mui-bar-nav{
+	background-color: #FFFFFF;
+	color: #333333 !important;
+	box-shadow: none;
+}
+.mui-bar{
+	box-shadow: none;
+}
+.mui-bar-nav a{
+	color: #858585;
+}
+.mui-bar-nav h1 {
+	color: #333333;
+	font-size: 16px;
+	font-weight: 800;
+}
+.mui-bar-nav{
+	border-bottom: 1px solid #EEEEEE;
+}
+/* 消息提示 */
+.mui-toast-container{
+	bottom: 50%;
+}
+/* 主体 */
+.mui-content{
+	background-color: #FFFFFF;
+}
+ ul ,li {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.mui-content>.mui-table-view:first-child{
+	margin-top: 0px;
+}
+.mui-table-view-cell:after{
+	height: 0px;
+}
+
+/*选择城市*/
+.location-div-o{
+	padding: 15px;
+}
+.location-div-o button{
+	border:0px;
+}
+.location-div-t button{
+	/* float: left; */
+	width:30%;
+	/* margin-right:5%; */
+	margin-bottom: 10px;
+}
+.location-div-t-list p{
+	background: #F3F6F5;
+	padding:5px 15px;
+	font-size:16px;
+}
+.location-div-t-list ul{
+	margin-top: -10px;
+}
+.location-div-t-nav{
+	position: fixed;
+	right:2px;
+	top:25%;
+	z-index: 999;
+}
+.location-div-t-nav p{
+	line-height: 10px;
+	text-align: center;
+	color:#3492E9;
+}
+.mui-group-list-bar{
+	background: rgba(0,0,0,0);
+	height: 100% !important;
+}
+.mui-group-list-bar .active{
+	background: #FFFFFF;
+}
+.mui-group-list-bar a{
+	color: #10B6FF !important;
+}
+.blue-txt{
+	color: #10B6FF;
+}
+.public-b-btn{
+	width: 30%;
+}

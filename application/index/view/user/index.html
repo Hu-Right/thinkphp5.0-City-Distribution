@@ -1,0 +1,412 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>{$title|default=''} – {:__('VV跑腿')}</title>
+    <script src="/assets/js/mui.min.js"></script>
+    <script src="/assets/layui/layui.all.js"></script>
+
+    <link href="/assets/css/mui.min.css" rel="stylesheet" />
+    <link href="/assets/css/mui.picker.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/iconfont.css" />
+</head>
+<style type="text/css">
+    ul, li{
+        padding: 0;
+        margin: 0;
+    }
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+
+    .icon-dingwei {
+        fill: currentColor;
+        width: 60px;
+        height: 60px;
+        color: #10B6FF;
+    }
+
+    #topPopover {
+        top: 50px;
+    }
+    /* .mui-dtpicker-title{
+        display: none;
+    } */
+
+    [data-type="day"] .mui-picker,
+    [data-type="day"] .mui-dtpicker-title h5 {
+        width: 33.3%;
+    }
+    [data-type="day"] [data-id="picker-y"],[data-type="day"] [data-id="picker-m"],
+    [data-type="day"] [data-id="title-m"],
+    [data-type="day"] [data-id="title-y"]  {
+        display: none;
+    }
+
+    #show-pop .address-shou{
+        line-height: 40px;
+        border-bottom: 1px solid #DCDCDC;
+        padding: 0;
+        margin: 0 15px;
+    }
+    #show-pop .address-shou .right{
+        float: right;
+        width: calc(100% - 98px);
+    }
+    #show-pop .address-shou .btn{
+        float: right;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        border: none;
+        background: #10B6FF;
+        color: #fff;
+        font-size: 13px;
+        margin-top: 8px;
+    }
+    #show-pop .icon1{
+        color: #FF7751;
+    }
+    #show-pop .icon2{
+        color: #10B6FF;
+    }
+    span.BMap_Marker img{
+        height: 25px;
+    }
+    .gun{
+        position: absolute;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        top: 44px;
+        height: 40px;
+        color: #ffffff;
+        font-size: 15px;
+        width: 100%;
+        background: rgba(16,182,255,.8);
+        z-index: 9999;
+    }
+    .gun img{
+        height: 65%;
+        /*width: 20%;*/
+        margin-right: 10px;
+    }
+    .notice {
+        height: 40px;/*固定公告栏显示区域的高度*/
+        overflow: hidden;
+    }
+    .notice ul li {
+        list-style: none;
+        line-height: 40px;
+        /*以下为了单行显示，超出隐藏*/
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+<body>
+<!-- 主界面菜单同时移动 -->
+<!-- 侧滑导航根容器 -->
+<div class="mui-off-canvas-wrap mui-draggable">
+    <!-- 主页面容器 -->
+    <div class="mui-inner-wrap">
+        <!-- 菜单容器 -->
+        <aside class="mui-off-canvas-left" id="offCanvasSide">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <!-- 菜单具体展示内容 -->
+                    <div class="vv-menu">
+                        <!-- 侧边栏关闭按钮 -->
+                        <div>
+                            <span class="mui-icon mui-icon-arrowleft"></span>
+                        </div>
+                        <!-- 登录 -->
+
+                        <div class="vv-login">
+                            {if condition="$isLogin == false"}
+                            <div id="img">
+                                <img src="/assets/img/headimg.png">
+                            </div>
+                            <div id="text">
+                                登录/注册
+                            </div>
+                            <input type="hidden" name="islogin" id="islogin" value="{$isLogin}">
+                            {else /}
+                            <div id="img">
+                                {if condition="$userInfo['avatar'] !== ''"}
+                                <img src="{$userInfo.avatar}"  width="90" height="90">
+                                {else /}
+                                <img src="/assets/img/headimg.png">
+                                {/if}
+                            </div>
+                            <h4>{$userInfo.nickname}</h4>
+                            <p>账号：{$userInfo.username}</p>
+                            <button type="button" class="mui-btn mui-btn-primary">Lv{$userInfo.level}<span>小资阶层</span> </button>
+                            <input type="hidden" name="islogin" id="islogin" value="{$isLogin}">
+                            {/if}
+                        </div>
+
+
+                        <!-- 余额 和充值-->
+                        <div id="balance-box">
+                            <!-- 余额 -->
+                            <div class="balance" id="balance">
+                                <div>
+                                    余额
+                                </div>
+                                <div class="balance-num">
+                                    {if condition="empty($userInfo) == true"}
+                                    0.00
+                                    {else /}
+                                    {$userInfo.balance}
+                                    {/if}
+                                </div>
+                            </div>
+                            <!-- 充值 -->
+                            <div class="recharge" id="recharge">
+                                <a>在线充值<i class="mui-icon mui-icon-arrowright"></i></a>
+                            </div>
+                        </div>
+                        <div id="gongneng">
+                            <ul class="mui-table-view mui-grid-view mui-grid-9">
+                                <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">
+                                    <a href="#">
+                                        <span class="mui-icon iconfont icon-dingdanzhongxin1"></span>
+                                        <div class="mui-media-body">订单中心</div>
+                                    </a>
+                                </li>
+                                <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">
+                                    <a href="#">
+                                        <span class="mui-icon iconfont icon-yaoqingjiangli"></span>
+                                        <div class="mui-media-body">邀请好友</div>
+                                    </a>
+                                </li>
+                                <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">
+                                    <a href="#">
+                                        <span class="mui-icon iconfont icon-wodedizhi"></span>
+                                        <div class="mui-media-body">我的地址</div>
+                                    </a>
+                                </li>
+                                <li id="set" class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">
+                                    <a href="#">
+                                        <span class="mui-icon iconfont icon-yonghushezhi "></span>
+                                        <div class="mui-media-body">用户设置</div>
+                                    </a>
+                                </li>
+                                <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">
+                                    <a href="#">
+                                        <span class="mui-icon iconfont icon-shiyongbangzhu"></span>
+                                        <div class="mui-media-body">使用帮助</div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- 主页面标题 -->
+        <header class="mui-bar mui-bar-nav" id="header">
+            <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+            <h1 class=" mui-title" id="vv-city"><span id="vv-city-info">郑州市</span>
+                <i class="mui-icon iconfont icon-xiala"></i>
+            </h1>
+            <a id="activity" class="mui-icon iconfont icon-liwu mui-pull-right"></a>
+        </header>
+
+        <!-- 主页面内容容器 -->
+        <div class="mui-content mui-scroll-wrapper" id="content">
+            <div class="gun">
+                <img src="/assets/img/laba.png" alt="">
+                <div class="notice">
+                    <ul>
+                        {volist name="arrOrder" id="vo"}
+                        <li>&nbsp;&nbsp;##{$vo}##&nbsp;&nbsp;{$key}的{$vo}订单已被完成</li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+            <div class="mui-scroll">
+                <!-- 主界面具体展示内容 -->
+                <div class="dingwei-box">
+                    <div class="dingwe-text">
+                        <p class="dingwe-p">附近有超过30位跑男</p>
+                        <p class="dingwe-p">预计最快<span style="color: #FF7751;">1分钟</span>内到达</p>
+                    </div>
+                    <img class="icon-dingwei" aria-hidden="true" src="/assets/img/dingwei.png" style="width: 35px;height: 35px;">
+                </div>
+                <!-- 操作面板 -->
+                <div class="vv-operation">
+                    <!-- 工具栏 定位 - 消息 -->
+                    <div class="vv-toolbar">
+                        <span id="new-dingwei" class="iconfont icon-019suodingweizhi"></span>
+
+                        <span id="msg" class="iconfont icon-icon--"></span>
+                    </div>
+
+                    <div class="vv-operation-table">
+                        <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                            <div class="mui-scroll">
+                                {volist name="serviceInfo" id="vo"}
+                                <a class="mui-control-item {$key == 0 ? 'mui-active':''}" data-id="{$key}">
+                                    {$vo.service_name}
+                                </a>
+                                {/volist}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 选项卡主体 -->
+                    <div class="vv-operation-table" id="show-pop">
+                        <div class="mui-slider">
+                            <div class="mui-slider-group">
+
+                                {volist name="serviceInfo" id="vo"}
+                                {if condition="$vo['id'] eq 1"}
+                                <div id="tab-body{$key+1}" class="mui-slider-item" data-id="{$vo.id}">
+                                    <div class="mui-table-view-cell">
+                                        <span style="font-size: 14px;" class="mui-pull-left">服务类型：</span>
+                                        <p class="mui-pull-right mui-icon mui-icon-arrowright"></p>
+                                        {if condition="array_key_exists('son', $vo)"}
+                                        <p class="mui-pull-right">{$vo.son.0.service_name}</p>
+                                        {/if}
+                                    </div>
+                                    <div class="vv-operation-table-text">
+                                        <span>{$vo.service_name}:</span>
+                                    </div>
+                                    <div class="vv-operation-table-text">
+                                        <span style="color: #B6B6B6;">
+                                            想买什么，就买什么！请填写商品名称和数量
+                                        </span>
+                                    </div>
+                                </div>
+                                {elseif condition="$vo['id'] eq 2"}
+                                <div id="tab-body{$key+1}" class="mui-slider-item" style="padding-top: 15px;" data-id="{$vo.id}">
+                                    <div class="vv-operation-table-text address-shou">
+                                        <span class="iconfont icon-dizhi-fa icon icon1"></span>
+                                        <span class="left">发货地址：</span>
+                                        <div class="right">
+                                            <div class="btm">
+                                                <span>请选择发货地址</span>
+                                                <!--<button class="btn" type="button">常用</button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vv-operation-table-text address-shou">
+                                        <span class="iconfont icon-dizhi-shou icon icon2"></span>
+                                        <span class="left">收货地址：</span>
+                                        <div class="right">
+                                            <div class="btm">
+                                                <span>请选择收货地址</span>
+                                                <!--<button class="btn" type="button">常用</button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {elseif condition="$vo['id'] eq 3"}
+                                <div id="tab-body{$key+1}" class="mui-slider-item" data-id="{$vo.id}">
+                                    <div class="mui-table-view-cell">
+                                        <span style="font-size: 14px;" class="mui-pull-left">服务类型：</span>
+                                        <p class="mui-pull-right mui-icon mui-icon-arrowright"></p>
+                                        {if condition="array_key_exists('son', $vo)"}
+                                        <p class="mui-pull-right">{$vo.son.0.service_name}</p>
+                                        {/if}
+                                    </div>
+                                    <div class="vv-operation-table-text">
+                                        <span>{$vo.service_name}:</span>
+                                    </div>
+                                    <div class="vv-operation-table-text">
+                                        <span style="color: #B6B6B6;">
+                                            日常保洁、搬运、临时保姆、小时工、紧急求助...
+                                        </span>
+                                    </div>
+                                </div>
+                                {elseif condition="$vo['id'] eq 4"}
+                                <div id="tab-body{$key+1}" class="mui-slider-item" data-id="{$vo.id}">
+                                    <div class="mui-table-view-cell">
+                                        <span style="font-size: 14px;" class="mui-pull-left">服务类型：</span>
+                                        <p class="mui-pull-right mui-icon mui-icon-arrowright"></p>
+                                        {if condition="array_key_exists('son', $vo)"}
+                                        <p class="mui-pull-right">{$vo.son.0.service_name}</p>
+                                        {/if}
+                                    </div>
+                                    <div class="vv-operation-table-text">
+                                        <span>{$vo.service_name}:</span>
+                                    </div>
+                                    <div class="vv-operation-table-text">
+                                        <span style="color: #B6B6B6;">
+                                            买票、占座、办业务，填写排队需求，全都能满足...
+                                        </span>
+                                    </div>
+                                </div>
+                                {elseif condition="$vo['id'] eq 5"}
+                                <div id="tab-body{$key+1}" class="mui-slider-item" style="padding-top: 15px;" data-id="{$vo.id}">
+                                    <div class="vv-operation-table-text address-shou">
+                                        <span class="iconfont icon-dizhi-qu icon icon1"></span>
+                                        <span class="left">取货地址：</span>
+                                        <div class="right">
+                                            <div class="btm">
+                                                <span>请选择取货地址</span>
+                                                <!--<button class="btn" type="button">常用</button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vv-operation-table-text address-shou">
+                                        <span class="iconfont icon-dizhi-shou icon icon2"></span>
+                                        <span class="left">收货地址：</span>
+                                        <div class="right">
+                                            <div class="btm">
+                                                <span>请选择收货地址</span>
+                                                <!--<button class="btn" type="button">常用</button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/if}
+
+                                {/volist}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="allmap"></div>
+            </div>
+        </div>
+
+        <div class="mui-off-canvas-backdrop"></div>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<script src="/assets/js/frontend/user/index.jump.js"></script>
+<script src="/assets/js/frontend/user/index.order.js"></script>
+<script src="/assets/js/frontend/user/index.map.js"></script>
+<script src="/assets/js/frontend/user/index.one.login.js"></script>
+<script src="/assets/js/frontend/user/iconfont.js"></script>
+<script src="/assets/js/frontend/user/mui.picker.min.js"></script>
+<script>
+    function noticeUp(obj,top,time) {
+        $(obj).animate({
+            marginTop: top
+        }, time, function () {
+            $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+        })
+    }
+    setInterval("noticeUp('.notice ul','-35px',500)", 3000);
+</script>
+</body>
+</html>

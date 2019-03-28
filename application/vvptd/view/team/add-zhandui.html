@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>帮助说明</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/iconfont.css" />
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/clear.border.css" />
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+
+		<style type="text/css">
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.biaoshi {
+				margin-top: 30px;
+			}
+			
+			.biaoshi p {
+				text-align: center;
+				font-size: 15px;
+				color: #333333;
+				
+			}
+			.paonan_card{
+				
+				border: 1px solid #ccc;
+				width: 70%;
+				margin: 0 auto;
+				margin-top: 20px;
+				box-shadow: 1px 1px 1px  #ccc;
+			}
+			.img_box{
+				text-align: center;
+				margin: 20px 0 15px;
+			}
+			.img_box img{
+				margin: 0 auto;
+				width: 80px;
+				height: 80px;
+				border-radius:50% ;
+			}
+			.cy_name{
+				font-weight: bold;
+				text-align: center;
+				font-size:20px ;
+				color: #333333;
+			}
+			.dengji{
+				position: relative;
+				overflow: hidden;
+				text-align: center;
+			}
+			.cy_lv{
+				margin: 10px auto;
+				padding: 0 10px;
+				height: 20px;
+				text-align: center;
+				background: #10B6FF;
+				display: inline-block;				
+				border-radius:10px ;
+				font-size: 12px;
+				color: #fff;
+			}
+			.xingji{
+				text-align: center;
+			}
+			.xingji img{
+				width: 14px;
+				height: 16px;
+			}
+			.dianhua{
+				margin: 5px 0;
+				text-align: center;
+			}
+			.dianhua span{
+				margin-right: 5px;
+				color: #858585;
+			}
+			.shenqing_if{				
+				margin:20px 40px 30px;
+				text-align: center;
+				font-size:14px ;
+				color: #858585;
+				
+			}
+			.btn_2{
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				height: 45px;
+			}
+			.btn_2 div{
+				float: left;
+				width: 50%;
+				text-align: center;
+				line-height: 45px;
+			}
+			.jujue{
+				color: #858585;
+				background: #DCDCDC;
+			}
+			.tongyi{
+				color: #fff;
+				background: #10B6FF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">战队加入验证</h1>
+		</header>
+		<div class="mui-content">
+			<div class="biaoshi">
+				<p>
+					有新的跑男申请加入你的战队，
+				</p>
+				<p>
+					请审核验证！
+				</p>
+			</div>
+			<div class="paonan_card">
+				<div class="img_box">
+					<img src="/{$data['avatar']}"/>
+				</div>
+				<div class="cy_name">
+                    {$data['truename']}
+				</div>
+				<div class="dengji">
+					<div class="cy_lv">
+					V{$data['level_info']['level']} {$data['level_info']['name']}
+				</div>
+				</div>
+				
+				<div class="xingji">
+					{$data['score']}
+				</div>
+				<div class="dianhua">
+					{$data['mobile']}
+				</div>
+				<div class="shenqing_if">
+					{$team['apply_content']}
+				</div>
+			</div>
+		</div>
+		<div class="btn_2">
+			<div class="jujue" id="jujue">拒绝</div>
+			<div class="tongyi" id="tongyi">同意</div>
+		</div>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+		<script src="__CDN__/assets/vvptd/setting/js/jquery.min.js"></script>
+	</body>
+    <script>
+        mui.init();
+        var team_id = "{$team['team_id']}";
+        var rid = "{$team['rid']}";
+        document.getElementById('tongyi').addEventListener('tap', function () {
+            mui.ajax('/vvptd/team/agreeJoinTeam',{
+                type:'post',
+                data:{
+                    team_id:team_id,
+                    rid:rid
+                },success:function(data){
+                   if(data.code == 1){
+                       mui.alert(data.msg,function(){
+                           history.go(-1);
+                       });
+                   }else{
+                       mui.alert(data.msg,function(){
+                           history.go(-1);
+                       });
+                   }
+                }
+            })
+        })
+        document.getElementById('jujue').addEventListener('tap', function () {
+            mui.ajax('/vvptd/team/refuseJoin',{
+                type:'post',
+                data:{
+                    team_id:team_id,
+                    rid:rid
+                },success:function(data){
+                    if(data.code == 1){
+                        mui.alert(data.msg,function(){
+                            history.go(-1);
+                        });
+                    }else{
+                        mui.alert(data.msg,function(){
+                            history.go(-1);
+                        });
+                    }
+                }
+            })
+        })
+    </script>
+</html>

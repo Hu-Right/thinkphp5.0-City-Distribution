@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/my.css" />
+		<script src="__CDN__/assets/vvptd/member/js/iconfont.js"></script>
+		<style type="text/css">
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+			
+			.header {
+				border-bottom: 1px solid #DCDCDC;
+				background-color: #fff;
+				box-shadow: none;
+			}
+			
+			.pingjia_box li {
+				background: #fff;
+				padding: 20px;
+				position: relative;
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			.pingjia_box li .ddhm {
+				font-size: 11px;
+			}
+			
+			.dd_name {
+				height: 35px;
+				margin-top: 10px;
+			}
+			
+			.dd_name img {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				float: left;
+			}
+			
+			.dd_name div {
+				float: left;
+			}
+			
+			.dd_name div:nth-child(2) {
+				margin-left: 14px;
+				line-height: 35px;
+				font-size: 14px;
+				color: #333333;
+			}
+			
+			.dd_name div:nth-child(3) {
+				background: #FFD94D;
+				margin-left: 14px;
+				padding: 0 10px;
+				height: 22px;
+				border-radius: 11px;
+				font-size: 10px;
+				color: #333333;
+				text-align: center;
+				line-height: 22px;
+				position: relative;
+				top: 6px;
+			}
+			.huifu{
+				margin-top:12px ;
+			}
+			.zhpj {
+				line-height: 21px;
+				margin-top: 15px;
+				color: #333333;
+				font-size: 12px;
+			}
+			
+			.pj span {
+				margin: 0 10px 0 0;
+				font-size: 12px;
+				color: #333333;
+			}
+			
+			.huifu input {
+				width: 80%;
+				height: 20px;
+				background: #EEEEEE;
+				border-radius: 10px;
+				font-size: 12px;
+				margin:0 ;
+			}
+			
+			.huifu input::-webkit-input-placeholder {
+				font-size: 12px;
+				
+			}
+			.fasong{
+				line-height: 24px;
+				color: #fff;
+				margin-top: 2px;
+				width: 50px;
+				height: 22px;
+				background: #10B6FF;
+				text-align: center;
+				font-size: 10px;
+				border-radius:11px ;
+			}
+			.hfnr{
+				margin-top:10px ;
+				font-size: 10px;
+				color: #858585;
+			}
+            .mui-content{
+                background-color:#FFF;
+            }
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left head_left"></a>
+			<h1 class="mui-title">评价管理</h1>
+		</header>
+		<div class="mui-content pingjia_box" id="pullrefresh">
+
+			<ul class=" list_pj">
+			</ul>
+        </div>
+
+		<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script type="text/javascript">
+            var page = 1;
+            getNewsList();
+            mui.init({
+                swipeBack: false,
+                keyEventBind: {
+                    backbutton: false //关闭back按键监听
+                },
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    down: {
+                        callback: pulldownRefresh
+                    },
+                    up: {
+                        contentrefresh: '正在加载...',
+                        callback: pullupRefresh
+                    }
+                }
+            });
+            /**
+             * 下拉刷新具体业务实现
+             */
+            function pulldownRefresh() {
+                setTimeout(function() {
+                    location.href='';
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for (var i = cells.length, len = i + 3; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<a href="javascript:;">'
+//									+		'<div class="mui-media-body">'
+//									+			'<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>'
+//									+			'<p class="mui-ellipsis time">2018.10.10  12:30</p>'
+//									+		'</div>'
+//									+	'</a>';
+//						//下拉刷新，新纪录插到最前面；
+//						table.insertBefore(li, table.firstChild);
+//					}
+
+                    mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+                }, 1500);
+            }
+            var count = 0;
+            /**
+             * 上拉加载具体业务实现
+             */
+            function pullupRefresh() {
+                setTimeout(function() {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for(var i = cells.length, len = i + 20; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<a href="javascript:;">'
+//									+		'<div class="mui-media-body">'
+//									+			'<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>'
+//									+			'<p class="mui-ellipsis time">2018.10.10  12:30</p>'
+//									+		'</div>'
+//									+	'</a>';
+//						table.appendChild(li);
+//					}
+                    ++page;
+                    getNewsList();
+                }, 1000);
+            }
+            function getNewsList(){
+                mui.ajax('/vvptd/member/news_main2', {
+                    type: 'post',
+                    async:false,
+                    data:{
+                        page:page
+                    },
+                    success: function (data) {
+                        var arr = data.data;
+                        if(arr.length>0){
+                            count = 0;
+                            var html = '';
+                            for(var i=0;i<arr.length;i++){
+                            html+='<li><div class="ddhm"><span>订单号码：</span>';
+                                html+='<span>'+arr[i].order_num+'</span>';
+                                html+='<span class="mui-pull-right">'+arr[i].create_time+'</span>';
+                                html+='</div>';
+                                html+='<div class="dd_name">';
+                                html+='<img src="'+arr[i].avatar+'" />';
+                                html+='<div>'+arr[i].nickname+'</div>';
+                                html+='<div>'+arr[i].service_name+'</div>';
+                                html+='<span class="mui-icon mui-icon-arrowright mui-pull-right detail" data-id="'+arr[i].order_id+'"  style="line-height: 35px;"></span>';
+                                html+='</div>';
+                                html+='<div class="zhpj"><span>综合评价</span> <span style="margin-left: 10px;">';
+                                var count = arr[i].start;
+                                for(var j=0;j<count;j++){
+                                    html+='<svg class="icon" aria-hidden="true"><use xlink:href="#icon-xing"></use></svg>';
+                                }
+                                html+='</span></div><div class="pj">';
+                                html+='<span>'+arr[i].content+'</span></div>';
+                                if(arr[i].reply == null ||arr[i].reply =='') {
+                                    html += '<div class="huifu" id="huifu_'+arr[i].id+'">';
+                                    html += '<input type="text" placeholder="回复" class="huifu_' + arr[i].id + '" />';
+                                    html += '<div class="mui-pull-right fasong hf"  data-id="'+arr[i].id+'"> 发送</div></div>';
+                                }else {
+                                    html += '<div class="hfnr">';
+                                    html += '<span>我的回复:</span>';
+                                    html += '<span>'+arr[i].reply+'</span>';
+                                    html += '</div>';
+                                }
+                                html+='</li>';
+                            }
+                            $('.list_pj').append(html);
+
+                        }
+                    }
+                })
+            }
+
+            for(var i = 0;i<mui('.hf').length;i++){
+                mui('.hf')[i].addEventListener('tap', function(index) {
+                    var id = index.srcElement.attributes[1].nodeValue;
+                    sendPinglun(id);
+                });
+            }
+            for(var i = 0;i<mui('.detail').length;i++){
+                mui('.detail')[i].addEventListener('tap', function(index) {
+                    var id = index.srcElement.attributes[1].nodeValue;
+
+                    mui.openWindow({
+                        url: baseUrl+'/vvptd/order/order_detail?order_id='+id,
+                        id: 'message'
+                    })
+                });
+            }
+            function sendPinglun(id){
+               var reply =  $('.huifu_'+id).val();
+                if(reply == undefined || reply == ''){
+                    mui.alert('回复内容不能为空');
+                    return false;
+                }
+                mui.ajax('/vvptd/member/huifuPingjia', {
+                    type: 'post',
+                    data:{
+                        reply:reply,
+                        id:id
+                    },
+                    success: function (data) {
+                        if(data.code == 1){
+                            var html = '<span>我的回复:</span><span>'+reply+'</span>';
+                            $('#huifu_'+id).html(html);
+                            $('#huifu_'+id).removeClass();
+                            $('#huifu_'+id).addClass('hfnr');
+                        }
+
+                    }
+                })
+            }
+		</script>
+	</body>
+
+</html>

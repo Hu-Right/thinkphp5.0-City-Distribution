@@ -1,0 +1,198 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+<style>
+        .layui-form-label{
+            width: 100px;
+            padding: 5px 15px;
+        }
+        .layui-form-mid{
+            padding: 5px 0 !important;
+        }
+
+
+        
+    </style>
+    <div class="layui-form seller-alone-form">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">基本信息</li>
+                <!-- <li>收货人信息</li>
+                <li>商品信息</li>
+                <li>备注信息</li>
+                <li>订单记录</li> -->
+            </ul>
+              <div class="layui-tab-content">
+              
+                <!--订单信息-->
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form-item" lay-size="sm">
+                        <label class="layui-form-label" style="margin-left:-44px; ">订单号</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['order_num']}</div>
+    
+                        <label class="layui-form-label" style="margin-left:185px;">订单金额:</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['money']}元</div>
+                    </div>
+       
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="margin-left:-15px;">订单类型：</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['service_name']}</div>
+    
+                        <label class="layui-form-label" style="margin-left:219px; width:150px;">配送员名称：</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['truename']}</div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="margin-left:-15px;">支付方式：</label>
+                        <div class="layui-form-mid seller-inline-4">{if condition="($data['payment']) eq '1' "}余额
+                          {elseif condition="($data['payment']) eq '2' "}支付宝
+
+                          {elseif condition="($data['payment']) eq '3' "}微信
+
+                          {elseif condition="($data['payment']) eq '4' "}银联
+                          
+                           {else/}
+                          {/if}
+
+                        </div>
+     
+                        <label class="layui-form-label" style="margin-left:248px; width:150px;">骑手是否垫付：</label>
+                        <div class="layui-form-mid seller-inline-4">
+
+                            {if condition="($data['is_advance']) eq '0' "}否
+                            {else /}是
+                         {/if}
+                        </div>
+
+                    </div>
+                   
+                    
+                    <div class="layui-form-item">
+                            <label class="layui-form-label" style="margin-left:-24px;width: 150px;">配送员接单时间：</label>
+                            <div class="layui-form-mid seller-inline-4">{$data['payment']|date="Y-m-d H:i:s",###}</div>
+                            
+                            <label class="layui-form-label" style="margin-left:110px; width:150px;">配送员完成时间：</label>
+                            <div class="layui-form-mid seller-inline-4">{$data['is_advance']|date="Y-m-d H:i:s",###}</div>
+    
+                        </div>
+                       
+                        
+                        <div class="layui-form-item">
+                                <label class="layui-form-label" style="margin-left:-24px; width: 150px;">配送员拒单原因：</label>
+                                <div class="layui-form-mid seller-inline-4">{$data['payment']}</div>
+                                
+                                <label class="layui-form-label" style="margin-left:230px; width:150px;">配送员拒单时间：</label>
+                                <div class="layui-form-mid seller-inline-4">{$data['is_advance']|date="Y-m-d H:i:s",###}</div>
+        
+                            </div>
+                           
+                      
+
+                    <div class="layui-form-item">
+                       
+                            <label class="layui-form-label" style="margin-left:-15px;">收货状态：</label>
+                            <div class="layui-form-mid seller-inline-4"> {if( condition="($data['status']) eq '0' "}待接单
+                                    {elseif condition="($data['status']) eq '1' "}已接单
+                                    {elseif condition="($data['status']) eq '2'"}以完成
+                                    {elseif condition="($data['status']) eq '3'"}取消订单
+                                     {else/}拒绝订单 
+    
+                                                   {/if}                      
+                            </div>
+
+                        <label class="layui-form-label"  style="margin-left:230px; width:150px;">下单时间：</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['create_time']|date="Y-m-d H:i:s",###}</div>
+                    </div>
+                    
+                </div>
+    
+                <!--收货人信息-->
+                <!-- <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">收货时间：</label>
+                        <div class="layui-form-mid seller-inline-4"></div>
+    
+                        <label class="layui-form-label">收货区域：</label>
+                        <div class="layui-form-mid seller-inline-4"> </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">收货人姓名：</label>
+                        <div class="layui-form-mid seller-inline-4"> </div>
+    
+                        <label class="layui-form-label">收货人电话：</label>
+                        <div class="layui-form-mid seller-inline-4"> </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">收货地址：</label>
+                        <div class="layui-form-mid seller-inline-9"> </div>
+                    </div>
+                </div>
+     -->
+                <!--商品详情-->
+                <!-- <div class="layui-tab-item">
+                    <table class="layui-table" lay-size="sm">
+                        <thead>
+                            <tr>
+                                <th>商品名称</th>
+                                <th>商品单价</th>
+                                <th>购买数量</th>
+                                <th>商品总价</th>
+                                <th>货品编码</th>
+                                <th>商品编码</th>
+                                <th>商品总重量</th>
+                                <th>发货数量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                                <tr>
+                                    <td> 222</td>
+                                 
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+     -->
+                <!--备注信息-->
+                 
+    
+                <!--订单记录-->
+                <!-- <div class="layui-tab-item">
+                    <table class="layui-table" lay-size="sm">
+                        <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>操作类型</th>
+                            <th>描述</th>
+                            <th>时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        <tr>
+                            <td> 111</td>
+                          
+                     
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                </div> -->
+            </div>
+        </div> 
+    </div>	
+<script> 
+    layui.use('element', function(){
+        var element = layui.element;
+        
+        //获取hash来切换选项卡，假设当前地址的hash为lay-id对应的值
+        var layid = location.hash.replace(/^#test1=/, '');
+        element.tabChange('test1', layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
+        
+        //监听Tab切换，以改变地址hash值
+        element.on('tab(test1)', function(){
+          location.hash = 'test1='+ this.getAttribute('lay-id');
+        });
+      });
+      </script>      

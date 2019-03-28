@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style>
+			.content {
+				width: 300px;
+				height: 200px;
+				border-radius: 10px;
+				background: #fff;
+				position: absolute;
+				margin-top: -150px;
+				margin-left: -150px;
+				top: 50%;
+				left: 50%;
+			}
+			
+			.zd {
+				margin-top: 35px;
+				height: 22px;
+				font-size: 23px;
+				color: #10B6FF;
+				text-align: center;
+			}
+			
+			.dw {
+				position: relative;
+			}
+			
+			.bh {
+				margin-top: 12px;
+				height: 13px;
+				font-size: 13px;
+				color: #333333;
+				text-align: center;
+			}
+			
+			input {
+				margin: 0;
+				margin-top: 15px;
+				width: 250px;
+				height: 40px;
+				font-size: 14px;
+			}
+			
+			input::-webkit-input-placeholder {
+				color: #858585;
+				font-size: 14px;
+			}
+			
+			a {
+				text-align: center;
+				font-size: 15px;
+				width: 50%;
+				line-height: 45px;
+				float: left;
+			}
+			
+			.btn_box a:nth-child(1) {
+				border-radius:0 0 0 10px;
+				background: #DCDCDC;
+				color: #858585;
+			}
+			.btn_box a:nth-child(2) {
+				border-radius:0 0 10px 0px;
+				background: #10B6FF;
+				color: #FFFFFF;
+			}
+			.btn_box {
+				position: relative;
+				bottom: -3px;
+			}
+			
+			.btn_box:after {
+				display: block;
+				clear: both;
+				content: "";
+			}
+			
+		</style>
+	</head>
+
+	<body class="mui-backdrop">
+		<div class="content">
+
+			<div class="zd">
+				五星战队
+			</div>
+			<div class="bh">
+				战队编号：00000
+			</div>
+			<input type="text" name="" id="" value="" / style="width: 250px; height: 40px; margin: 15px 25px;" placeholder="请输入验证信息/申请理由">
+			<div class="btn_box">
+				<a href="">返回</a>
+				<a href="">申请加入</a>
+			</div>
+			
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

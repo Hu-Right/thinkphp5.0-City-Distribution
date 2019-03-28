@@ -1,0 +1,131 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+<style>
+        .layui-form-label{
+            width: 160px;
+            padding: 5px 15px;
+        }
+        .layui-form-mid{
+            padding: 5px 0 !important;
+        }
+        .layui-form-label{
+            width: 200px;
+        }
+        .layui-form-mid{
+            width: 200px;
+        }
+ 
+</style>
+    <script> 
+    layui.use('element', function(){
+        var element = layui.element;
+        
+        //获取hash来切换选项卡，假设当前地址的hash为lay-id对应的值
+        var layid = location.hash.replace(/^#test1=/, '');
+        element.tabChange('test1', layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
+        
+        //监听Tab切换，以改变地址hash值
+        element.on('tab(test1)', function(){
+          location.hash = 'test1='+ this.getAttribute('lay-id');
+        });
+      });
+      </script>      
+      
+     
+        <div class="layui-form seller-alone-form">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">基本信息 </li>
+                    
+                </ul>
+                  <div class="layui-tab-content">
+                  
+                    <!--订单信息-->
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item" lay-size="sm">
+                        <label class="layui-form-label">订单号：</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['order_num']}</div>
+                        <label class="layui-form-label">订单金额：</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['money']}元</div>       
+                        </div>
+
+                        <div class="layui-form-item">
+                                <label class="layui-form-label" >订单类型：</label>
+                                <div class="layui-form-mid seller-inline-4">{$data['service_name']}</div>
+            
+                                <label class="layui-form-label">配送员名称：</label>
+                                <div class="layui-form-mid seller-inline-4">{$data['truename']}</div>  
+                        </div>
+
+                           
+                        <div class="layui-form-item">
+                        <label class="layui-form-label">支付方式：</label>
+                        <div class="layui-form-mid seller-inline-4">{if condition="($data['payment']) eq '1' "}余额
+                          {elseif condition="($data['payment']) eq '2' "}支付宝
+
+                          {elseif condition="($data['payment']) eq '3' "}微信
+
+                          {elseif condition="($data['payment']) eq '4' "}银联
+                          
+                           {else/}
+                          {/if}
+
+                        </div>
+                        <label class="layui-form-label">收货人地址：</label>
+                        <div class="layui-form-mid seller-inline-4">{$data['end_address']}</div>  
+                        </div>
+                        <div class="layui-form-item">
+                                <label class="layui-form-label">配送员接单时间：</label>
+                                <div class="layui-form-mid seller-inline-4">{if condition="($data['accept_time']) eq '' "}
+                                    暂无时间
+                                    {else/}
+                                    {$data['accept_time']|date="Y-m-d H:i:s",###}
+                                {/if}
+                                </div>
+                                <label class="layui-form-label">配送员完成时间：</label>
+                                <div class="layui-form-mid seller-inline-4">
+                                    {if condition="($data['finish_time']) eq '' "}
+                                    暂无时间
+                                    {else/}
+                                    {$data['finish_time']|date="Y-m-d H:i:s",###}</div>
+                                    {/if}
+                            </div>
+                           
+                            
+                            <div class="layui-form-item">
+                                    <label class="layui-form-label" >配送员拒单原因：</label>
+                                    <div class="layui-form-mid seller-inline-4">暂无</div>
+                                    
+                                    <label class="layui-form-label" >配送员拒单时间：</label>
+                                    <div class="layui-form-mid seller-inline-4">
+                                        {if condition="($data['refuse_time']) eq ''"}
+                                        暂无时间
+                                        {else/}
+                                        {$data['refuse_time']|date="Y-m-d H:i:s",###}</div>
+                                        {/if}
+                                </div>
+                               
+                          
+    
+                        <div class="layui-form-item">   
+                                <label class="layui-form-label">收货状态：</label>
+                                <div class="layui-form-mid seller-inline-4"> {if( condition="($data['status']) eq '0' "}待接单
+                                        {elseif condition="($data['status']) eq '1' "}已接单
+                                        {elseif condition="($data['status']) eq '2'"}以完成
+                                        {elseif condition="($data['status']) eq '3'"}取消订单
+                                         {else/}拒绝订单 
+                                        {/if}                      
+                                </div>
+    
+                            <label class="layui-form-label" >下单时间：</label>
+                            <div class="layui-form-mid seller-inline-4">{$data['create_time']|date="Y-m-d H:i:s",###}</div>
+                        </div>
+                    
+                     
+                    </div>              
+                  
+                </div>
+            </div> 
+        </div>	
+      

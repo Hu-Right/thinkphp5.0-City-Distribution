@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <link href="__CDN__/assets/vvptd/login/css/mui.min.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/login/css/login.css"/>
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+		<style type="text/css">
+			.mui-bar-nav~.mui-content {
+				padding-top: 100px;
+			}
+			.mui-input-group .code input {
+				width: 35%;
+				float: left;
+			}
+			.mui-input-group .code .send-code {
+				float: right;
+				font-size: 15px;
+				line-height: 43px;
+				margin-bottom: 0;
+				margin-right: 5px;
+				color: #10B6FF;
+			}
+			.btn {
+				margin-top: 40px;
+			}
+			.btn p {
+				float: left;
+				color: #858585;
+			}
+			.btn p span {
+				color: #10B6FF;
+			}
+            .mui-input-row label~select {
+                float: left;
+                color: #858585;
+                width: 15%;
+                font-size: 15px;
+                overflow: hidden;
+                margin-right: 5%;
+            }
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+		    <h1 class="mui-title">注册</h1>
+		</header>
+		<section class="mui-content">
+			<form class="mui-input-group">
+                <div class="mui-input-row selectCity">
+                    <label>所在城市</label>
+                    <select name="province" id="province" onchange="getCity('province','city')">
+                        {foreach name="city" item="vo"}
+                        <option value="{$vo.id}">{$vo.areaname}</option>
+                        {/foreach}
+                    </select>
+                    <select name="city" id="city" onchange="getCity('city','area')">
+                        <option value="0">-请选择-</option>
+                    </select>
+                    <!-- <select name="area" id="area">
+                        <option value="0">-请选择-</option>
+                    </select> -->
+                    <!--<span class="mui-icon mui-icon-arrowdown" style="float: right;margin-top: 5px;color: #858585;"></span>-->
+                </div>
+                <div class="mui-input-row">
+			        <label>手机号</label>
+			        <input type="text" id="mobile" class="mui-input-clear" placeholder="请输入您的手机号码">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>设置密码</label>
+			        <input type="text" id="password" class="mui-input-clear" placeholder="请设置登录密码">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>确定密码</label>
+			        <input type="text" id="qrpassword" class="mui-input-clear" placeholder="再次输入登录密码">
+			    </div>
+			    <div class="mui-input-row code">
+			        <label>验证码</label>
+			        <input type="text" id="code" class="mui-input-clear" placeholder="请输入验证码">
+			        <p class="send-code">发送验证码</p>
+			    </div>
+                <div class="mui-input-row">
+                    <label>推荐人手机号</label>
+                    <input type="text" id="tjrmobile" class="mui-input-clear" placeholder="推荐人手机号没有可不填">
+                </div>
+			</form>
+			<div class="btn">
+				<button type="button" class="mui-btn mui-btn-primary register">提&nbsp; 交</button>
+				<p>注册即代表同意VV跑腿<span>《跑男服务协议》</span></p>
+			</div>
+			<p class="btm">VV跑腿 | 跑男版</p>	
+		</section>
+        <script src="__CDN__/assets/vvptd/login/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+		<script type="text/javascript">
+			mui.init();
+            $('.register').on('click',function(){
+                var mobile = $('#mobile').val();
+                if(mobile == ''){
+                    layer.open({
+                        content: '请输入手机号'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                var password = $('#password').val();
+                if(password == ''){
+                    layer.open({
+                        content: '请输入密码'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                var qrpassword = $('#qrpassword').val();
+                if(qrpassword == ''){
+                    layer.open({
+                        content: '请输入确认密码'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                var code = $('#code').val();
+                if(code == ''){
+                    layer.open({
+                        content: '请输入验证码'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                if(password!=qrpassword){
+                    layer.open({
+                        content: '两次密码不一致'
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                var province = $('#province').val();
+                var city = $('#city').val();
+                var area = $('#area').val();
+//                layer.open({
+//                    type: 2
+//                    ,content: '注册中'
+//                    ,shadeClose:false
+//                });
+                var tjrmobile = $('#tjrmobile').val();
+                $.ajax({
+                    url: "/vvptd/login/register",
+                    type: 'post',
+                    data: {mobile: mobile, password: password,qrpassword:qrpassword,code:code,city:city,province:province,county:area,tjrmobile:tjrmobile},
+                    success: function (data) {
+//                        layer.closeAll();
+                        if (data.code == 1) {
+                            layer.open({
+                                content: '注册成功'
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+                                ,success: function(elem){
+                                    setTimeout(function(){
+                                        location.href='/vvptd/login/login';
+                                    },500);
+
+                                }
+                            });
+
+                        } else {
+                            layer.open({
+                                content: data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.closeAll();
+                        layer.open({
+                            content: '网络异常'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                });
+
+            })
+            //发送验证码
+            $('.send-code').on('click',function(){
+                var mobile = $('#mobile').val();
+                var btn = $(this);
+                var count = 60;
+                var resend = setInterval(function(){
+                    count--;
+                    if (count > 0){
+                        btn.html(count+"S");
+                    }else {
+                        clearInterval(resend);
+                        btn.html("获取验证码").removeAttr('disabled style');
+                    }
+                }, 1000);
+                btn.attr('disabled',true).css('cursor','not-allowed');
+                if(mobile == ''){
+                    layer.open({
+                        content: '请输入手机号'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+                    });
+                    //0.5秒后刷新页面
+                    setTimeout(function(){
+                        window.location.reload();//刷新当前页面.
+                    },500);
+                    return false;
+                }
+                $.ajax({
+                    type: "POST", //用POST方式传输
+                    dataType: "text", //数据格式:JSON
+                    url: '/api/sms/send', //目标地址
+                    data: {mobile:mobile,event:'register'}, //post携带数据
+                    error: function (data) {
+                        layer.open({
+                            content: '发送失败'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+                        });
+                        //0.5秒后刷新页面
+                        setTimeout(function(){
+                            window.location.reload();//刷新当前页面.
+                        },500);
+                    }, //请求错误时的处理函数
+                    success: function (data){
+                        var datas = JSON.parse(data);
+                        layer.open({
+                            content: datas.msg
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+                        });
+                    } //请求成功时执行的函数
+                });
+            })
+            function getCity(now,next){
+                var id  = $("#"+now).val();
+                $.ajax({
+                    url: "/vvptd/login/getCitys",
+                    type: 'post',
+                    data: {id: id},
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code == 1) {
+                            $("#"+next).html(data.data);
+                        }
+                    },
+                    error: function (data) {
+                        layer.closeAll();
+                        layer.open({
+                            content: '网络异常'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                });
+            }
+		</script>
+	</body>
+
+</html>

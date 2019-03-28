@@ -1,0 +1,65 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{$title|default=''} – {:__('VV跑腿')}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/assets/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/member-set.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/member-set.css"/>
+    <script src="__CDN__/assets/js/mui.min.js"></script>
+    <script src="__CDN__/assets/layui/layui.all.js"></script>
+</head>
+
+<body>
+
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">用户设置</h1>
+</header>
+<div class="mui-content">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell" id="zhifu">
+            <span class="vv-li-left">支付方式顺序</span>
+            <span class="vv-li-right"><span class="mui-icon mui-icon-arrowright"></span></span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">只允许佩戴保温箱的跑男接单</span>
+            <span class="vv-li-right">
+						<!-- 开关 -->
+						<div id="mySwitch-one" class="mui-switch mui-switch-blue mui-switch-mini {$userInfo['isincubator']==1?='mui-active'}">
+						  <div class="mui-switch-handle"></div>
+						</div>
+					</span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">取货时，不需要跑男给客户打电话</span>
+            <span class="vv-li-right">
+						<!-- 开关 -->
+						<div id="mySwitch-two" class="mui-switch mui-switch-blue mui-switch-mini {$userInfo['iscall']==1?='mui-active'}">
+						  <div class="mui-switch-handle"></div>
+						</div>
+					</span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">是否启用语音提示功能</span>
+            <span class="vv-li-right">
+						<!-- 开关 -->
+						<div id="mySwitch-three" class="mui-switch mui-switch-blue mui-switch-mini {$userInfo['isvoiceprompt']==1?='mui-active'}">
+						<div class="mui-switch-handle"></div>
+						</div>
+					</span>
+        </li>
+    </ul>
+</div>
+
+<script src="/assets/js/frontend/user/memberset.js"></script>
+
+</body>
+
+</html>

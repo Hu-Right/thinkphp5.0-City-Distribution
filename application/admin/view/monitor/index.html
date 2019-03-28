@@ -1,0 +1,164 @@
+<div class="panel panel-default panel-intro">
+    <link rel="stylesheet" href="http://layui.hcwl520.com.cn/layui/css/layui.css?v=201801090202">
+    {:build_heading()}
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one" style="width: 100%;">
+                <div id='allmap' style='width:100%; height:800px; position: relative;'></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=m5Z6uuCsaVKQ0lae7PNhNVZhptYX8mSA"></script>
+<script>
+
+    /* ---------百度地图的头部开始-------------- */
+    var map = new BMap.Map("allmap");
+    //开启鼠标滚轮缩放
+    map.enableScrollWheelZoom(true);
+    //设置地图默认的鼠标指针样式
+    map.setDefaultCursor("url('bird.cur')");
+    // var geoc = new BMap.Geocoder(); //地址解析对象
+    // var markersArray = [];
+    var geolocation = new BMap.Geolocation();
+    var point = new BMap.Point(116.331398,39.897445);
+    map.centerAndZoom(point,12); // 中心点
+    function myFun(result){
+        var cityName = result.name;
+        map.setCenter(cityName);
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+    geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+
+            map.panTo(r.point);
+            map.enableScrollWheelZoom(true);
+        } else {
+            alert('failed' + this.getStatus());
+        }
+    }, {
+        enableHighAccuracy : true
+    })
+
+    busyman();
+    function busyman() {
+        map.clearOverlays();
+        $.ajax({
+            url:'Monitor/busyman',
+            dataType:'json',
+            success:function (data) {
+                //为多个点注册单击事件
+                console.log(data);
+                var json_data1 = data;
+                var pointArray1 = new Array();
+                var opts = {
+                    width: 200,
+                    title : ""  // 信息窗口标题
+                };
+                for(var i=0;i<json_data1.length;i++){
+                    var myIcon = new BMap.Icon("../assets/img/busyman.png", new BMap.Size(26,26));//修改图标样式
+                    var marker1 = new BMap.Marker(new BMap.Point(json_data1[i].lon, json_data1[i].lat),{icon:myIcon}); // 创建点
+                    var content1 = '配送员：'+json_data1[i].truename+'---忙碌中'+'<br>'+'<a style="color: blue;" href="../admin/Monitor/getOrderId/id/'+json_data1[i].id+'">详情>><a/>';
+                    console.log(content1);
+                    map.addOverlay(marker1);//将标注添加到地图中
+                    pointArray1[i] = new BMap.Point(json_data1[i].lon, json_data1[i].lat);
+                    addOpt(content1,marker1);
+                    //marker1.setAnimation(BMAP_ANIMATION_BOUNCE);
+                }
+
+                //已标注点鼠标移入事件
+                function addOpt(content,marker){
+                    marker.addEventListener("click",function(e){
+                        attribute(content,e);
+                    });
+                }
+                function attribute(content,e){
+                    var p = e.target;
+                    var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+                    var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow,point); //开启信息窗口
+                }
+            }
+        })
+    }
+    //setInterval('busyman()',5000);
+    
+    freeman();
+    function freeman() {
+        $.ajax({
+            url:'Monitor/freeman',
+            dataType:'json',
+            success:function (data) {
+                //为多个点注册单击事件
+                console.log(data);
+                //map.clearOverlays();
+                var json_data2 = data;
+                var pointArray2 = new Array();
+                var opts = {
+                    width: 200,
+                    title : ""  // 信息窗口标题
+                };
+                for(var i=0;i<json_data2.length;i++){
+                    var myIcon = new BMap.Icon("../assets/img/freeman.png", new BMap.Size(26,26)); //这个是你要显示坐标的图片的相对路径
+                    var marker2 = new BMap.Marker(new BMap.Point(json_data2[i].lon, json_data2[i].lat),{icon:myIcon}); // 创建点
+                    var content2 = '配送员：'+json_data2[i].truename+'---空闲中';
+                    console.log(content2);
+                    map.addOverlay(marker2);//将标注添加到地图中
+                    pointArray2[i] = new BMap.Point(json_data2[i].lon, json_data2[i].lat);
+                    addOpt(content2,marker2);
+                }
+
+                //已标注点鼠标移入事件
+                function addOpt(content,marker){
+                    marker.addEventListener("click",function(e){
+                        attribute(content,e);
+                    });
+                }
+                function attribute(content,e){
+                    var p = e.target;
+                    var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+                    var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow,point); //开启信息窗口
+                }
+            }
+        })
+    }
+
+    //setInterval('freeman()',5000);
+
+
+    //让所有点在视野范围内
+    //map.setViewport(pointArray);
+    //已标注点鼠标移入事件
+    function addOpt(content,marker){
+        marker.addEventListener("click",function(e){
+            attribute(content,e);
+        });
+    }
+    function attribute(content,e){
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+        map.openInfoWindow(infoWindow,point); //开启信息窗口
+    }
+
+    // map.addEventListener("click",function(e) {
+    //     //获取经纬度
+    //     var mPoint = new BMap.Point(e.point.lng, e.point.lat);
+    //     console.log(mPoint);
+    //     // document.getElementById('longitude').value = e.point.lng;
+    //     // document.getElementById('latitude').value = e.point.lat;
+    //     geoc.getLocation(e.point, function(rs) {
+    //         var addComp = rs.addressComponents;
+    //         var address = addComp.province + addComp.city
+    //             + addComp.district + addComp.street
+    //             + addComp.streetNumber;
+    //     confirm("确定要地址是" + address + "?")
+    //     });
+    // })
+    /* ---------百度地图的尾部结束-------------- */
+
+</script>

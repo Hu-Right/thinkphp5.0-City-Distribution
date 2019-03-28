@@ -1,0 +1,164 @@
+
+<style type="text/css">
+	body,.mui-content{background: #FAFAFA;}
+	.mui-table-view:before,.mui-table-view:after{height: 0;}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">费用明细</h1>
+</header>
+<div class="mui-content cost-detail">
+	<div class="cost-box">
+		<ul class="mui-table-view">
+
+		</ul>
+		<div class="price-box">
+			费用合计：<span class="price" id="total"></span>元
+		</div>
+	</div>
+	<div class="biaozhun-box">
+		<div class="biaozhun-tit">
+			— 计价标准 —
+		</div>
+		<div class="section">
+			<div class="tit">里程收费规则</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="left">2公里</p>
+					<p class="right">{$two_km}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">3公里</p>
+					<p class="right">{$three_km}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">3-10公里</p>
+					<p class="right">{$three_ten_km}元/公里</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">10-30公里</p>
+					<p class="right">{$ten_thirty_km}元/公里</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">30公里以上</p>
+					<p class="right">{$over_thirty_km}元/公里</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<div class="tit">重量收费规则</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="left">25公斤以内加</p>
+					<p class="right">{$lower_twentyfive_kg}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">26-30公斤加</p>
+					<p class="right">{$twentysix_thirty_kg}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">30-40公斤加</p>
+					<p class="right">{$thirtyone_forty_kg}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">40公斤以上</p>
+					<p class="right">{$over_forty_kg}元/公斤</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<div class="tit">排队收费规则</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="left">30分钟</p>
+					<p class="right">{$lineup_start_price}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">1-10小时</p>
+					<p class="right">{$lineup_one_ten_price}元/30分钟</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">10小时以上</p>
+					<p class="right">{$lineup_delayed_price}元/30分钟</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<div class="tit">帮办上门费用</div>
+			<ul class="mui-table-view">
+				{volist name="helpdo" id="vo"}
+				<li class="mui-table-view-cell">
+					<p class="left">{$vo.service_name}</p>
+					<p class="right">{$vo.starting_price}元</p>
+				</li>
+				{/volist}
+			</ul>
+		</div>
+
+		<div class="section">
+			<div class="tit">特殊时段收费规则</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="left">22:00-00:00每单加</p>
+					<p class="right">{$front_night}元</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p class="left">00:00-06:00每单加</p>
+					<p class="right">{$back_night}元</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<div class="tit">预约费规则</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="left">每单加</p>
+					<p class="right">{$subscription_price}元</p>
+				</li>
+			</ul>
+		</div>
+
+		<div class="section">
+			<div class="tit">特殊天气收费规则</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<p class="left">每单加</p>
+					<p class="right">{$weather}元</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<input id="type" type="hidden" value="">
+
+<input id="is_weather" type="hidden" value="{$is_weather}">
+<input id="weather" type="hidden" value="{$weather}">
+
+<input id="two_km" type="hidden" value="{$two_km}">
+<input id="three_km" type="hidden" value="{$three_km}">
+<input id="three_ten_km" type="hidden" value="{$three_ten_km}">
+<input id="ten_thirty_km" type="hidden" value="{$ten_thirty_km}">
+<input id="over_thirty_km" type="hidden" value="{$over_thirty_km}">
+
+<input id="lower_twentyfive_kg" type="hidden" value="{$lower_twentyfive_kg}">
+<input id="twentysix_thirty_kg" type="hidden" value="{$twentysix_thirty_kg}">
+<input id="thirtyone_forty_kg" type="hidden" value="{$thirtyone_forty_kg}">
+<input id="over_forty_kg" type="hidden" value="{$over_forty_kg}">
+
+<input id="lineup_start_price" type="hidden" value="{$lineup_start_price}">
+<input id="lineup_one_ten_price" type="hidden" value="{$lineup_one_ten_price}">
+<input id="lineup_delayed_price" type="hidden" value="{$lineup_delayed_price}">
+
+<input id="front_night" type="hidden" value="{$front_night}">
+<input id="back_night" type="hidden" value="{$back_night}">
+
+<input id="subscription_price" type="hidden" value="{$subscription_price}">
+
+
+
+<script src="/assets/js/frontend/placeorder/expenseDetail.js"></script>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>添加银行卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.picker.css" rel="stylesheet" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+		<!-- <link rel="stylesheet" type="text/css" href="../../css/login.css"/> -->
+		<style>
+			.mui-input-row label{
+				width: 30%;
+				font-size: 16px;
+				color: #333;
+			}
+			.mui-input-row label~input{
+				width: 70%;
+				font-size: 15px;
+				color: #858585;
+				line-height: 25px;
+			}
+			#showUserPicker{
+				width: 60%;
+				text-align: left;
+				font-size: 15px;
+				color: #858585;
+				padding: 11px 0;
+				margin-bottom: 0;
+				border: none;
+				float: left;
+				line-height: 17px;
+			}
+			.mui-input-group:before{
+				background-color: #fff;
+			}
+			.btn {
+				text-align: center;
+				margin-top: 68px;
+				padding: 0 15px;
+			}
+			.btn button{
+				padding: 10px 0;
+				width: 100%;
+				font-size: 18px;
+				-webkit-border-radius: 42px;
+				-moz-border-radius: 42px;
+				border-radius: 42px;
+				background-color: #10B6FF;
+				border: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+		    <h1 class="mui-title" style="color: #333333;">添加银行卡</h1>
+		</header>
+		<section class="mui-content">
+			<form class="mui-input-group">
+			    <div class="mui-input-row">
+			        <label>持卡人</label>
+			        <input type="text" id="true_name" class="mui-input-clear" placeholder="真实姓名">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>银行</label>
+			        <!-- <input type="password" class="mui-input-clear password" placeholder="选择银行"> -->
+					<button id='showUserPicker' class="mui-btn mui-btn-block" type='button'>选择银行</button>
+					<i class="mui-icon mui-icon-arrowright" style="float: right;margin-top: 7px;color: #858585; margin-right: 5px;"></i>
+                    <input type="hidden" id="bank_name">
+				</div>
+				<div class="mui-input-row">
+					<label>银行卡号</label>
+					<input type="number" id="bank_card" class="mui-input-clear" placeholder="请输入银行卡号码">
+				</div>
+			</form>
+			<div class="btn">
+				<button type="button" class="mui-btn mui-btn-primary add_bank">确定添加</button>
+			</div>
+		</section>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.picker.js"></script>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.poppicker.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			var picker = new mui.PopPicker();
+            mui.ajax("/vvptd/setting/getBank",{
+                type: 'post',
+                data:{
+                },
+                success: function (data) {
+                    if(data.code == 1){
+                        picker.setData(data.data);
+                    }
+                },
+                error: function (data) {
+                    layer.open({
+                        content:'网络繁忙'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                }
+            });
+
+			var showUserPickerButton = document.getElementById('showUserPicker');
+			showUserPickerButton.addEventListener('tap', function(event) {
+				picker.show(function (selectItems) {
+//					console.log(selectItems[0].text);//智子
+					$('#bank_name').val(selectItems[0].text);
+					showUserPickerButton.innerHTML = selectItems[0].text;
+					showUserPickerButton.style.color = '#333';
+				});
+			});
+            $('.add_bank').on('click',function(){
+                var bank_name = $('#bank_name').val();
+                var true_name = $('#true_name').val();
+                var bank_card = $('#bank_card').val();
+                if(bank_name == ''){
+                    layer.open({
+                        content:'银行卡名称不能为空'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                    return false;
+                }
+                if(true_name == ''){
+                    layer.open({
+                        content:'真实姓名不能为空'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                    return false;
+                }
+                if(bank_card == ''){
+                    layer.open({
+                        content:'银行卡号不能为空'
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                    return false;
+                }
+                mui.ajax('/vvptd/setting/operationReflect',{
+                    type:'post',
+                    data:{
+                        bank_name:bank_name,
+                        true_name:true_name,
+                        bank_card:bank_card,
+                        type:'add'
+                    },
+                    success: function (data) {
+                        if(data.code == 1){
+                            layer.open({
+                                content:'添加成功'
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                            setTimeout(function(){
+                                location.href='/vvptd/setting/setReflect';
+                            },500);
+                        }else{
+                            layer.open({
+                                content:data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.open({
+                            content:'网络繁忙'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                })
+            })
+		</script>
+	</body>
+</html>

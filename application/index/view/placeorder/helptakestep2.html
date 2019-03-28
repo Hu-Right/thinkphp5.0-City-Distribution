@@ -1,0 +1,316 @@
+
+<link rel="stylesheet" type="text/css" href="/assets/css/help-buy.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/mui.picker.min.css" />
+<style type="text/css">
+	.mui-content>.mui-table-view:first-child {
+		margin-top: 0;
+	}
+
+	.mui-bar {
+		border-bottom: 1px solid #dcdcdc;
+	}
+
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+		font-size: 15px;
+		font-weight: normal;
+		padding: 0 15px;
+	}
+
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+		border: none;
+		font-size: 16px;
+	}
+
+	[data-type="day"] .mui-picker,
+	[data-type="day"] .mui-dtpicker-title h5 {
+		width: 33.3%;
+	}
+
+	[data-type="day"] [data-id="picker-y"],
+	[data-type="day"] [data-id="picker-m"],
+	[data-type="day"] [data-id="title-m"],
+	[data-type="day"] [data-id="title-y"] {
+		display: none;
+	}
+	input::-webkit-input-placeholder{
+		color: #ccc !important;
+		font-size: 12px !important;
+	}
+	#topPopover {
+		top: 50px;
+	}
+	/*支付宝*/
+	.icon-zhifubaozhifu{
+		color: #0FA2EC;
+	}
+	/*余额*/
+	.icon-yue{
+		color: #FF7751;
+	}
+	/*微信*/
+	.icon-weixinzhifu{
+		color: #47BA43;
+	}
+	.jiazhi{
+		padding: 10px;
+		font-size: 16px;
+	}
+	.jiazhi-inner{
+		margin-bottom: 10px;
+	}
+	.jiazhi-bt span{
+		display: inline-block;
+		width: 100px;
+		background-color: #cccccc;
+		font-size: 14px;
+		border-radius: 10px;
+		padding: 5px 0;
+		color: #FFFFFF;
+		text-align: center;
+	}
+	.jiazhi-bt span:first-child{
+		margin-right: 10px;
+	}
+	.baojia-top{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 10px;
+	}
+	.baojia-top >span,.baojia-top >div {
+		width: 50%;
+	}
+	.baojia-top >div{
+		text-align: right;
+	}
+	#isag{
+		color: #10B6FF;
+	}
+	#isag-contant {
+		color: #cccccc;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">帮我取</h1>
+</header>
+
+<div class="mui-content help-buy-index">
+	<ul class="mui-table-view">
+		<li class="ul-li ul-li1 address-shou">
+			<span class="iconfont icon-dizhi-shou icon icon2"></span>
+			<span class="left">收货地址：</span>
+			<div class="right">
+				<div class="btm">
+					<div id="select-ads" style="display: inline-block;width: calc(100% - 50px);color: #10B6FF;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">点击此处选择地址</div>
+					<!--<button class="btn" type="button">常用</button>-->
+				</div>
+			</div>
+		</li>
+
+		<li class="ul-li ul-li1 select-time">
+			<span class="left">物品重量：</span>
+			<span class="mui-icon mui-icon-arrowright"></span>
+			<a id="weight" class="right" href="#topPopover">25kg以内</a>
+		</li>
+
+		<li id="select-time" class="ul-li ul-li1 select-time">
+			<span class="left">发货时间：</span>
+			<span class="mui-icon mui-icon-arrowright"></span>
+			<a class="right" href="#topPopover">立即发货</a>
+		</li>
+
+		<li class="ul-li ul-li1">
+			<span class="left">小费：</span>
+			<input id="fee" oninput="onInput(event)" type="number" class="input-price" type="text" placeholder="给跑腿小哥一个鼓励" style="text-align: right;">
+		</li>
+
+
+		<li class="ul-li ul-li1">
+			<span class="left">保温箱配送：</span>
+			<div id="mySwitch" style="margin-top: 8px" class="mui-switch mui-switch-blue mui-switch-mini mui-pull-right">
+				<div class="mui-switch-handle"></div>
+			</div>
+		</li>
+
+		<li class="ul-li ul-li1">
+			<span class="left">优惠：</span>
+			<span class="right" style="float: right;">暂无可用优惠券</span>
+		</li>
+
+		<li class="ul-li ul-li1">
+			<span class="left">订单备注：</span>
+			<input id="remake" class="input-price" type="text" placeholder="点击这里输入订单备注信息" style="text-align: right;height: 45px; width: calc(100% - 100px);">
+		</li>
+	</ul>
+	<!--物品价值-->
+	<div class="jiazhi">
+		<div class="jiazhi-inner">物品价值</div>
+		<div class="jiazhi-bt">
+			<span data-jz="1">0~500</span>
+			<span data-jz="2">500~1000</span>
+		</div>
+	</div>
+	<!--保价服务-->
+	<div class="jiazhi">
+		<div class="baojia-top">
+			<span>保价服务</span>
+			<div>
+				<span id="isag" class="iconfont icon-dui icons" style="margin-right: 2%; display: none"></span>
+				<span id="isag-contant" data-value="0">请先选择物品价格</span>
+			</div>
+		</div>
+		<div style="color: #ccc;font-size: 12px;">
+			<span id="isag2" class="iconfont icon-quan1 icons" style="font-size: 14px;">我已阅读并同意</span>
+			<span id="bjxy" style="text-decoration: underline;">《保价协议》</span>
+		</div>
+	</div>
+	<!--下单-->
+	<div class="foot">
+		<span id="cost">
+			<p class="money">￥<span class="price" id="price">{$two_km}.00</span></p>
+			<p class="mingxi">费用明细 ></p>
+		</span>
+		<button id="pay-btn" type="button" class="btn">立即下单</button>
+	</div>
+</div>
+
+<input id="user_min" type="hidden" value="20">
+<input id="service_date" class="input-price" type="hidden" value="立即发货">
+<input id="is_weather" type="hidden" value="{$is_weather}">
+<input id="weather" type="hidden" value="{$weather}">
+<input id="mileage" type="hidden" value="2">
+<input id="two_km" type="hidden" value="{$two_km}">
+<input id="three_km" type="hidden" value="{$three_km}">
+<input id="three_ten_km" type="hidden" value="{$three_ten_km}">
+<input id="ten_thirty_km" type="hidden" value="{$ten_thirty_km}">
+<input id="over_thirty_km" type="hidden" value="{$over_thirty_km}">
+<input id="subscription_price" type="hidden" value="{$subscription_price}">
+<input id="hour" type="hidden" value="{$hour}">
+<input id="front_night" type="hidden" value="{$front_night}">
+<input id="back_night" type="hidden" value="{$back_night}">
+<input id="kg" type="hidden" value="25">
+<input id="lower_twentyfive_kg" type="hidden" value="{$lower_twentyfive_kg}">
+<input id="twentysix_thirty_kg" type="hidden" value="{$twentysix_thirty_kg}">
+<input id="thirtyone_forty_kg" type="hidden" value="{$thirtyone_forty_kg}">
+<input id="over_forty_kg" type="hidden" value="{$over_forty_kg}">
+
+<!-- 选择支付方式弹窗 -->
+<div id="pay-pop" style="display: none;">
+	<div id="pay-way">
+		<form class="mui-input-group">
+			{volist name="paymentsort" id="pay"}
+			{php}
+			if($key==0){
+			$check = 'checked';
+			}else{
+			$check = '';
+			}
+			if(strpos($pay,'支付宝') !== false){
+			$icon = 'icon-zhifubaozhifu';
+			}elseif(strpos($pay,'微信') !== false){
+			$icon = 'icon-weixinzhifu';
+			}elseif(strpos($pay,'余额') !== false){
+			$icon = 'icon-yue';
+			}
+			{/php}
+			{if condition="!ctype_space($pay)"}
+			<div class="mui-input-row mui-radio">
+				<label><span class="iconfont {$icon}"></span>{$pay}</label>
+				<input name="payment" type="radio" value="{$pay}" {$check}/>
+			</div>
+			{/if}
+			{/volist}
+			<div class="btn-box">
+				<button id="cancel-pay" class="btn btn1" type="button">取消</button>
+				<button id="sure-pay" class="btn btn2" type="button">确定</button>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 地图 -->
+<div id="allmap" class="map-box" style="display: none"></div>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+<script src="/assets/js/frontend/placeorder/place.order.map.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/frontend/placeorder/helptakestep2.js"></script>
+<script src="/assets/js/frontend/placeorder/payment.js"></script>
+<script src="/assets/js/frontend/placeorder/mui.picker.min.js"></script>
+<script>
+    function onInput(event){
+        //console.log(event.target.value);
+        price()
+    }
+    var flag = false;
+    var zhi ;
+    $('.jiazhi-bt').find('span').click(function () {
+		$(this).css('backgroundColor','#10B6FF').siblings().css('backgroundColor','#ccc')
+		var jiazhiType  = $(this).attr('data-jz')
+        zhi = jiazhiType;
+		$('#isag-contant')
+		// 如果点的是0~500元
+		if (jiazhiType == 1){
+		    if (flag==false){
+                $('#isag').css('display','inline-block').siblings('#isag-contant').css('color','#333').text('保价3元').attr('data-value','3');
+                price()
+			} else {
+                $('#isag').css('display','inline-block').siblings('#isag-contant').css('color','#333').text('保价3元').attr('data-value','0');
+                price()
+			}
+
+		}else {
+		    // 如果点的是500~10000元
+            $('#isag').css('display','inline-block').siblings('#isag-contant').css('color','#333').text('保价5元').attr('data-value','5');
+            price()
+            $('#isag').attr('class','iconfont icon-dui icons').css('color','#10B6FF')
+		}
+    })
+	// 保价价格开关的锁
+
+	$('#isag').click(function () {
+	    if(zhi==1){
+            if (flag){
+                $(this).attr('class','iconfont icon-dui icons').css('color','#10B6FF').siblings('#isag-contant').attr('data-value','3');
+                price()
+                flag = false
+            } else {
+                $(this).attr('class','iconfont icon-quan1').css('color','#333').siblings('#isag-contant').attr('data-value','0');
+                price()
+                flag = true
+            }
+		}else if(zhi==2){
+            if (flag == false){
+                $(this).attr('class','iconfont icon-quan1 icons').css('color','#333').siblings('#isag-contant').attr('data-value','0');
+                price()
+                flag = true
+            } else {
+                $(this).attr('class','iconfont icon-dui icons').css('color','#10B6FF').siblings('#isag-contant').attr('data-value','5');
+                price()
+                flag = false
+            }
+		}
+		// var baojiaMoney =  $('#isag-contant').attr('data-value');
+		// console.log(baojiaMoney)
+    })
+	// 同意开关的锁
+	var flag2 = false;
+	$('#isag2').click(function () {
+		if (zhi) {
+            if (flag2){
+                $(this).attr('class','iconfont icon-quan1 icons').css('color','#333');
+                flag2 = false
+				// console.log('未同意'+flag2)
+			} else {
+                $(this).attr('class','iconfont icon-dui icons').css('color','#10B6FF');
+                flag2 = true
+                // console.log('同意'+flag2)
+			}
+        }else {
+            mui.alert('请先选择物品价值', '提示');
+        }
+    })
+    // 跳转到保价协议
+    document.getElementById('bjxy').addEventListener('tap', function() {
+        mui.openWindow(top.location.origin+'/index/recharge/agreement?title=保价协议&id=9');
+    });
+</script>

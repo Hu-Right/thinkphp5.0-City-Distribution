@@ -1,0 +1,103 @@
+<style type="text/css">
+	.mui-grid-view.mui-grid-9 {
+		border: 0;
+		background-color: #FFFFFF;
+	}
+
+	.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+		border: 0;
+	}
+
+	.recharge-border {
+		border: #CCCCCC 1px solid;
+		border-radius: 12px;
+	}
+
+	.recharge-border span {
+		font-size: 14px;
+	}
+
+	.border-active {
+		border: #10B6FF 1px solid;
+		color: #10B6FF !important;
+		border-radius: 12px;
+	}
+
+	.border-active span {
+		font-size: 14px;
+	}
+	.chongzhixieyi{
+		margin-top: 20px;
+		text-align: center;
+		font-size: 12px;
+		color: #ccc;
+	}
+	.chongzhixieyi span{
+		color: #222;
+		text-decoration: underline;
+	}
+</style>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">在线充值</h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-row" style="background-color: #FAFAFA;padding: 30px 0;">
+			<div class="mui-col-xs-6 mui-col-sm-6" style="text-align: center;border-right: 1px solid #CCCCCC;">
+						余额（元）
+			</div>
+			<div class="mui-col-xs-6 mui-col-sm-6" style="text-align: center;">
+						{$userInfo.balance}
+			</div>
+		</div>
+		<ul id="ul" class="mui-table-view mui-grid-view mui-grid-9">
+			<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6">
+				<a href="#" class="recharge-border border-active" data-money="100">
+					<h3>100元</h3>
+					<!--<span>送10元优惠券</span>-->
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6">
+				<a href="#" class="recharge-border" data-money="300">
+					<h3>300元</h3>
+					<!--<span>送50元优惠券</span>-->
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6">
+				<a href="#" class="recharge-border" data-money="500">
+					<h3>500元</h3>
+					<!--<span>送120元优惠券</span>-->
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6">
+				<a href="#" class="recharge-border" data-money="1000">
+					<h3>1000元</h3>
+					<!--<span>送200元优惠券</span>-->
+				</a>
+			</li>
+		</ul>
+		<!-- 支付方式 -->
+		<div class="">
+
+		</div>
+		<div class="pay-type">
+			选择支付方式：
+		</div>
+		<ul class="mui-table-view mui-table-view-radio recharge-pay">
+            {volist name="paymentsort" id="pay"}
+            <li class="mui-table-view-cell {$key==0?'mui-selected':''}">
+                <a class="mui-navigate-right"><span class="iconfont {$pay.icon}"></span>{$pay.name}</a>
+            </li>
+            {/volist}
+			<input id="payment" type="hidden" value="{$paymentsort[0]['name']}">
+			<input id="money" type="hidden" value="100">
+		</ul>
+		<div class="recharge-btn">
+			<button id="goBtn" class="public-g-btn btn-block">去支付</button>
+		</div>
+		<div class="chongzhixieyi" id="czxy">点击去支付，即已同意<span>《充值协议》</span>。余额不可提现、转赠、退还。</div>
+	</div>
+
+	<script src="/assets/js/frontend/recharge/index.js"></script>
+	<script src="/assets/js/frontend/recharge/payment.js"></script>

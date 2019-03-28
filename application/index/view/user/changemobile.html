@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/edit-member-mobile.css"/>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">更换手机号</h1>
+</header>
+<div class="vv-mg">
+    <div class="public-margin-top">
+        <div id="old-mobile" class="old-mobile">
+            <span>当前手机号:</span>
+            <span>{$mobile}</span>
+        </div>
+        <form class="mui-input-group">
+            <div class="mui-input-row register-input">
+                <label>新手机号</label>
+                <input type="number" name="mobile" class="mui-input-clear" placeholder="请输入您的新手机号">
+            </div>
+            <div class="mui-input-row">
+                <label>验证码</label>
+                <input type="text" name="captcha" class="mui-input" placeholder="验证码">
+                <button class="yzm-btn" id="yzm-btn">获取验证码</button>
+            </div>
+        </form>
+        <button id="edit-btn" class="public-g-btn btn-block public-b-btn">确定</button>
+    </div>
+</div>
+
+<script src="__CDN__/assets/js/frontend/user/changemobile.js"></script>

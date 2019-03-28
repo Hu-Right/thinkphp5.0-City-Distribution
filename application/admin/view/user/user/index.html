@@ -1,0 +1,229 @@
+ <div class="panel panel-default panel-intro">
+    <link rel="stylesheet" href="http://layui.hcwl520.com.cn/layui/css/layui.css?v=201801090202">
+    {:build_heading()}
+
+    <div class="panel-body">
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        
+                            <a href="javascript:history.go(0)">  <i class="fa fa-refresh">
+
+                                </i></a>
+                        <div class="dropdown btn-group {:$auth->check('user/user/multi')?'':'hide'}">
+                            <ul class="dropdown-menu text-left" role="menu">
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=normal"><i class="fa fa-eye"></i> {:__('Set to normal')}</a></li>
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=normal"><i class="fa fa-eye"></i> {:__('Set to normal')}</a></li>
+                                <li><a class="btn btn-link btn-multi btn-disabled disabled" href="javascript:;" data-params="status=hidden"><i class="fa fa-eye-slash"></i> {:__('Set to hidden')}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <form method="post" action="" >
+                        <div class="col-sm-3"  style=" width:500px; margin-top:-42px;text-align: center; margin-left: 600px;">
+                            <div class="input-group col-sm-4" style="float: left;">
+                                <input type="text" style="width: 90%" placeholder="请输入地区名称" class="input-sm form-control" name="areaname" value="{$areaname}">
+                            </div>
+                            <div class="input-group col-sm-4" style="float: left;">
+                                <input type="text" placeholder="请输入会员昵称" class="input-sm form-control" name="keyword" value="{$keyword}">
+                            </div>
+                            <div class="input-group col-sm-4" style="float: left;text-align: left">
+                                   <span class="input-group-btn">
+                                       <button type="submit" class="btn btn-sm btn-primary">
+                                                搜索
+                                       </button>
+                                   </span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--表格开始-->
+            <form action="{:url('delslect')}" method="post" name="updateSort" id="updateSort" >
+                    {//<input type="hidden" name="page_num" value={$_GET['p']}
+                    <div class="table-responsive">
+                        <table class="table  table-bordered table-hover" width="100%">
+                            <thead>{//表头}
+                            <tr>
+                               
+                                <th style="text-align: center">ID</th>
+                                <th style="text-align: center">昵称</th>
+                                <th style="text-align: center">手机号</th>
+                                <th style="text-align: center">性别</th>
+                                <th style="text-align: center">头像</th>
+                                <th style="text-align: center">等级</th>
+                                <th style="text-align: center">余额</th>
+                                <th style="text-align: center">注册地</th>
+                                <th style="text-align: center">生日</th>
+                                <!-- <th style="text-align: center">注册地</th> -->
+                                <th style="text-align: center">加入时间</th>
+                                <th style="text-align: center">状态</th>
+                                <th style="text-align: center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>{//表内容}
+                                    {if condition="$count eq 0"}
+                                    <tr class="text-c"><td style="text-align: center" colspan="21">暂无相关数据</td></tr>
+                                {else/}
+                              {volist name="list" id="vo"}
+                               <tr>
+                                    <td style="text-align: center"><input type="checkbox" name="id[]" value="{$vo.id}" />{$vo.id}</td>
+                                    <td style="text-align: center">{$vo.nickname}</td>
+                                    <td style="text-align: center">{$vo.mobile}</td>
+                                    <td style="text-align: center">
+                                        {if condition="($vo['gender']) eq 0"}保密
+                                        {elseif condition="($vo['gender']) eq 1"/}男
+                                        {elseif condition="($vo['gender']) eq 2"/}女
+                                        {else/}
+                                        {/if}
+                                    </td>
+                                    <td style="text-align: center"><img src="{$vo.avatar}" style="width:40px;"></td>
+                                    <td style="text-align: center">{$vo.name}</td>
+                                    <td style="text-align: center">{$vo.balance}</td>
+                                    <td style="text-align: center">{$vo.areaname}</td>
+                                    <td style="text-align: center">{$vo.birthday}</td>
+                                    <td style="text-align: center">{$vo.jointime|date="Y-m-d:H:i:s",###}</td>
+                                    <td style="text-align: center">{if condition="($vo['status']) eq 'hidden' "}隐藏
+                                        {else /}正常
+                                        {/if}</td>
+                                    <td style="text-align: center">
+                                        <a href="#"  onclick="save({$vo.id})"><i class="fa fa-pencil">编辑</i></a>&nbsp;
+                                        <a class="confirm" href="{:url('des',array('id'=>$vo['id']))}" onclick="return des(id)">
+                                            <i class="fa fa-trash">删除</i>
+                                        </a>&nbsp;
+                                        <a href="#"  onclick="recharge({$vo.id})"><i class="fa fa-jpy">余额充值</i></a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                {/if}
+                                </tbody>
+                            </table>
+                            <!--分页开始-->
+                            <div style="padding-top:15px;float: right; ">
+                                {//<div class="page"></div>}
+                                {$page}
+                            </div>
+                            <!--分页结束-->
+                        
+                        <div class="padding border-bottom">
+
+                            <button type="button" class="layui-btn" id="checkall">
+                                <span class="iconfont icon-htmal5icon22"></span>全选</button>
+
+                            <button type="submit" class="layui-btn layui-btn-danger" onclick="return delslect()">
+                                <span class="iconfont icon-shanchu"></span>批量删除</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--多选删除-->
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+    //  layer.open({
+    //   content: 'test'
+    //   ,btn: ['按钮一', '按钮二', '按钮三']
+    //   ,yes: function(index, layero){
+    //     //按钮【按钮一】的回调
+    //   }
+
+    // 修改编辑
+    function save(id){
+        layer.open({
+            type: 2,
+            shadeClose: true,
+            maxmin: true,
+            title:'编辑',
+            shade: 0.3,
+            area: ['850px', '600px'],
+            content: '/admin/user/user/save/?id='+id
+        });
+    }
+
+    //充值
+    function recharge(id) {
+        layer.open({
+            type: 2,
+            shadeClose: true,
+            maxmin: true,
+            title:'余额充值',
+            shade: 0.3,
+            area: ['850px', '600px'],
+            content: '/admin/user/user/recharge/?id='+id
+        });
+    }
+
+
+    //增加
+    function add()
+    {
+
+        layer.open({
+            type: 2,
+            title: '很多时候，我们想最大化看，比如像这个页面。',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['893px', '600px'],
+            content: '//fly.layui.com/'
+        });
+    }
+
+
+    //删除
+    function des(id) {
+
+        if (confirm("您确定要删除吗?")) {
+           
+            
+        } else {
+            return false;
+        }
+
+    }
+    $("#checkall").click(function() {
+        $("input[name='id[]']").each(function() {
+            if (this.checked) {
+                this.checked = false;
+            } else {
+                this.checked = true;
+            }
+        });
+    })
+
+    //推广状态-修改
+    function is_exten()
+    {
+        $.get('{:url("is_exten")}',function(res){
+            if(res.codes<2)
+            {
+                layer.alert(res.msg,{icon:2});
+            }else
+            {
+                layer.msg(res.msg);
+            }
+        },'json')
+    }
+    //全选
+    function delslect() {
+        var Checkbox = false;
+        $("input[name='id[]']").each(function() {
+            if (this.checked == true) {
+                Checkbox = true;
+            }
+        });
+        if (Checkbox) {
+            var t = confirm("您确认要删除选中的内容吗？");
+            if (t == false) return false;
+        } else {
+               //alert("请选择您要删除的内容!");
+            layer.alert('请选择您要删除的内容!', {icon: 2});
+
+            return false;
+        }
+    }</script>

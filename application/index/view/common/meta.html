@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<title>{$title|default=''} – {:__('VV跑腿')}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="renderer" content="webkit">
+
+{if isset($keywords)}
+<meta name="keywords" content="{$keywords}">
+{/if}
+{if isset($description)}
+<meta name="description" content="{$description}">
+{/if}
+<meta name="author" content="FastAdmin">
+
+<!--VV跑腿-->
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<!--CSS-->
+<link href="__CDN__/assets/css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/iconfont.css"/>
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/layui/css/layui.css"/>
+<!--JS-->
+<script src="__CDN__/assets/js/mui.min.js"></script>
+<script src="__CDN__/assets/layui/layui.all.js"></script>
+<!--VV跑腿-->
+
+<link rel="shortcut icon" href="__CDN__/assets/img/favicon.ico" />
+
+<!--<link href="__CDN__/assets/css/frontend{$Think.config.app_debug?'':'.min'}.css?v={$Think.config.site.version}" rel="stylesheet">-->
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="__CDN__/assets/js/html5shiv.js"></script>
+  <script src="__CDN__/assets/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    var require = {
+        config: {$config|json_encode}
+    };
+</script>

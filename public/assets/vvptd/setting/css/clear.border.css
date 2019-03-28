@@ -1,0 +1,4 @@
+/* 列表 border*/
+.mui-table-view:before,.mui-table-view-cell:after,.mui-table-view:after{
+	height: 0px;
+}

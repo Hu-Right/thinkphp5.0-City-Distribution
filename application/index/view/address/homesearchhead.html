@@ -1,0 +1,74 @@
+
+<style type="text/css">
+	.mui-table-view:after,
+	.mui-table-view:before {
+		height: 0;
+	}
+
+	.mui-control-content {
+		height: 200px;
+		background: #fff;
+	}
+
+	.city {
+		display: inline;
+	}
+
+	header .right-btn {
+		font-size: 14px;
+		position: absolute;
+		right: 15px;
+		line-height: 44px;
+		color: #333333;
+	}
+	.mui-scroll-wrapper {
+		top: 83px;
+	}
+
+	.search-ads .search-box {
+		top: 44px;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">地址选择 &bull; <div class="city"><span id="vv-city-info"></span><i class="iconfont icon-xiala"
+																						  style="font-size: 11px;"></i></div>
+	</h1>
+</header>
+
+<div class="mui-content">
+	<div class="search-ads">
+		<!-- 搜索框 -->
+		<div class="search-box">
+			<div class="search" style="overflow: hidden;">
+				<i class="iconfont icon-fangdajing"></i>
+				<input id="searchId" class="input" type="text" placeholder="请输入您要搜索的地址">
+			</div>
+			<div class="tishi">请从下方列表中选择</div>
+		</div>
+		<!-- 隐藏地图 -->
+		<div id="allmap"></div>
+
+		<!-- 滚动列表 -->
+		<div id="scroll">
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--数据列表-->
+					<ul class="mui-table-view" id="searchResultPanel">
+
+
+					</ul>
+					<p id="foot" class="foot">已经全部加载完毕</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+
+<script src="/assets/js/mui.min.js"></script>
+<script src="/assets/js/frontend/address/homesearchhead.js"></script>
+<!--<script src="/assets/js/frontend/address/homesearchbody.js"></script>-->

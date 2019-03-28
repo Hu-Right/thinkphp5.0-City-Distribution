@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+    <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+    <style type="text/css">
+        body {
+            padding: 0;
+        }
+        p {
+            margin-bottom: 0;
+            font-size: 12px;
+        }
+        .mui-bar {
+            border-bottom: 1px solid #DCDCDC;
+        }
+        .mui-bar~.mui-content {
+            padding: 77px 6% 0 6%;
+        }
+        .xing {
+            position: relative;
+            top: 3px;
+            color: #FF7751;
+            margin-right: 5px;
+        }
+        .mui-input-group {
+            margin-top: 20px;
+
+        }
+        .mui-input-group .mui-input-row {
+            height: 36px;
+            margin-top: 0;
+            padding-bottom: 0;
+
+        }
+        .mui-input-row label {
+            width: 30%;
+            padding: 11px 0;
+            font-size: 13px;
+            color: #333;
+        }
+        .mui-input-row label~input {
+            width: 70%;
+            height: 36px;
+        }
+        .mui-input-group:before {
+            height: 1px;
+            background-color: #dcdcdc;
+        }
+        .mui-radio input[type=radio] {
+            top: 7px;
+        }
+        .mui-radio input[type=radio]:before {
+            font-size: 20px;
+        }
+        .mui-input-row label~input {
+            font-size: 13px;
+        }
+        .mui-input-row label~input::-webkit-input-placeholder {
+            font-size: 13px;
+        }
+        .warranty>p {
+            color: #333333;
+            padding: 15px;
+        }
+        .warranty>div {
+            width: 100%;
+            border: 1px solid #DCDCDC;
+        }
+        .warranty>div:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .baodan, .paizhao {
+            width: 50%;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .paizhao {
+            position: relative;
+            background-color: #EEEEEE;
+        }
+        .paizhao div:first-child {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            line-height: 50px;
+            background-color: white;
+            margin: 25px auto;
+        }
+        .paizhao div:last-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: #fff;
+        }
+        .paizhao div:last-child img {
+            width: 100%;
+            height: 100%;
+        }
+        .warranty>.explain {
+            margin-top: 10px;
+            border: none;
+
+        }
+        .mui-btn {
+            width: 100%;
+            height: 50px;
+            background-color: #10B6FF;
+            border-radius: 0;
+            border: none;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+        .files{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity:0;
+        }
+    </style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+    <h1 class="mui-title" style="color: #333333;">完善资料</h1>
+</header>
+<div class="mui-content">
+
+    <form class="mui-input-group">
+
+        <div class="mui-input-row">
+            <label><span class="xing">* </span> 电话</label>
+            <input type="text" class="mui-input-clear" id="mobile" placeholder="请填写手机号">
+        </div>
+
+        <div class="mui-input-row">
+            <label><span class="xing">* </span> 提现金额</label>
+            <input type="text" class="mui-input-clear" id="money" value="" >
+        </div>
+    </form>
+
+
+
+</div>
+<button type="button" class="mui-btn mui-btn-primary subdata">确定提交</button>
+<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+    mui.init();
+    $('.img').show();
+</script>
+<script>
+    $('.subdata').on('click',function(){
+        var money = $('#money').val();
+        var mobile = $('#mobile').val();
+        alert(mobile);
+        mui.ajax('/vvptd/member/putForward',{
+            type:'post',
+            data:{
+                money:money,
+                mobile:mobile,
+                account:1
+            },
+            success: function (data) {
+                if(data.code == 1){
+                    layer.open({
+                        content:data.msg
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                    setTimeout(function(){
+                        location.href='';
+                    },500);
+                }else{
+                    layer.open({
+                        content:data.msg
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                }
+            },
+            error: function (data) {
+                layer.open({
+                    content:'网络繁忙'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+
+                });
+            }
+        })
+    })
+</script>
+</body>
+
+</html>

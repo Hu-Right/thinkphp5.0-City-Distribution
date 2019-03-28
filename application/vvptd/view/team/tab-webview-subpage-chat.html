@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/mui.min.css">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/iconfont.css">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/clear.border.css">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/style.css">
+		<style>
+			html,
+			body {
+				color: #00131B;
+				background: #00131B;
+			}
+			
+			.mui-content {
+				background-color: #00131B;
+			}
+			
+			.mui-input-row .mui-input-clear~.mui-icon-clear,
+			.mui-input-row .mui-input-password~.mui-icon-eye,
+			.mui-input-row .mui-input-speech~.mui-icon-speech {
+				color: #fff;
+			}
+			
+			.mui-icon.mui-icon-search {
+				color: #fff!important;
+			}
+			/*满足规则*/
+			
+			
+			.content1 {
+				z-index: 2;
+				width: 300px;
+				height: 200px;
+				border-radius: 10px;
+				background: #fff;
+				position: absolute;
+				margin-top: -150px;
+				margin-left: -150px;
+				top: 50%;
+				left: 50%;
+                display: none;
+			}
+			
+			.zd {
+				margin-top: 35px;
+				height: 22px;
+				font-size: 23px;
+				color: #10B6FF;
+				text-align: center;
+			}
+			
+			.dw {
+				position: relative;
+			}
+			
+			.bh {
+				margin-top: 12px;
+				height: 13px;
+				font-size: 13px;
+				color: #333333;
+				text-align: center;
+			}
+			
+			.zd_sq {
+				margin: 0;
+				margin-top: 15px;
+				width: 250px;
+				height: 40px;
+				font-size: 14px;
+			}
+			
+			.zd_sq::-webkit-input-placeholder {
+				color: #858585;
+				font-size: 14px;
+			}
+			
+			a {
+				text-align: center;
+				font-size: 15px;
+				width: 50%;
+				line-height: 45px;
+				float: left;
+			}
+			
+			.btn_box a:nth-child(1) {
+				border-radius:0 0 0 10px;
+				background: #DCDCDC;
+				color: #858585;
+			}
+			.btn_box a:nth-child(2) {
+				border-radius:0 0 10px 0px;
+				background: #10B6FF;
+				color: #FFFFFF;
+			}
+			.btn_box {
+				position: relative;
+				bottom: -3px;
+			}
+			
+			.btn_box:after {
+				display: block;
+				clear: both;
+				content: "";
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper myteam">
+			<div class="mui-scroll">
+				<div class="top-box">
+					<p class="p1">您当前还没有加入任何战队</p>
+					<p class="p2">每个跑男一次只能加入一个战队哦！</p>
+					<!-- 创建战队 -->
+					<div class="add-team" id="cjzd" type="button"><span class="iconfont icon-tianjiatuandui"></span>创建战队</div>
+				</div>
+
+				<!-- 搜索 -->
+				<div class="search-box o-h">
+					<div class="mui-input-row mui-search f-l">
+						<input type="search" id="keyword" class="mui-input-clear" placeholder="请输入战队名称">
+					</div>
+
+					<button id="search-btn" class="f-r search-btn" type="button" onclick="doSearch(flag);">搜索</button>
+				</div>
+
+				<!-- 战队列表 -->
+				<div class="team-list">
+					<ul class="mui-table-view li-head">
+						<li class="mui-table-view-cell">
+							战队名称
+						</li>
+						<li class="mui-table-view-cell">
+							战队编号
+						</li>
+						<li class="mui-table-view-cell">
+							人数/上限
+						</li>
+						<li class="mui-table-view-cell">
+							申请加入
+						</li>
+					</ul>
+					<div id="list">
+						<ul class="mui-table-view">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!---->
+		<div class="content1">
+
+			<div class="zd">
+				五星战队
+			</div>
+			<div class="bh">
+				战队编号：<span>00000</span>
+			</div>
+			<input class="zd_sq" type="text" name="" id="content" value="" / style="width: 250px; height: 40px; margin: 15px 25px;" placeholder="请输入验证信息/申请理由">
+			<div class="btn_box">
+				<a href="" class="back_q">返回</a>
+				<a id="join">申请加入</a>
+			</div>
+
+		</div>
+
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script>
+            var page = 1;
+            teamList(page,'')
+            function teamList(page,keyword,type){
+                mui.ajax('/vvptd/team/teamList',{
+                    type:'post',
+                    async:false,
+                    data:{
+                        page:page,
+                        keyword:keyword
+                    },success:function(data){
+                        console.log(data);
+                        count = 0;
+                        if(data.data.length>0) {
+                            var arr = data.data;
+                            var html = '';
+                            for (var i = 0; i < arr.length; i++) {
+                                html+='<li class="mui-table-view-cell">';
+                                html+='<p class="name">'+arr[i].name+'</p>';
+                                html+='<p class="remb">'+arr[i].id+'</p>';
+                                html+='<p class="num">'+arr[i].num+'/30</p>';
+                                html+='<p><button class="btn" type="button" data-id="'+arr[i].id+'">申请加入</button></p>';
+                                html+='</li>';
+                            }
+                            if(type==1){
+                                $('#list').html(html);
+                            }else{
+                                $('#list').append(html);
+                            }
+
+                        }else{
+                            if(type==1){
+                                mui.alert('没有相关数据');
+                            }
+                        }
+                    }
+                })
+            }
+
+
+
+
+        function doSearch(flag) {
+                var keyword = $('#keyword').val();
+                teamList(page,keyword,1);
+			}
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$('.zdc').on('input', function() {
+					$('.inp_length').text($('.zdc').val().length)
+				})
+
+			})
+            $('#join').click(function(){
+                var content = $('#content').val();
+                var teamid = $(".bh>span").html();
+                if(content == '') {
+                    mui.alert('请输入申请原因');
+                    return false;
+                }
+                mui.ajax('/vvptd/team/applyTeam',{
+                    type:"post",
+                    data:{
+                        team_id:teamid,
+                        apply_content:content
+                    },success:function(data){
+                        if(data.code==1){
+                            mui.alert('申请成功');
+                            $(".content1").hide();
+                        }else{
+                            mui.alert(data.msg);
+                        }
+                    }
+                })
+            })
+		</script>
+
+		<script type="text/javascript">
+			$(".btn").each(function(i,e){
+				$(e).click(function(){
+					$(".zd").html($(this).parent().parent().find("p").eq(0).text());
+				$(".bh>span").html($(this).parent().parent().find("p").eq(1).text());
+				$(".content1").show();
+				
+				})
+				
+			})
+			$(".back_q").click(function(){
+				$(".content1").hide();
+			})
+
+            document.getElementById('cjzd').addEventListener('tap', function() {
+                mui.ajax('/vvptd/team/addTeam',{
+                    type:"post",
+                    data:{
+                    },success:function(data){
+                        if(data.code==0){
+                            mui.openWindow({
+                                url:baseUrl+'/vvptd/team/teamCjgz',
+                                id: 'tab-webview-main'
+                            })
+                        }else{
+                            mui.openWindow({
+                                url:baseUrl+'/vvptd/team/addTeam',
+                                id: 'tab-webview-main'
+                            })
+                        }
+                    }
+                })
+
+            });
+
+            mui.init({
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    down: {
+                        callback: pulldownRefresh
+                    },
+                    up: {
+                        contentrefresh: '正在加载...',
+                        callback: pullupRefresh
+                    }
+                }
+            });
+            var count = 0
+            /**
+             * 下拉刷新具体业务实现
+             */
+            function pulldownRefresh() {
+                setTimeout(function() {
+                    location.href='';
+                    mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+                }, 1500);
+            }
+
+            function pullupRefresh() {
+                setTimeout(function() {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count>2)); //参数为true代表没有更多数据了。
+                    ++page;
+                    var keyword = $('#keyword').val();
+                    teamList(page,keyword);
+                }, 1500);
+            }
+		</script>
+	</body>
+
+</html>

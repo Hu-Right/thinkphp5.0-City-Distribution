@@ -1,0 +1,175 @@
+
+	<style type="text/css">
+		header .manage-btn {
+			font-size: 14px;
+			color: #333333;
+			position: absolute;
+			right: 15px;
+			line-height: 44px;
+			display: none;
+		}
+
+		header .finish-btn {
+			color: #10B6FF;
+		}
+
+		.address {
+			padding: 44px 0 30px;
+		}
+
+		#OA_task_1 .mui-table-view-cell {
+			padding: 20px 15px;
+		}
+
+		.used-ads-box {
+			padding-bottom: 50px;
+		}
+		.address .icon-dui{
+			color: #FF7751;
+		}
+	</style>
+
+
+
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">我的地址</h1>
+		<a id="head-btn-l" class="manage-btn">管理</a>
+		<!-- finish-btn   完成 -->
+	</header>
+	<div class="mui-content address">
+		<div id="ads-all">
+			<ul id="OA_task_1" class="mui-table-view">
+				<!-- 家默认空 -->
+				{if condition="empty($homeInfo)"}
+				<li class="mui-table-view-cell">
+					<div class="tit">
+						<span id="home_icon" class="iconfont icon-jia1 icons" style="margin-right: 2%;"></span>
+						<span>家</span>
+					</div>
+					<div id="home">
+						<div class="mui-ellipsis">
+							<p id="home_ads" class="mui-ellipsis">设置地址</p>
+						</div>
+						<div class="mui-ellipsis">
+							<p id="home_name">设置联系人</p>
+						</div>
+					</div>
+				</li>
+				{else /}
+				<li class="mui-table-view-cell">
+					<div class="tit">
+						<span id="home_icon" class="iconfont icon-jia1 icons" style="margin-right: 2%;" data-id="{$homeInfo.id}"></span>
+						<span>家</span>
+					</div>
+					<div id="home">
+						<div class="mui-ellipsis">
+							<p id="home_ads" class="mui-ellipsis">{$homeInfo.address_head} {$homeInfo.address}</p>
+						</div>
+						<div class="mui-ellipsis">
+							{if condition="empty($homeInfo.linkman)"}
+							<p>{$homeInfo.mobile}</p>
+							{else /}
+							<p>{$homeInfo.linkman}：{$homeInfo.mobile}</p>
+							{/if}
+						</div>
+					</div>
+				</li>
+				{/if}
+				<!-- 公司默认空 -->
+				{if condition="empty($companyInfo)"}
+				<li class="mui-table-view-cell">
+					<div class="tit">
+						<span id="company_icon" class="iconfont icon-gongsi icons" style="margin-right: 2%;"></span>
+						<span>公司</span>
+					</div>
+					<div id="company">
+						<div class="mui-ellipsis">
+							<p id="company_ads" class="mui-ellipsis">设置地址</p>
+						</div>
+						<div class="mui-ellipsis">
+							<p id="company_name">设置联系人</p>
+						</div>
+					</div>
+				</li>
+				{else /}
+				<li class="mui-table-view-cell" id="company">
+					<div class="tit">
+						<span id="company_icon" class="iconfont icon-gongsi icons" style="margin-right: 2%;" data-id="{$companyInfo.id}"></span>
+						<span>公司</span>
+					</div>
+					<div id="company">
+						<div class="mui-ellipsis">
+							<p id="company_ads" class="mui-ellipsis">{$companyInfo.address_head} {$companyInfo.address}</p>
+						</div>
+						<div class="mui-ellipsis">
+							{if condition="empty($companyInfo.linkman)"}
+							<p>{$companyInfo.mobile}</p>
+							{else /}
+							<p>{$companyInfo.linkman}：{$companyInfo.mobile}</p>
+							{/if}
+						</div>
+					</div>
+				</li>
+				{/if}
+			</ul>
+
+			<!-- 常用地址 -->
+			<div class="used-ads-box">
+				<div class="tit-box">
+					<p class="left">常用地址</p>
+					<p class="right" id="newaddress">
+						<i class="iconfont icon-jia2"></i>
+						<span>新增地址</span>
+					</p>
+				</div>
+
+				<div class="body-box">
+					{if condition="empty($addressInfo)"}
+					<!-- 无地址 -->
+					<div class="no-ads">
+						<i class="iconfont icon-tubiao-zanwudizhi"></i>
+						<p class="con">您当前没有常用地址</p>
+					</div>
+					{else /}
+					<!-- 有地址 -->
+					<ul class="mui-table-view" id="used_list">
+						{volist name="addressInfo" id="address"}
+						 <li class="mui-table-view-cell">
+							<div class="tit">
+								<span class="iconfont icon-shiliangzhinengduixiang icons" style="margin-right: 2%;" data-id="{$address.id}"></span>
+								<span>{$address.address_head}</span>
+							</div>
+						    <div class="common-used" data-id="{$address.id}">
+								<div class="mui-ellipsis">
+									<p class="mui-ellipsis">{$address.address}</p>
+								</div>
+								<div class="mui-ellipsis used_ads">
+									{if condition="empty($address.linkman)"}
+									<p>{$address.mobile}</p>
+									{else /}
+									<p>{$address.linkman}：{$address.mobile}</p>
+									{/if}
+								</div>
+							</div>
+						 </li>
+						 {/volist}
+					</ul>
+					{/if}
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<!-- 删除 -->
+		<div id="del-box" class="del-box" style="display: none;">
+			<label id="all" class="left" for="all">
+				<i class="iconfont icon-quan1"></i>全选
+			</label>
+			<button class="right" type="button" id="del-btn">删除</button>
+		</div>
+	</div>
+		<script src="/assets/js/frontend/address/index.js"></script>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet">
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+		
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">任务中心</h1>
+            <a class=" mui-icon  mui-icon-person mui-pull-right" id="zhongxin"></a>
+		</header>
+		<div class="mui-content"></div>
+	</body>
+	<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+  <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+	<script type="text/javascript">
+      document.getElementById('zhongxin').addEventListener('tap', function() {
+                mui.openWindow(baseUrl+'/vvptd/member/getRunMenTask');
+            });
+      //http://www.zhangzhengjiang.top/vvptd/member/getRunMenTask
+		//启用双击监听
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:baseUrl+'/vvptd/member/task_main',
+				id:baseUrl+'/vvptd/member/task_main',
+				styles:{
+					top: '45px',
+					bottom: '0px',
+				}
+			}]
+		});
+	
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+	</script>
+
+</html>

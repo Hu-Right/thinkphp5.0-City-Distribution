@@ -1,0 +1,36 @@
+li {
+	padding: 0 20px;
+	border-bottom: 1px solid #EEEEEE;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+}
+.icon-fanhui-copy{
+	margin-left: 10px;
+}
+.vv-li-left{
+	color: #858585;
+	font-size:15px;
+	font-weight:500;
+}
+.vv-li-right{
+	color: #333333;
+	font-size:15px;
+	font-weight:500;
+}
+.f-btn{
+	padding-top: 80px;
+	width: 100%;
+	text-align: center;
+}
+.f-btn button {
+	width: 90%;
+	background: #FF7751;
+	color: #FFFFFF;
+	height: 45px;
+	border: 0;
+}
+.mui-table-view-cell>a:not(.mui-btn){
+	width: 110%;
+}

@@ -1,0 +1,73 @@
+<form id="add-form" class="form-horizontal form-ajax nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:url('add_task')}" novalidate="novalidate">
+
+    <div class="form-group">
+        <label for="title" class="control-label col-xs-12 col-sm-2">任务名称:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" name="title" id="title" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="detail" class="control-label col-xs-12 col-sm-2">任务介绍:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea name="detail" id="detail" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="value" class="control-label col-xs-12 col-sm-2">任务值:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" name="value" id="value" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="type" class="control-label col-xs-12 col-sm-2">任务类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="type" id="type" class="form-control">
+                <option value="1">按订单量发布任务</option>
+                <option value="2">按公里数发布任务</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="claim_type" class="control-label col-xs-12 col-sm-2">领取类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="claim_type" id="claim_type" class="form-control">
+                <option value="1">固定任务只可领取一次</option>
+                <option value="2">循环任务每个月可领取一次</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reward" class="control-label col-xs-12 col-sm-2">完成任务的奖励描述:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea name="reward" id="reward" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reward_num" class="control-label col-xs-12 col-sm-2">奖励数值:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" name="reward_num" id="reward_num" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="status" class="control-label col-xs-12 col-sm-2">状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="radio" name="status" id="status" value="1" checked>正常
+            <input type="radio" name="status" id="" value="0">隐藏
+        </div>
+    </div>
+
+    <div class="form-group layer-footer">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed">提交</button>
+            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+        </div>
+    </div>
+</form>

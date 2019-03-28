@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			html,body,#allmap {
+				width: 100%;
+				height: 100%;
+			}
+			.mui-content {
+				width: 100%;
+				height: 100%;
+			}
+			.mui-bar {
+				background-color: #fff;
+				box-shadow: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+			<h1 class="mui-title">热力图</h1>
+		</header>
+		<div class="mui-content">
+			<div id="allmap"></div>
+		</div>
+		<script src="__CDN__/assets/vvptd/member/js/mui.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+		<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+        <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				// 获取设备定位信息
+				plus.geolocation.getCurrentPosition(translatePoint, function(e) {
+					mui.toast("异常:" + e.message);
+				});
+			});
+			function translatePoint(position) {
+				var currentLon = position.coords.longitude;
+				var currentLat = position.coords.latitude;
+				var gpsPoint = new BMap.Point(currentLon, currentLat);
+				BMap.Convertor.translate(gpsPoint, 0, initMap); //坐标转换
+				
+				
+			
+			}
+			
+			function initMap(point) {
+				map = new BMap.Map("allmap"); //创建地图
+				map.centerAndZoom(point, 16);
+                getPoint();
+//                var points =[
+//                    {"lng":116.418261,"lat":39.921984,"count":100},
+//                    {"lng":116.418591,"lat":39.921594,"count":100},
+//                    {"lng":116.419787,"lat":39.930658,"count":100},
+//                    {"lng":116.418455,"lat":39.920921,"count":100},
+//                    {"lng":116.418843,"lat":39.915516,"count":100},
+//                ];
+//                heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
+//                map.addOverlay(heatmapOverlay);
+//                heatmapOverlay.setDataSet({data:points,max:100});
+//                heatmapOverlay.show();
+			}
+
+            function getPoint(){
+                mui.ajax('/vvptd/order/getHotMap',{
+                    type:'post',
+                    async:false,
+                    success: function (data) {
+                        var points = data.data
+                        heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
+                        map.addOverlay(heatmapOverlay);
+                        heatmapOverlay.setDataSet({data:points,max:100});
+                        heatmapOverlay.show();
+                    },error:function(XMLHttpRequest, textStatus, errorThrown){
+                        alert(XMLHttpRequest.status)
+                    }
+                })
+            }
+		</script>
+	</body>
+
+</html>

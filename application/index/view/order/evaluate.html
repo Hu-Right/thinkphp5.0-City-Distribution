@@ -1,0 +1,54 @@
+
+<style type="text/css">
+	p{margin-bottom: 0;color: #333;}
+
+</style>
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">订单评价</h1>
+</header>
+
+<div class="mui-content order-pj">
+	<div class="list msg">
+		{php}
+		if($runmenInfo['avatar'] == ''){
+			$avatar = '/assets/img/headimg.png';
+		}else{
+			$avatar = $runmenInfo['avatar'];
+		}
+		{/php}
+		<img class="head-img" src="{$avatar}" >
+		<p class="name">{$runmenInfo.truename}</p>
+	</div>
+
+	<div class="list star-list">
+		<p class="tit">觉得不错请给跑男5星好评哦！</p>
+		<div id="stars" class="star-box">
+			<img src="/assets/img/star2.png" >
+			<img src="/assets/img/star2.png" >
+			<img src="/assets/img/star2.png" >
+			<img src="/assets/img/star2.png" >
+			<img src="/assets/img/star2.png" >
+		</div>
+	</div>
+
+	<div class="list tag-list">
+		<input id="input" type="text" placeholder="您可以选择以下标签评价跑男，也可以直接填写评价哦！" />
+
+		<div id="tags" class="tag-box">
+			<span class="tag tag1">态度好</span> <!-- tag1-on -->
+			<span class="tag tag1">速度快</span>
+			<span class="tag tag1">活地图</span>
+			<span class="tag tag1">着装整洁</span>
+			<span class="tag tag2">任务拖沓</span> <!-- tag2-on -->
+			<span class="tag tag2">态度差</span>
+			<span class="tag tag2">穿着邋遢</span>
+		</div>
+	</div>
+
+	<button class="submit" type="button" id="submit">提交</button>
+	<input type="hidden" id="score" value="0"/>
+	<input type="hidden" id="id" value="{$id}"/>
+</div>
+
+<script src="/assets/js/frontend/order/evaluate.js" type="text/javascript" charset="utf-8"></script>

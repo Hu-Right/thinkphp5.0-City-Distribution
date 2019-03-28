@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="/assets/css/help-buy.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/mui.picker.min.css" />
+<style type="text/css">
+	.mui-content {
+		background: #fff;
+	}
+
+	.mui-content>.mui-table-view:first-child {
+		margin-top: 0;
+	}
+
+	.mui-bar {
+		border-bottom: 1px solid #dcdcdc;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">帮我取</h1>
+</header>
+
+<div class="mui-content help-buy-index">
+	<ul class="mui-table-view">
+		<li class="ul-li" style="padding-top: 5px;">
+			<span class="left" style="line-height: 30px;">帮我取：</span>
+			<textarea id="textarea" placeholder="美食、文件、蛋糕、鲜花、钥匙..."></textarea>
+			<!-- <input class="input-price" type="text" placeholder="请输入商品价格" style="text-align: right;"> -->
+		</li>
+
+		<li class="ul-li ul-li1 address-shou">
+			<span class="iconfont icon-dizhi-qu icon icon1"></span>
+			<span class="left">取货地址：</span>
+			<div class="right">
+				<div class="btm">
+					<div id="select-ads" style="display: inline-block;width: calc(100% - 50px);color: #10B6FF;">点击此处选择地址</div>
+					<!--<button class="btn" type="button">常用</button>-->
+				</div>
+			</div>
+		</li>
+	</ul>
+
+	<button id="next-btn" type="button">下一步</button>
+</div>
+<script src="/assets/js/frontend/placeorder/helptakestep1.js"></script>

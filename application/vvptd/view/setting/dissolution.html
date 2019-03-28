@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加银行卡</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+    <link href="__CDN__/assets/vvptd/setting/css/mui.picker.css" rel="stylesheet" />
+    <link href="__CDN__/assets/vvptd/setting/css/mui.poppicker.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+    <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../../css/login.css"/> -->
+    <style>
+        .mui-input-row label{
+            width: 30%;
+            font-size: 16px;
+            color: #333;
+        }
+        .mui-input-row label~input{
+            width: 70%;
+            font-size: 15px;
+            color: #858585;
+            line-height: 25px;
+        }
+        #showUserPicker{
+            width: 60%;
+            text-align: left;
+            font-size: 15px;
+            color: #858585;
+            padding: 11px 0;
+            margin-bottom: 0;
+            border: none;
+            float: left;
+            line-height: 17px;
+        }
+        .mui-input-group:before{
+            background-color: #fff;
+        }
+        .btn {
+            text-align: center;
+            margin-top: 68px;
+            padding: 0 15px;
+        }
+        .btn button{
+            padding: 10px 0;
+            width: 100%;
+            font-size: 18px;
+            -webkit-border-radius: 42px;
+            -moz-border-radius: 42px;
+            border-radius: 42px;
+            background-color: #10B6FF;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+    <h1 class="mui-title" style="color: #333333;">添加银行卡</h1>
+</header>
+<section class="mui-content">
+    <form class="mui-input-group">
+        <div class="mui-input-row mui-radio">
+            <label>密码</label>
+            <input name="" type="password" id="password" >
+        </div>
+    </form>
+    <div class="btn">
+        <button type="button" class="mui-btn mui-btn-primary add_bank">确定添加</button>
+    </div>
+</section>
+<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+<script src="__CDN__/assets/vvptd/setting/js/mui.picker.js"></script>
+<script src="__CDN__/assets/vvptd/setting/js/mui.poppicker.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $('.add_bank').on('click',function(){
+        var password = $('#password').val();
+
+        if(password == ''){
+            layer.open({
+                content:'密码不能为空'
+                , skin: 'msg'
+                , time: 2 //2秒后自动关闭
+
+            });
+            return false;
+        }
+
+        mui.ajax('/vvptd/setting/dissolution',{
+            type:'post',
+            data:{
+                password:password
+            },
+            success: function (data) {
+                if(data.code == 1){
+                    layer.open({
+                        content:data.msg
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+
+                }else{
+                    layer.open({
+                        content:data.msg
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+
+                    });
+                }
+            },
+            error: function (data) {
+                layer.open({
+                    content:'网络繁忙'
+                    , skin: 'msg'
+                    , time: 2 //2秒后自动关闭
+
+                });
+            }
+        })
+    })
+</script>
+</body>
+</html>

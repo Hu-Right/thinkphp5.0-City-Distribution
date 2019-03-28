@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/mui.min.css">
+        <link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/iconfont.css">
+        <link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/clear.border.css">
+        <link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/style.css">
+		<style>
+			html,
+			body {
+				color: #00131B;
+			}
+			.mui-pull-top-pocket{
+				background:#00131B ;
+			}
+			.mui-content {
+				background-color: #00131B;
+			}
+			
+			.mui-input-row .mui-input-clear~.mui-icon-clear,
+			.mui-input-row .mui-input-password~.mui-icon-eye,
+			.mui-input-row .mui-input-speech~.mui-icon-speech {
+				color: #fff;
+			}
+			
+			.mui-icon.mui-icon-search {
+				color: #fff!important;
+			}
+			
+			.zhandui_hz {
+				position: relative;
+				height: 160px;
+				overflow: hidden;
+			}
+			
+			.zhandui_hz img {
+				left: 50%;
+				margin-top: 30px;
+				margin-left: -71.5px;
+				position: absolute;
+				width: 143px;
+				height: 119px;
+			}
+			
+			.zhandui_name {
+				position: relative;
+				margin-top: 77px;
+				text-align: center;
+				color: #fff;
+				font-size: 15px;
+			}
+			
+			.zhandui_num {
+				position: relative;
+				margin-top: 5px;
+				text-align: center;
+				color: #333333;
+				font-size: 12px;
+			}
+			
+			.line {
+				width: 100%;
+				height: 10px;
+				background: rgb(3, 52, 73);
+			}
+			
+			.shangzhoushuju {
+				padding: 18px 0 11px 0px;
+				background: #00131B;
+				text-align: center;
+			}
+			
+			.shangzhou_title {
+				color: #FF7751;
+				font-size: 15px;
+			}
+			
+			.shijian {
+				font-size: 10px;
+				color: #ffffff;
+			}
+			
+			.shuju_shang {
+				width: 100%;
+				border: 1px solid rgb(3, 52, 73);
+			}
+			
+			.shuju_shang:after {
+				display: block;
+				clear: both;
+				content: "";
+			}
+			
+			.shuju_shang>div {
+				padding: 20px 0;
+				text-align: center;
+				width: 33.33%;
+				border-right: 1px solid rgb(3, 52, 73);
+				float: left;
+			}
+			
+			.shuju_shang>div:last-child {
+				border: none;
+			}
+			
+			.shuju_shang>div>div:nth-child(1) {
+				color: #10B6FF;
+				font-size: 14px;
+				padding: 10px 0;
+			}
+			
+			.shuju_shang>div>div:nth-child(2) {
+				color: #ffffff;
+				font-size: 20px;
+			}
+			
+			.person_head{
+				text-align: center;
+				border-top:1px solid #10B6FF ;
+				border-bottom:1px solid #10B6FF ;
+				color: #10B6FF;
+				font-size: 13px;
+			}
+			@media(min-width:320px ) {
+				.person_head{
+				border-top:1px solid #10B6FF ;
+				border-bottom:1px solid #10B6FF ;
+				color: #10B6FF;
+				font-size: 12px;
+			}
+			}
+			.xiangxi li{
+				text-align: center;
+				color: #fff;
+				font-size: 11px;
+				border-bottom:  1px solid #10B6FF;
+			}
+			
+			.tuichu{
+				width: 100%;
+				height: 50px;
+				
+				text-align: center;
+				line-height: 50px;
+				color:#858585 ;
+				font-size:12px ;
+				
+				background: #00131B;
+			}
+            #zdxx{
+                position: relative;
+                top: -21px;
+                right: 15px;
+            }
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper myteam">
+			<div class="mui-scroll">
+				<div class="zhandui_hz">
+					<img src="__CDN__/assets/vvptd/setting/img/zhandui-my.png" />
+					<div class="zhandui_name">
+						{$myTeam['name']}
+					</div>
+					<div class="zhandui_num">
+                        {$myTeam['id']}
+					</div>
+				</div>
+				<div class="line">
+
+				</div>
+				<div class="shangzhoushuju">
+					<div class="shangzhou_title">
+						- 本周数据 -
+					</div>
+					<div class="shijian">
+						统计时间：<span>{$time}</span>
+					</div>
+				</div>
+				<div class="shuju_shang">
+					<div class="danshu">
+						<div>单数</div>
+						<div>{$order_num}</div>
+					</div>
+					<div class="licheng">
+						<div>里程(公里）</div>
+						<div>{$distance}</div>
+					</div>
+					<div class="shouru">
+						<div>收入（元）</div>
+						<div>{$money}</div>
+					</div>
+				</div>
+				<div class="line">
+
+				</div>
+				<div class="zhandui_person">
+					<div class="shangzhoushuju">
+						<div class="shangzhou_title">
+							战队成员
+						</div>
+                        {if condition=" $is_qun eq 1 "}
+                        <div class="mui-pull-right shangzhou_title " id="zdxx">
+                            战队消息
+                        </div>
+                        {/if}
+                    </div>
+					<div class="mui-content">
+						<div class="mui-row person_head">
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									成员姓名
+								</li>
+							</div>
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									战队身份
+								</li>
+							</div>
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									VV等级
+								</li>
+							</div>
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									联系方式
+								</li>
+							</div>
+						</div>
+					</div>
+					<div class="mui-content">
+                        {foreach name="men" item="vo"}
+						<div class="mui-row xiangxi">
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									{$vo['truename']}
+								</li>
+							</div>
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+                                    {if condition=" $vo['team_type'] eq 1 "}
+									队长
+                                    {else/}
+                                    队员
+                                    {/if}
+								</li>
+							</div>
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									V{$vo['level']} {$vo['name']}
+								</li>
+							</div>
+							<div class="mui-col-sm-3 mui-col-xs-3">
+								<li class="mui-table-view-cell">
+									{$vo['mobile']}
+								</li>
+							</div>
+						</div>
+                    {/foreach}
+					</div>	
+					<div class="tuichu" id="tuichu">
+						退出战队
+					</div>
+				</div>
+			</div>			
+		</div>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script>
+            var is_qun = "{$is_qun}";
+			mui.init({
+				swipeBack: false,
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					}
+				}
+			});
+            if(is_qun == 1) {
+                document.getElementById('zdxx').addEventListener('tap', function () {
+                    mui.openWindow({
+                        url: baseUrl + '/vvptd/team/teamnew',
+                        id: 'add-zhandui'
+                    })
+                })
+            }
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					// TODO 刷新事件
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1000);
+			}
+			var count = 0;
+			var flag = true;
+
+            document.getElementById('tuichu').addEventListener('tap', function() {
+                mui.ajax('/vvptd/team/tuichuTeam',{
+                    type:"post",
+                    data:{
+                    },success:function(data){
+                        if(data.code==0){
+                            mui.alert(data.msg);
+                        }else{
+                            mui.alert(data.msg);
+                            location.href='';
+                        }
+                    }
+                })
+
+            });
+		</script>
+	</body>
+
+</html>

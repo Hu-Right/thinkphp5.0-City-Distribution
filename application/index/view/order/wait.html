@@ -1,0 +1,125 @@
+<style>
+	#process0,#process9{
+		color: #FF7751;
+	}
+	#process1,#process2{
+		color: #10B6FF;
+	}
+	#process3,#process5,#process6{
+		color: #858585;
+	}
+</style>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper order-main">
+			<div class="mui-scroll">
+
+				<ul class="mui-table-view">
+					<!-- 循环 -->
+					{volist name="orders" id="order"}
+					<li class="mui-table-view-cell">
+						<a class="jump" data-id="{$order.id}">
+							<div class="top">
+								<span class="type">{$order.service_name}</span>
+								<span class="time"><span class="sp-m-r">{$order.create_time|date='Y-m-d H:i:s',###}</span></span>
+								<span class="process" id="process{$order.status}">
+								{if condition="($order.order_code != '') AND ($order.status == 1)"}
+									已接单
+								{elseif condition="($order.order_code == '') AND ($order.status == 1)"}
+									待就位
+								{/if}
+								{switch name="order.status"}
+									{case value="0"}待接单{/case}
+									{case value="3"}已取消{/case}
+									{case value="5"}待评价{/case}
+									{case value="6"}已完成{/case}
+									{case value="9"}待支付{/case}
+								{/switch}
+								</span>
+							</div>
+							<div class="center">
+								<div class="li o-h">
+									<p class="p f-l">订单号：{$order.order_num}</p>
+								</div>
+								{if condition="$order.end_address != ''"}
+								<div class="li o-h">
+									{php}
+									if($order['type'] == 5){
+									$icon = 'icon-dizhi-qu';
+									}elseif($order['type'] == 2){
+									$icon = 'icon-dizhi-fa';
+									}else{
+									$icon = 'icon-dizhi-mai';
+									}
+									{/php}
+									<i class="iconfont {$icon} f-l"></i>
+									<p class="p">{$order.start_address}</p>
+								</div>
+								{/if}
+								{if condition="$order.end_address != ''"}
+								<div class="li o-h">
+									{php}
+									if($order['type'] == 1 || $order['type'] == 2 || $order['type'] == 5 ){
+									$icon = 'icon-dizhi-shou';
+									}elseif($order['type'] == 3){
+									$icon = 'icon-dizhi-ban';
+									}elseif($order['type'] == 4){
+									$icon = 'icon-dizhi-pai';
+									}
+									{/php}
+									<i class="iconfont {$icon} f-l"></i>
+									<p class="p">{$order.end_address}</p>
+								</div>
+								{else/}
+								<div class="li o-h">
+									{php}
+									if($order['type'] == 1 || $order['type'] == 2 || $order['type'] == 5 ){
+									$icon = 'icon-dizhi-shou';
+									}elseif($order['type'] == 3){
+									$icon = 'icon-dizhi-ban';
+									}elseif($order['type'] == 4){
+									$icon = 'icon-dizhi-pai';
+									}
+									{/php}
+									<i class="iconfont {$icon} f-l"></i>
+									<p class="p">{$order.start_address}</p>
+								</div>
+								{/if}
+								<div class="li o-h">
+									<i class="iconfont icon-dianhua f-l"></i>
+									<p class="p f-l">联系人：{$order.content.name} <span class="phone">{$order.content.mobile}</span></p>
+								</div>
+							</div>
+						</a>
+						<div class="btm">
+							<input type="hidden" class="id" value="{$order.id}">
+							<input type="hidden" class="status" value="{$order.status}">
+							{switch name="order.status"}
+							{case value="0"}
+							<button type="button" class="mui-btn mui-btn-grey cancel">取消订单</button>
+							{/case}
+							{case value="3"}
+							<button type="button" class="mui-btn mui-btn-grey delete">删除</button>
+							{/case}
+							{case value="5"}
+							<button type="button" class="mui-btn mui-btn-blue evaluate">去评价</button>
+							<button type="button" class="mui-btn mui-btn-grey delete">删除</button>
+							{/case}
+							{case value="6"}
+							<button type="button" class="mui-btn mui-btn-grey delete">删除</button>
+							{/case}
+							{case value="9"}
+							<button type="button" class="mui-btn mui-btn-blue evaluate">去支付</button>
+							<button type="button" class="mui-btn mui-btn-grey cancel">取消订单</button>
+							{/case}
+							{/switch}
+							<p class="f-r p2">订单金额 <span class="black">￥</span><span class="black money">{$order.money}</span></p>
+						</div>
+					</li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+
+
+		<script src="/assets/js/frontend/order/wait.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="/assets/js/frontend/orderpush.ajax.js" type="text/javascript" charset="utf-8"></script>

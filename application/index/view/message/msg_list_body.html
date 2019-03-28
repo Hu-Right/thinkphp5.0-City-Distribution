@@ -1,0 +1,30 @@
+
+<style type="text/css">
+	.mui-table-view:before,.mui-table-view:after{
+		height: 0;
+	}
+</style>
+
+<!--下拉刷新容器-->
+<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+	<div class="mui-scroll">
+		<!--数据列表-->
+
+		<ul id="ul" class="mui-table-view mui-table-view-chevron">
+			{volist name="msgInfo" id="msg"}
+			<li class="mui-table-view-cell mui-media">
+				<a href="javascript:;" class="mui-navigate-right" id="jump" data-id="{$msg.id}">
+					<div class="mui-media-body" >
+						{$msg.title}
+						<p class="mui-ellipsis">
+						<span>{$msg.create_time|date="Y-m-d",###}</span>
+						<span style="margin-left:5px;">{$msg.create_time|date="H:i:s",###}</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			{/volist}
+		</ul>
+	</div>
+</div>
+<script src="/assets/js/frontend/message/msgListBody.js"></script>

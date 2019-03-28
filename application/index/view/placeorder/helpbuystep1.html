@@ -1,0 +1,91 @@
+
+<link rel="stylesheet" type="text/css" href="/assets/css/help-buy.css" />
+<style type="text/css">
+	.mui-content {
+		background: #fff;
+	}
+
+	.mui-content>.mui-table-view:first-child {
+		margin-top: 0;
+	}
+
+	.mui-bar {
+		border-bottom: 1px solid #dcdcdc;
+	}
+
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+		font-size: 15px;
+		font-weight: normal;
+		padding: 0 15px;
+	}
+
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+		border: none;
+		font-size: 16px;
+	}
+</style>
+
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">帮我买</h1>
+</header>
+
+<div class="mui-content help-buy-index">
+	<ul class="mui-table-view">
+		<li class="ul-li ul-li2">
+			<div style="overflow: hidden; line-height: 26px;">
+				<span class="left">服务类型：</span>
+			</div>
+
+			<!-- 服务类型 -->
+			<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted chanpin">
+				<div id="scroll" class="mui-scroll">
+					{volist name="$soninfo" id="vo"}
+					<a class="mui-control-item {$key == 0 ? 'mui-active':''}" data-id="{$vo.id}" >
+						{$vo.service_name}
+					</a>
+					{/volist}
+				</div>
+			</div>
+		</li>
+
+		<li class="ul-li ul-li2 tag-box">
+			<p class="left" style="line-height: 30px;">帮我购买：</p>
+			<textarea id="input_tag" class="input-buy" placeholder="请填写需要购买的商品名称和数量"></textarea>
+
+			<div id="tags" class="tags">
+				<span>+ 999感冒灵</span>
+				<span>+ 数据线、充电器</span>
+				<span>+ 香烟一盒</span>
+				<span>+ 订单需要小票</span>
+				<span>+ 购买前与我联系</span>
+			</div>
+		</li>
+
+		<li class="ul-li ul-li1 address-buy">
+			<span class="iconfont icon-dizhi-mai icon icon1"></span>
+			<span class="left">购买地址：</span>
+			<div class="right">
+				<div id="select_ads" class="top">
+					<div class="li li-on">指定购买地址</div>
+					<div class="li" style="float: right;">跑男就近购买</div>
+				</div>
+				<div id="select_ads_btm" class="btm">
+					<div class="div on cl-10B6FF">
+						<div id="select-ads" style="display: inline-block;width: calc(100% - 50px);color: #10B6FF;">点击此处选择地址</div>
+							<!--<button class="btn" type="button">常用</button>-->
+					</div>
+					<div class="div" style=" line-height: 16px; font-size: 12px;">
+						就近购买支持购买2公里内的商品，若超出范围请与跑男协商
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+
+
+	<button id="next-btn" type="button">下一步</button>
+</div>
+
+<script src="/assets/js/frontend/placeorder/helpbuystep1.js"></script>

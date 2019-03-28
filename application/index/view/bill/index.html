@@ -1,0 +1,79 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>{$title|default=''} – {:__('VV跑腿')}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="/assets/css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="/assets/css/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="/assets/css/member-set.css"/>
+	<script src="__CDN__/assets/js/mui.min.js"></script>
+	<script src="__CDN__/assets/layui/layui.all.js"></script>
+</head>
+<style type="text/css">
+	.mui-table-view:before{
+		height: 0;
+	}
+	.mui-ios .mui-table-view-cell{
+		border-bottom: 1px solid #DCDCDC;
+	}
+	.add-color{
+		color: #10B6FF;
+		font-size: 20px;
+	}
+	.jian-color{
+		color: #333333;
+		font-size: 20px;
+	}
+	.mui-table-view-cell>a:not(.mui-btn).mui-active{
+		background-color: #FFFFFF;
+	}
+	.mui-table-view-cell.mui-active{
+		background-color: #FFFFFF;
+	}
+</style>
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">账户明细</h1>
+</header>
+<div class="mui-content">
+	<div class="mui-row" style="background-color: #FAFAFA;padding: 30px 0;">
+		<div class="mui-col-xs-6 mui-col-sm-6" style="text-align: center;border-right: 1px solid #CCCCCC;">
+					余额（元）
+		</div>
+		<div class="mui-col-xs-6 mui-col-sm-6" style="text-align: center;">
+					{$userInfo.balance}
+		</div>
+	</div>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell" style="text-align: center;">
+			交易记录
+		</li>
+		{volist name="billInfo" id="vo"}
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				{if condition="$vo['money'] > 0"}
+				<p class="mui-media-object mui-pull-right add-color">+{$vo.money}</p>
+				{else /}
+				<p class="mui-media-object mui-pull-right jian-color">{$vo.money}</p>
+				{/if}
+				<div class="mui-media-body">
+					{if condition="$vo['order_type'] == 0"}
+					在线充值
+					{else /}
+					{$vo.service_name}-{$vo.money>0 ? '退款' : '付款'}
+					{/if}
+					<p class='mui-ellipsis'>{$vo.create_time|date='Y.m.d',###}</p>
+				</div>
+			</a>
+		</li>
+		{/volist}
+	</ul>
+</div>
+</body>
+
+</html>

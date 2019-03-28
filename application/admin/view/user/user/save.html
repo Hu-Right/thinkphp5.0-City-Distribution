@@ -1,0 +1,115 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+<form class="layui-form" action=""  enctype="multipart/form-data" method="POST"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="width: 100px;">昵称:</label>
+      <div class="layui-input-block" style="width:350px;">
+        <input type="text" name="nickname" value="{$data['nickname']}" placeholder="请输入昵称" disabled="disabled" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+            <label class="layui-form-label" style=" width: 100px;">生日:</label>
+            <div class="layui-input-block" style="width:350px;">
+              <input type="text" name="birthday" value="{$data['birthday']}" class="layui-input" id="test1">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+                <label class="layui-form-label" style="margin-left: 35; width: 100px;">图片:</label>
+                <div class="layui-input-block" style="width:350px;">  
+                  <img src="__PUBLIC__{$data.avatar}" alt="" disabled="disabled">
+                  <input type="file" name="avatar">
+                </div>
+              </div>
+
+
+          <div class="layui-form-item">
+                <label class="layui-form-label" style="margin-left: 35; width: 100px;">手机号:</label>
+                <div class="layui-input-block" style="width:350px;">
+                  <input type="text" name="mobile" placeholder="请输入会员手机号"  value="{$data['mobile']}" disabled="disabled" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+
+
+              <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-left: 35; width: 100px;">余额:</label>
+                    <div class="layui-input-block" style="width:350px;">
+                      <input type="text" name="balance" value="{$data['balance']}" placeholder="请输入会员余额" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+
+    <div class="layui-form-item">
+            <label class="layui-form-label" style="margin-left: 35; width: 100px;">会员等级:</label>
+      <div class="layui-input-block" style="width:350px;">
+        <select name="level" lay-filter="aihao">  
+            {volist name="levels" id="vo"}
+            <option value="{$vo['id']}">{$vo['name']}</option>
+            {/volist}
+
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      
+        <label class="layui-form-label" style="margin-left: 35; width: 100px;">状态:</label>
+      
+      <div class="layui-input-block" style="width:350px;">
+        <!-- <input type="checkbox" name="status" value="{$data['status']}" checked lay-skin="switch"> -->
+        <input <?php if($data['status'] == "hidden") echo 'checked="checked"'; ?> type="radio" name="status"value="hidden" />隐藏				
+        <input <?php if($data['status'] == "normal") echo 'checked="checked"'; ?> type="radio" name="status"value="normal" />正常	
+          
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="margin-left: 35; width: 100px;">性别:</label
+      <div class="layui-input-block" style="width:350px;">
+
+            <input <?php if($data['gender'] == "0") echo 'checked="checked"'; ?> type="radio" name="gender"value="0" />保密				
+            <input <?php if($data['gender'] == "1") echo 'checked="checked"'; ?> type="radio" name="gender"value="1" />男							
+            <input <?php if($data['gender'] == "2") echo 'checked="checked"'; ?> type="radio" name="gender"value="2" />女						 
+        
+        <!-- <input type="radio" name="gender" value="0" title="男">
+        <input type="radio" name="gender" value="1" title="女" checked>
+        <input type="radio" name="gender" value="3" title="保密"> -->
+    </div>
+    </div>
+    
+              <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-left: 35; width: 100px;">加入时间:</label>
+                    <div class="layui-input-block" style="width:350px;">
+                      <input type="text" name="jointime" disabled="disabled"  value="{$data['jointime']|date="Y-m-d H:i:s",###}" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+  </form>
+ 
+  <script>
+  layui.use('form', function(){
+    var form = layui.form;
+    
+    //各种基于事件的操作，下面会有进一步介绍
+  });
+  </script>
+ 
+  <script>
+  layui.use('laydate', function(){
+    var laydate = layui.laydate;
+    
+    //执行一个laydate实例
+    laydate.render({
+      elem: '#test1' //指定元素
+    });
+  });
+  </script>

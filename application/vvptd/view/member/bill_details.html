@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>账单详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/iconfont.css" />
+		<link href="__CDN__/assets/vvptd/setting/css/style.css" rel="stylesheet" />
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+		<style type="text/css">
+			ul{
+				margin: 0;
+			}
+			/* p{margin: 0;} */
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">账单详情</h1>
+		</header>
+		
+		<div class="mui-content bill-details">
+			<div class="top">
+				<span class="left">账单金额</span>
+				<span class="right">{$data['money']}元</span>
+			</div>
+			<div class="btm">
+				<div class="li">
+					<span class="left">类型</span>
+					<span class="right">{if condition=" $data['type'] eq 1 "}收入{else/}支出{/if}</span>
+				</div>
+				<div class="li">
+					<span class="left">订单类型</span>
+					<span class="right">{$data['detail']}</span>
+				</div>
+				<div class="li">
+					<span class="left">时间</span>
+					<span class="right">{$data['add_time']|date="y-m-d h:i:s",###}</span>
+				</div>
+				<div class="li">
+					<span class="left">订单号</span>
+					<span class="right">{$data['order_sn']}</span>
+				</div>
+				<!--<div class="li">-->
+					<!--<span class="left">余额</span>-->
+					<!--<span class="right">1000.00元</span>-->
+				<!--</div>-->
+			</div>
+		</div>
+		
+		<script src="../../js/jquery.min.js"></script>
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+
+</html>

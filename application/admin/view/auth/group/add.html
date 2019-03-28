@@ -1,0 +1,129 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <input type="hidden" name="row[rules]" value="" />
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Parent')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[pid]', $groupdata, null, ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    
+    <!-- <div class="form-group">
+            
+        <input type="hidden" class="form-control" id="name" name="row[name]" value="" data-rule="required" />
+
+        <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[pid]', $groupdata, null, ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div> -->
+
+    <div class="form-group">
+            <label for="" class="control-label col-xs-12 col-sm-2">城市地区:</label>
+            <div class="col-xs-12 col-sm-6">
+                <select id="province" name="province" class="form-control" style="float: left; width: 90px;">
+                    <option value="0">请选择省</option>
+                    {foreach name="province" item="vo"}
+                    <option value="{$vo.id}">{$vo.areaname}</option>
+                    {/foreach}
+                </select>
+                 
+                <select id="city" name="city" class="form-control" style="float: left; width: 90px;">
+                    <option value="0">请选择市</option>
+                </select>
+               
+                <!-- <select id="county" name="county" class="form-control" style="float: left; width: 90px;">
+                    <option value="0">请选择县/区</option>
+                </select> -->
+            </div>
+        </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Permission')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <span class="text-muted"><input type="checkbox" name="" id="checkall" /> <label for="checkall"><small>{:__('Check all')}</small></label></span>
+            <span class="text-muted"><input type="checkbox" name="" id="expandall" /> <label for="expandall"><small>{:__('Expand all')}</small></label></span>
+
+            <div id="treeview"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')])}
+        </div>
+    </div>
+    
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+    $('#city').hide();
+    $('#county').hide();
+    $('#province').change(function () {
+        //alert(11111);
+        var province_id = $('#province').val();
+        if (province_id == 0){
+            $('#city').hide();
+            $('#city').empty();
+            $('#county').hide();
+            $('#county').empty();
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "{:url('get_city')}",
+            data: {'province_id': province_id},
+            datatype: "text",
+            success: function (data) {
+                if (data != ''){
+                    $('#city').show();
+                    $('#city').empty();
+                    $('#city').append(data);
+                    get_county();
+                } else{
+                    $('#city').hide();
+                    $('#city').empty();
+                    $('#county').hide();
+                    $('$county').empty();
+                }
+            }
+        })
+
+    });
+
+    // function get_county() {
+    //     $('#county').hide();
+    //     $('#city').ready(function () {
+    //         var city_id = $('#city').val();
+    //         if (city_id == 0){
+    //             $('county').hide();
+    //             $('county').empty();
+    //             return false;
+    //         }
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "{:url('get_county')}",
+    //             data: {'city_id': city_id},
+    //             datatype: "text",
+    //             success: function (data) {
+    //                 if (data != ''){
+    //                     $('#county').show();
+    //                     $('#county').empty();
+    //                     $('#county').append(data);
+    //                 } else{
+    //                     $('#county').hide();
+    //                     $('$county').empty();
+    //                 }
+    //             }
+    //         })
+    //     })
+    // };
+</script>

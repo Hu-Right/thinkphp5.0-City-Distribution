@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+		
+		<style type="text/css">
+			body {
+				background-color: #FAFAFA;
+				padding: 0;
+			}
+			.mui-bar-nav {
+				border-bottom: 1px solid #DCDCDC;
+				background-color: #fff;
+				box-shadow: none;
+			}
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}	
+			.mui-content .mui-table-view-cell {
+				padding: 15px;
+				color: #858585;
+				font-size: 15px;
+			}
+			.mui-table-view-cell:after {
+				width: 100%;
+				left: 0;
+			}
+			.level {
+				margin-right: 20px;
+				color: #333;
+			}
+			.mui-btn {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				padding: 16px 0;
+				background-color: #FF7751;
+				border-radius: 0;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+		    <h1 class="mui-title">个人中心</h1>
+		</header>
+		<div class="mui-content">
+			 <ul class="mui-table-view"> 
+		        <li class="mui-table-view-cell modify-info">
+		            <a class="mui-navigate-right" href="#">资料修改</a>
+		        </li>
+		        <li class="mui-table-view-cell lev">
+		            <a class="mui-navigate-right" href="#">等级管理<span class="mui-pull-right level">V{$data['level']['level']} {$data['level']['name']}</span></a>
+		        </li>
+    		</ul>
+			
+		</div>
+		<button type="button" class="mui-btn mui-btn-warning logout">退出当前账号</button>
+		<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+      	<script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			//点击跳转到完善资料页面
+			document.querySelector(".modify-info").addEventListener('tap', function() {
+				mui.openWindow({
+					url: baseUrl+'/vvptd/member/perfectInfo',
+					id: 'perfectInfo'
+				});
+			});
+			//点击跳转到等级管理页面
+			document.querySelector(".lev").addEventListener('tap', function() {
+				mui.openWindow({
+					url: 'manageLevel.html',
+					id: 'manageLevel'
+				});
+			});
+            //点击跳转到等级管理页面
+            document.querySelector(".logout").addEventListener('tap', function() {
+                mui.ajax('/vvptd/member/logout',{
+                    type:'post',
+                    success:function(data){
+                        if(data.code==1) {
+                            location.href = '/vvptd/login/login';
+                        }
+                    }
+                })
+            });
+		</script>
+	</body>
+
+</html>

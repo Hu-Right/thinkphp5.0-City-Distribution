@@ -1,0 +1,166 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+<form class="layui-form" action="" enctype="multipart/form-data" method="POST" > <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    
+       
+    <div class="layui-form-item">
+       
+        <label class="layui-form-label" style="width: 130px; margin-left:-35px;">优惠码类型:</label>
+        <div class="layui-input-block" style="width:260px;"> 
+
+                <input type="radio" name="type"value="1"   
+                {if condition="($list['type'] eq 1)"}checked{/if} />减满
+
+                <input type="radio" name="type"value="2"
+                {if condition="($list['type'] eq 2)"}checked{/if}
+/>折扣
+  </div>
+</div>
+                                          
+                  <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px; margin-left:-35px;">优惠码:</label>
+                    <div class="layui-input-block" style="width:260px;">
+                          <input type="text" name="code" value="{$list['code']}" placeholder="请输入优惠码"  required  lay-verify="required"   autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+     
+                      <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">优惠力度:</label>
+                        <div class="layui-input-block" style="width:260px;">
+                              <input type="text" name="discount" value="{$list['discount']}" placeholder="请输入优惠力度"   required  lay-verify="required"  autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+
+
+                          <div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 130px; margin-left:-35px;">优惠条件:</label>
+                            <div class="layui-input-block" style="width:260px;">
+                                  <input type="text" name="condition" value="{$list['condition']}" placeholder="请输入优惠条件（使用条件）"  required  lay-verify="required"   autocomplete="off" class="layui-input">
+                                </div>
+                              </div>
+    
+                              
+                          <div class="layui-form-item">
+                                <label class="layui-form-label" style="width: 130px; margin-left:-35px;">使用次数:</label>
+                            <div class="layui-input-block" style="width:260px;">
+                                  <input type="text" name="times" value="{$list['times']}" placeholder="请输入使用次数"  required  lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
+                              </div>
+    
+
+                        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">城市选择:</label>
+            <div class="layui-input-block" style="width:260px; "> 
+               
+                    <!-- 省份 -->
+    <select name="city" id="city"  required  lay-verify="required" >
+      {volist name="rs" id="vo"}
+      <option value="{$vo['id']}">{$vo['areaname']}</option>
+      {/volist}
+    </select>     
+            </div>
+          </div>
+
+
+                              <script>
+                                    layui.use('laydate', function(){
+                                      var laydate = layui.laydate;
+                                      
+                                      //执行一个laydate实例
+                                      laydate.render({
+                                        elem: '#test1' //指定元素
+                                      });
+                                    
+                                    laydate.render({
+
+                                       elem:'#test2'
+
+                                    });
+
+
+                                    });
+                                    </script>
+                      
+                                   <!-- <div class="layui-inline"> -->
+                                        <div class="layui-form-item">
+                                      <label class="layui-form-label"style="width: 130px; margin-left:-35px;">开始时间：</label>
+                                      <div class="layui-input-block" style="width:260px;">
+                                          <!-- <input type="text" name="date" id="date" placeholder="开始时间" autocomplete="off" class="layui-input" lay-key="1"> -->
+                                          <input type="text" name="create_time" value="{$list['create_time']}" class="layui-input"  required  lay-verify="required" placeholder="请选择优惠券的开始时间" id="test1" >
+                                      </div>
+                                  </div> 
+
+
+                                  
+                                  <div class="layui-form-item">
+                                        <label class="layui-form-label"style="width: 130px; margin-left:-35px;">到期时间：</label>
+                                        <div class="layui-input-block" style="width:260px;">
+                                            <!-- <input type="text" name="date" id="date" placeholder="开始时间" autocomplete="off" class="layui-input" lay-key="1"> -->
+                                            <input type="text" name="finish_time" value="{$list['finish_time']}" class="layui-input"  required  lay-verify="required" placeholder="请选择优惠券的结束时间" id="test2"style="margin-top: 15px;">
+                                        </div>
+                                    </div> 
+  
+                                 
+            <div class="layui-form-item">
+      
+            <label class="layui-form-label" style="width: 130px; margin-left:-35px;">状态:</label>
+            <div class="layui-input-block" style="width:260px;"> 
+                  
+                    <input type="radio" name="status"value="0" 	
+                    
+                    {if condition="($list['status'] eq 0)"}checked{/if} />禁用
+
+                    <input type="radio" name="status"value="1"
+                    {if condition="($list['status'] eq 1)"}checked{/if}
+/>启用
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="*" type="submit">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+  </form>
+ 
+  <script>
+   layui.use(['layer','form'],function(){
+			form = layui.form;
+			layer = layui.layer;
+			$ = layui.jquery;
+      form.render();
+		});
+    
+    //各种基于事件的操作，下面会有进一步介绍
+ 
+        
+  </script>
+ <script>
+ form.on('submit(filter)',function(data){
+  // layer.msg(JSON.stringify(data.field));
+  //   return false;
+});
+ $('#pro').change(function(){
+    $.ajax({
+        type:"post",
+        url:"{:url('add')}",
+        data:'pro_id='+$('#pro').val(),
+        dataType:"text",
+        success:function(data){
+            $('#city').html(data);
+        }
+    });
+});
+
+ 
+ 
+ </script>
+
+ 
+
+
+
+     

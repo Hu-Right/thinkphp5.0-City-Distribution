@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/setting/css/mui.css" rel="stylesheet" />
+		<style>
+			body {
+				background-color: #fff;
+			}
+			
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			ul,
+			li {
+				list-style-type: none;
+			}
+			
+			.head_left {
+				color: #858585;
+				width: 7px;
+				height: 13px;
+			}
+			
+			.clear:after {
+				display: block;
+				content: "";
+				clear: both;
+			}
+			
+			.header {
+				border-bottom: 1px solid #DCDCDC;
+				background-color: #fff;
+				box-shadow: none;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.cc {
+				margin: 0 20px;
+				background: #fff;
+			}
+			
+			h2 {
+				font-size: 18px;
+				color: #333333;
+				margin-top: 22px;
+				padding-bottom: 13px;
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			.mx li {
+				padding: 14px 0;
+				background: #fff;
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			.yinhang {
+				font-size: 14px;
+				color: #333333;
+			}
+			
+			.zhanghu {
+				color: #10B6FF;
+				font-size: 12px;
+			}
+			
+			.wztz {
+				font-size: 12px;
+				color: #10B6FF;
+				margin-top: 8px;
+				width: 60px;
+				height: 20px;
+				border-radius: 10px;
+				background: #fff;
+				border: 1px #10B6FF solid;
+				text-align: center;
+				line-height: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left head_left"></a>
+			<h1 class="mui-title">任务中心</h1>
+		</header>
+		<div class="mui-content cc" id="pullrefresh">
+			<ul class="mx" id="list">
+
+			</ul>
+		</div>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/jquery.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script type="text/javascript">
+
+            var page = 1;
+            getTeamNews(page);
+			function getTeamNews(page){
+                mui.ajax('/vvptd/team/teamnew',{
+                    type:'post',
+                    async:false,
+                    data:{
+                        page:page
+                    },success:function(data){
+                        count = 0;
+                        var arr = data.data;
+                        var html = '';
+                        for(var i=0;i<arr.length;i++){
+                            html+='<li class="clear">'
+                            +'<div class="mui-pull-left">'
+                            +'<div class="yinhang">'
+                            +'<span>'+arr[i].truename+'申请加入战队</span>'
+                            +'</div>'
+                            +'<div class="zhanghu">'+arr[i].add_time+'</div>'
+                            +'</div>';
+                            if(arr[i].status == 1){
+                                html+='<div class="mui-pull-right wztz goto"  data-id="'+arr[i].id+'" style="background: #FF7751; color: #fff; border-color:#FF7751;">待审核</div>'
+                            }else if(arr[i].status == 2){
+                                html+='<div class="mui-pull-right wztz">已审核</div>'
+                            }else{
+                                html+='<div class="mui-pull-right wztz" style="background: #ff7d27; color: #fff; border-color:#FF7751;">已拒绝</div>'
+                            }
+                            html+='</li>';
+                        }
+                        $('#list').append(html);
+                    }
+                })
+            }
+            for(var i = 0;i<mui('.goto').length;i++){
+                mui('.goto')[i].addEventListener('tap', function(index) {
+                    var id = index.srcElement.attributes[1].nodeValue;
+                    mui.openWindow({
+                        url: baseUrl + '/vvptd/team/agreeJoinTeam?id='+id,
+                        id: 'add-zhandui'
+                    })
+                });
+            }
+            mui.init({
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    down: {
+                        callback: pulldownRefresh
+                    },
+                    up: {
+                        contentrefresh: '正在加载...',
+                        callback: pullupRefresh
+                    }
+                }
+            });
+            var count = 0
+            /**
+             * 下拉刷新具体业务实现
+             */
+            function pulldownRefresh() {
+                setTimeout(function() {
+                    location.href='';
+                    mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+                }, 1500);
+            }
+
+            function pullupRefresh() {
+                setTimeout(function() {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count>2)); //参数为true代表没有更多数据了。
+                    ++page;
+                    getTeamNews(page);
+                }, 1500);
+            }
+
+		</script>
+	</body>
+
+</html>

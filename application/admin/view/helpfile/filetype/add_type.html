@@ -1,0 +1,38 @@
+<form id="add-form" class="form-horizontal form-ajax nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:url('add_type')}" novalidate="novalidate">
+
+    <div class="form-group">
+        <label for="type_name" class="control-label col-xs-12 col-sm-2">文章类型:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" name="type_name" id="type_name" class="form-control">
+        </div>
+    </div>
+ 
+ 
+    <div class="form-group">
+            <label for="type" class="control-label col-xs-12 col-sm-2">城市选择:</label>
+            <div class="col-xs-12 col-sm-8">
+                                <!-- 省份 -->
+      <select name="city" id="city"  required  lay-verify="required" >
+        {volist name="citylist" id="vo"}
+        <option value="{$vo['id']}">{$vo['areaname']}</option>
+        {/volist}
+      </select>     
+            </div>
+        </div>
+
+    <div class="form-group">
+        <label for="status" class="control-label col-xs-12 col-sm-2">状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="radio" name="status" id="status" value="1" checked>正常
+            <input type="radio" name="status" id="" value="0">隐藏
+        </div>
+    </div>
+
+    <div class="form-group layer-footer">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed">提交</button>
+            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+        </div>
+    </div>
+</form>

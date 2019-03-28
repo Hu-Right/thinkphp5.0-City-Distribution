@@ -1,0 +1,91 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="/assets/layui/css/layui.css"/>
+<script src="/assets/layui/layui.js"></script>
+<style>
+        .layui-form-label{
+            width: 100px;
+            padding: 5px 15px;
+        }
+        .layui-form-mid{
+            padding: 5px 0 !important;
+        }    
+    </style>
+
+<div class="layui-form seller-alone-form">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">头像</li>
+                <li>个人形象照</li>
+                <li>手持身份证照片</li>
+                <li>身份证正面</li>
+                <li>身份证反面</li>
+            </ul>
+<div class="layui-tab-content">
+
+			<!--头像信息-->
+			<div class="layui-tab-item layui-show">
+				<div class="layui-form-item" lay-size="sm">
+                    
+                 <img src="{$list.avatar}" style="width:500px; height: 500px; text-align: center;">
+				 
+				</div>
+				 
+			</div>
+
+
+			<!--个人形象照-->
+			<div class="layui-tab-item">
+				<div class="layui-form-item">
+
+                <img src="{$list.photo}" alt=""  style="width:500px; height: 500px; text-align: center;">
+                
+            </div>
+				 
+			</div>
+
+            <!--手持身份证-->
+            
+            <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                       <img src="{$list.photo_hand}" alt="" style="width:500px; height: 500px; text-align: center;">
+                    </div>
+                </div>
+
+			
+			<!--正面-->
+			<div class="layui-tab-item">
+				<div class="layui-form-item">
+                        <img src="{$list.id_card_pos}" alt="" style="width:500px; height: 500px; text-align: center;">
+				</div>
+			</div>
+
+
+            <div class="layui-tab-item">
+                    <div class="layui-form-item">
+                            <img src="{$list.id_card_con}" alt="" style="width:500px; height: 500px; text-align: center;">
+                    </div>
+                </div>
+			 
+		</div>
+	</div> 
+</div>	
+<script> 
+    layui.use('element', function(){
+        var element = layui.element;
+        
+        //获取hash来切换选项卡，假设当前地址的hash为lay-id对应的值
+        var layid = location.hash.replace(/^#test1=/, '');
+        element.tabChange('test1', layid); //假设当前地址为：http://a.com#test1=222，那么选项卡会自动切换到“发送消息”这一项
+        
+        //监听Tab切换，以改变地址hash值
+        element.on('tab(test1)', function(){
+          location.hash = 'test1='+ this.getAttribute('lay-id');
+        });
+      });
+      </script>      
+
+ 
+
+
+
+      

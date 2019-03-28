@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/mui.min.css">
+		<link rel="stylesheet" href="__CDN__/assets/vvptd/setting/css/clear.border.css" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/setting/css/style.css"/>
+		<style>
+			.mui-btn-blue, .mui-btn-primary, input[type=submit]{
+				background-color: #C3C3C3;
+				border: none;
+				border-radius: 20px;
+				padding: 4px 12px;
+				font-size: 13px;
+				line-height: 20px;
+			}
+			.mui-table-view li{
+				border-bottom: 1px solid #DCDCDC;
+			}
+			.mui-table-view li:first-child{
+				border-top: 1px solid #DCDCDC;
+			}
+			.mui-ellipsis{
+				color: #333;
+				font-size: 16px;
+			}
+			.order-main .mui-table-view-cell .time{
+				font-size: 13px;
+				color: #858585;
+			}
+			.mui-table-view-cell img{
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper order-main">
+			<div class="mui-scroll ">
+				<ul class="mui-table-view list">
+					<!--<li class="mui-table-view-cell mui-media">-->
+						<!--<a href="javascript:;">-->
+							<!--<img class="mui-media-object mui-pull-left" src="__CDN__/assets/vvptd/setting/img/20180828162819.jpg">-->
+							<!--<div class="mui-media-body">-->
+								<!--<p class='mui-ellipsis'>帮买订单 | 您有一个订单，请及时处理！</p>-->
+								<!--<p class='mui-ellipsis time'>2018.10.10  12:30</p>-->
+							<!--</div>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li class="mui-table-view-cell mui-media">-->
+						<!--<a href="javascript:;">-->
+							<!--<img class="mui-media-object mui-pull-left" src="__CDN__/assets/vvptd/setting/img/20180828162819.jpg">-->
+							<!--<div class="mui-media-body">-->
+								<!--<p class='mui-ellipsis'>帮买订单 | 您有一个订单，请及时处理！</p>-->
+								<!--<p class='mui-ellipsis time'>2018.10.10  12:30</p>-->
+							<!--</div>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li class="mui-table-view-cell mui-media">-->
+						<!--<a href="javascript:;">-->
+							<!--<img class="mui-media-object mui-pull-left" src="__CDN__/assets/vvptd/setting/img/20180828162819.jpg">-->
+							<!--<div class="mui-media-body">-->
+								<!--<p class='mui-ellipsis'>帮买订单 | 您有一个订单，请及时处理！</p>-->
+								<!--<p class='mui-ellipsis time'>2018.10.10  12:30</p>-->
+							<!--</div>-->
+						<!--</a>-->
+					<!--</li>-->
+				</ul>
+			</div>
+		</div>
+		<script src="__CDN__/assets/vvptd/setting/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script>
+            var page=1;
+            getNewsList();
+            function getNewsList(){
+                mui.ajax('/vvptd/member/news_main3',{
+                    type:'post',
+                    data:{
+                        page:page
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if(data.data.length>0){
+                            count = 0;
+                            var arr  = data.data;
+                            var html = '';
+                            for(var i =0;i<arr.length;i++){
+                            html+='<li class="mui-table-view-cell mui-media">';
+                                html+='<a href="javascript:;">';
+                                html+='<img class="mui-media-object mui-pull-left" src="'+arr[i].avatar+'">';
+                                html+='<div class="mui-media-body">';
+                                html+='<p class="mui-ellipsis">'+arr[i].service_name+' | '+arr[i].content+'</p>';
+                                html+='<p class="mui-ellipsis time">'+arr[i].add_time+'</p>';
+                                html+='</div>';
+                                html+='</a>';
+                                html+='</li>';
+
+                            }
+                            $('.list').append(html);
+                        }
+                    },
+                    error: function (data) {
+                        layer.open({
+                            content:'网络繁忙'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                })
+            }
+            mui.init({
+                swipeBack: false,
+                keyEventBind: {
+                    backbutton: false //关闭back按键监听
+                },
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    down: {
+                        callback: pulldownRefresh
+                    },
+                    up: {
+                        contentrefresh: '正在加载...',
+                        callback: pullupRefresh
+                    }
+                }
+            });
+            /**
+             * 下拉刷新具体业务实现
+             */
+            function pulldownRefresh() {
+                setTimeout(function() {
+                    location.href='';
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for (var i = cells.length, len = i + 3; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<a href="javascript:;">'
+//									+		'<div class="mui-media-body">'
+//									+			'<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>'
+//									+			'<p class="mui-ellipsis time">2018.10.10  12:30</p>'
+//									+		'</div>'
+//									+	'</a>';
+//						//下拉刷新，新纪录插到最前面；
+//						table.insertBefore(li, table.firstChild);
+//					}
+
+                    mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+                }, 1500);
+            }
+            var count = 0;
+            /**
+             * 上拉加载具体业务实现
+             */
+            function pullupRefresh() {
+                setTimeout(function() {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for(var i = cells.length, len = i + 20; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<a href="javascript:;">'
+//									+		'<div class="mui-media-body">'
+//									+			'<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>'
+//									+			'<p class="mui-ellipsis time">2018.10.10  12:30</p>'
+//									+		'</div>'
+//									+	'</a>';
+//						table.appendChild(li);
+//					}
+                    ++page;
+                    getNewsList();
+                }, 1000);
+            }
+        </script>
+	</body>
+
+</html>

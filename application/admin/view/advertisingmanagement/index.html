@@ -1,0 +1,155 @@
+<div class="panel panel-default panel-intro">
+    <link rel="stylesheet" href="http://layui.hcwl520.com.cn/layui/css/layui.css?v=201801090202"> {:build_heading()}
+
+    <div class="panel-body">
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+
+
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh')}
+                        <a class="btn btn-success btn-add" onclick="sadd()" data-toggle="dropdown">
+                            <i class="fa fa-plus"></i>增加</a>
+                    </div>
+
+                    <!--表格开始-->
+                    <form action="{:url('delslect')}" method="post" name="updateSort" id="updateSort">
+                        {//
+                        <input type="hidden" name="page_num" value={$_GET[ 'p']} <div class="table-responsive">
+                        <table class="table  table-bordered table-hover" width="100%">
+                            <thead>{//表头}
+                                <tr>
+                                    <th style="text-align: center">ID</th>
+                                    <th style="text-align: center">图片</th>
+                                    <th style="text-align: center">链接</th>
+                                    <th style="text-align: center">地区</th>
+                                    <!-- <th style="text-align: center">注册地</th> -->
+                                    <th style="text-align: center">状态</th>
+                                    <th style="width: 100px">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {if condition="$count eq 0"}
+                                <tr class="text-c">
+                                    <td style="text-align: center" colspan="5">暂无相关数据</td>
+                                    </t24 {else/} {volist name="list" id="vo" } <tr>
+                                    <td style="text-align: center">
+                                        <input type="checkbox" name="id[]" value="{$vo.id}" />{$vo.id}</td>
+                                    <td style="text-align: center">
+                                        <img src="{$vo.img}" style="width:40px;">
+                                    </td>
+                                    <td style="text-align: center">{$vo.url}</td>
+                                    <td style="text-align: center">{$vo.areaname}</td>
+                                    <td style="text-align: center">{if condition="($vo['status']) eq '0' "}启用 {else /}禁用 {/if}
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="sadd({$vo.id})">
+                                            <i class="fa fa-pencil">编辑</i>
+                                        </a>
+                                        <a class="confirm" href="{:url('des',array('id'=>$vo['id']))}" onclick="return des(id)">
+                                            <i class="fa fa-trash">删除</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist} {/if}
+                            </tbody>
+                        </table>
+                        <!--分页开始-->
+                        <div style="padding-top:15px;float: right; ">
+                            {//
+                            <div class="page"></div>} {$page}
+                        </div>
+                        <!--分页结束-->
+                </div>
+
+
+                <div class="padding border-bottom">
+
+                    <button type="button" class="layui-btn" id="checkall">
+                        <span class="iconfont icon-htmal5icon22"></span>全选</button>
+
+                    <button type="submit" class="layui-btn layui-btn-danger" onclick="return delslect()">
+                        <span class="iconfont icon-shanchu"></span>批量删除</button>
+
+                </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+<!--多选删除-->
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+
+    //  layer.open({
+    //   content: 'test'
+    //   ,btn: ['按钮一', '按钮二', '按钮三']
+    //   ,yes: function(index, layero){
+    //     //按钮【按钮一】的回调
+    //   }
+
+    // 修改编辑
+    function sadd(id) {
+        layer.open({
+            type: 2,
+            shadeClose: true,
+            maxmin: true,
+            title: id > 0 ? '编辑' : '添加',
+            shade: 0.3,
+            area: ['850px', '600px'],
+            content: '/admin/advertisingmanagement/sadd/?id=' + id
+        });
+    }
+
+
+
+
+
+    //删除
+    function des(id) {
+
+        if (confirm("您确定要删除吗?")) {
+
+        } else {
+            return false;
+        }
+
+    }
+    $("#checkall").click(function () {
+        $("input[name='id[]']").each(function () {
+            if (this.checked) {
+                this.checked = false;
+            } else {
+                this.checked = true;
+            }
+        });
+    })
+
+
+    function delslect() {
+        var Checkbox = false;
+        $("input[name='id[]']").each(function () {
+            if (this.checked == true) {
+                Checkbox = true;
+
+            }
+        });
+        if (Checkbox) {
+            var t = confirm("您确认要删除选中的内容吗？");
+
+            if (t == false) return false;
+        } else {
+            //   alert("请选择您要删除的内容!");
+            layer.alert('请选择您要删除的内容!', { icon: 2 });
+
+            return false;
+        }
+    }</script>

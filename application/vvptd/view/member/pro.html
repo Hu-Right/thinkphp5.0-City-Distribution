@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #fff;
+			}
+			
+			ul {
+				list-style-type: none;
+			}
+			
+			.mui-bar {
+				box-shadow: none;
+				background-color: white;
+			}
+			.mui-bar a {
+				color: #858585;
+			}
+			
+			header {
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			.xq{
+				padding: 15px;
+			}
+			.mui-content {
+				background-color: white;
+			}
+			
+			h3 {
+				font-size: 15px;
+				margin: 20px 0px;
+			}
+			.wenzi{
+				color: #333333;
+				font-size: 13px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="border-bottom: 1px solid #DCDCDC;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">跑腿教程</h1>
+		</header>
+		<div class="mui-content">
+			<div class="xq">
+				<h3>
+					{$data['title']}
+				</h3>
+				<div class="wenzi">
+					{$data['content']}
+				</div>
+			</div>
+		</div>
+		<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+
+</html>

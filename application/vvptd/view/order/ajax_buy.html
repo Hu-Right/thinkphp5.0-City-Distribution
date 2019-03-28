@@ -1,0 +1,44 @@
+{foreach name="order_list" item="vo"}
+<li class="mui-table-view-cell">
+    <a href="/vvptd/order/order_detail?order_id={$vo['id']}">
+        <div class="top">
+            <span class="type">{$vo['type_info']['service_name']}</span>
+			<span class="time">{$vo['create_time']}</span>
+            {if condition=" $vo['status'] eq 2 or  $vo['status'] eq 5 or $vo['status'] eq 6"}
+            <span class="process process2">已完成</span>
+            {else/}
+            <span class="process process1">进行中</span>
+            {/if}
+        </div>
+        <div class="center">
+            {if condition=" ($vo['type_info']['service_name'] == '帮我买') OR ( $vo['type_info']['service_name'] == '帮我办' ) OR ( $vo['type_info']['service_name'] == '代排队' ) OR ( $vo['type_info']['service_name'] == '帮我取' )"}
+            <div class="li o-h">
+                <i class="iconfont icon-dizhi-fa f-l"></i>
+                <p class="p">{$vo['content']['details']}</p>
+            </div>
+            <div class="li o-h">
+                <i class="iconfont icon-dianhua f-l"></i>
+                <p class="p f-l">联系人：{$vo['content']['name']}<span class="phone">{$vo['content']['mobile']}</span></p>
+            </div>
+            {else/}
+            <div class="li o-h">
+                <i class="iconfont icon-dizhi-fa f-l"></i>
+                <p class="p">{$vo['start_address']}</p>
+            </div>
+            <div class="li o-h">
+                <i class="iconfont icon-dizhi-shou f-l"></i>
+                <p class="p">{$vo['end_address']}</p>
+            </div>
+            <div class="li o-h">
+                <i class="iconfont icon-dianhua f-l"></i>
+                <p class="p f-l">联系人：{$vo['content']['name']}<span class="phone">{$vo['content']['mobile']}</span></p>
+            </div>
+            {/if}
+
+        </div>
+    </a>
+    <div class="btm">
+        <p class="f-r p2">订单金额 <span class="black">￥</span><span class="black money">{$vo['money']}</span></p>
+    </div>
+</li>
+{/foreach}

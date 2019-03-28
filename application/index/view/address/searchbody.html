@@ -1,0 +1,43 @@
+
+		<style type="text/css">
+			.mui-scroll-wrapper {
+				top: 83px;
+			}
+
+			.search-ads .search-box {
+				top: 10px;
+			}
+		</style>
+		<!--下拉刷新容器-->
+		<!-- id=scroll -->
+		<div class="search-ads">
+			<!-- 搜索框 -->
+			<div class="search-box">
+				<div class="search" style="overflow: hidden;">
+					<i class="iconfont icon-fangdajing"></i>
+					<input id="searchId" class="input" type="text" placeholder="请输入您要搜索的地址">
+				</div>
+				<div class="tishi">请从下方列表中选择</div>
+			</div>
+			<!-- 隐藏地图 -->
+			<div id="allmap"></div>
+
+			<!-- 滚动列表 -->
+			<div id="scroll">
+				<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!--数据列表-->
+						<ul class="mui-table-view" id="searchResultPanel">
+
+
+						</ul>
+						<p id="foot" class="foot">已经全部加载完毕</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rD7bB2RmUfsanAFyKvdybpBRY9BkDuol"></script>
+		<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+		<script src="/assets/js/frontend/address/searchbody.js"></script>
+		<script src="/assets/js/mui.min.js"></script>

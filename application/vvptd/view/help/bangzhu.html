@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #fff;
+			}
+			
+			ul {
+				list-style-type: none;
+			}
+			
+			.mui-bar {
+				box-shadow: none;
+				background-color: white;
+			}
+			
+			header {
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			.mui-bar a {
+				color: #858585;
+			}
+			
+			.mui-bar .mui-title {
+				color: #333;
+			}
+			
+			.mui-bar span {
+				font-size: 15px;
+				line-height: 44px;
+				color: #10B6FF;
+			}
+			
+			.mui-content {
+				background-color: white;
+			}
+			
+			h3 {
+				font-size: 15px;
+				margin: 20px 15px;
+			}
+			
+			ul {
+				margin: 0 30px;
+				padding: 0 0 17px;
+				border-bottom: 1px solid #DCDCDC;
+			}
+			
+			ul li {
+				font-size: 12px;
+				color: #333333;
+				line-height: 24px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="border-bottom: 1px solid #DCDCDC;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">帮助中心</h1>
+		</header>
+		<div class="mui-content">
+            {foreach name="data" item="vo"}
+			<div class="ddfk">
+				<div class="jdjq">
+					<h3>{$vo['type_name']}</h3>
+				</div>
+                    <ul>
+                        {foreach name="$vo['help_list']" item="v"}
+                        <li class="detail" data-id="{$v['id']}">{$v['title']}</li>
+                        {/foreach}
+                    </ul>
+            </div>
+            {/foreach}
+		</div>
+		<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+        <script src="__CDN__/assets/vvptd/setting/js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+            for(var i = 0;i<mui('.detail').length;i++){
+                mui('.detail')[i].addEventListener('tap', function(index) {
+                    var id = index.srcElement.attributes[1].nodeValue;
+                    mui.openWindow({
+                        url: baseUrl + '/vvptd/help/help_detail?id='+id,
+                        id: 'add-zhandui'
+                    })
+                });
+            }
+		</script>
+	</body>
+
+</html>

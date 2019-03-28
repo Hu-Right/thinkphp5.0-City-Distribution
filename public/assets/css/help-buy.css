@@ -1,0 +1,276 @@
+/* 帮我买 */
+
+.help-buy-index p {
+	color: #333;
+	margin: 0;
+}
+
+.help-buy-index .ul-li {
+	margin: 0 10px;
+	overflow: hidden;
+	border-bottom: 1px solid #DCDCDC;
+}
+
+.help-buy-index .ul-li1 {
+	line-height: 45px;
+}
+
+.help-buy-index .ul-li2 {
+	padding: 5px 0;
+}
+
+.help-buy-index .left {
+	font-size: 16px;
+	float: left;
+}
+
+.help-buy-index .right {
+	font-size: 15px;
+	color: #858585;
+	float: left;
+}
+
+.help-buy-index a.right {
+	float: right;
+	padding: 0 10px;
+	margin: 0;
+	line-height: 45px;
+}
+
+.help-buy-index .mui-icon-arrowright {
+	float: right;
+	font-size: 20px;
+	color: #858585;
+	margin-top: 13px;
+}
+
+.help-buy-index input {
+	border: none;
+	margin-bottom: 0;
+	font-size: 15px;
+	padding: 8px 0;
+}
+
+.help-buy-index .input-price {
+	float: right;
+	width: calc(100% - 120px);
+}
+
+.help-buy-index .tag-box {
+	line-height: 22px;
+}
+
+.help-buy-index .tag-box .input-buy {
+	font-size: 14px;
+	padding: 0;
+	border: none;
+	height: 90px;
+}
+
+.help-buy-index .tag-box .tags span {
+	border: 1px solid #858585;
+	border-radius: 20px;
+	font-size: 14px;
+	color: #858585;
+	padding: 0 10px;
+	display: inline-block;
+	margin-bottom: 8px;
+}
+
+.help-buy-index .address-buy .right {
+	float: right;
+	width: calc(100% - 110px);
+	padding: 10px 0;
+}
+
+.help-buy-index .address-buy .top {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.help-buy-index .address-buy .li {
+	float: left;
+	border: 1px solid #858585;
+	color: #858585;
+	line-height: 24px;
+	padding: 0 12px;
+	border-radius: 5px;
+}
+
+.help-buy-index .address-buy .li-r {
+	float: right;
+}
+
+.help-buy-index .address-buy .li-on {
+	color: #10B6FF;
+	border: 1px solid #10B6FF;
+}
+
+.help-buy-index .address-buy .div {
+	display: none;
+	line-height: 24px;
+}
+
+.help-buy-index .address-buy .div .btn {
+	float: right;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 5px;
+	border: none;
+	background: #10B6FF;
+	color: #fff;
+	font-size: 13px;
+}
+
+.help-buy-index .address-buy .on {
+	display: block;
+}
+
+.help-buy-index .icon {
+	font-size: 18px;
+	float: left;
+	line-height: 18px;
+	margin-top: 13px;
+	margin-right: 5px;
+}
+
+.help-buy-index .icon1 {
+	color: #FF7751;
+}
+
+.help-buy-index .icon2 {
+	color: #10B6FF;
+}
+
+.help-buy-index .address-shou .right {
+	float: right;
+	width: calc(100% - 110px);
+}
+
+.help-buy-index .address-shou .btn {
+	float: right;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 5px;
+	border: none;
+	background: #10B6FF;
+	color: #fff;
+	font-size: 13px;
+	margin-top: 10px;
+}
+
+.help-buy-index #next-btn {
+	width: calc(100% - 20px);
+	display: block;
+	margin: 0 auto;
+	border: none;
+	background: #10B6FF;
+	color: #fff;
+	font-size: 17px;
+	height: 40px;
+	border-radius: 20px;
+	margin-top: 60px;
+}
+
+
+.help-buy-index .foot {
+	width: 100%;
+	background: #fff;
+	overflow: hidden;
+	line-height: 50px;
+	margin-top: 15px;
+	box-shadow: 0 -2px 5px rgba(51, 51, 51, .2);
+	position: absolute;
+	bottom: 0;
+}
+
+.help-buy-index .foot p {
+	float: left;
+	font-size: 14px;
+	color: #858585;
+}
+
+.help-buy-index .foot .money {
+	color: #FF7751;
+	padding: 0 10px 0 8px;
+	height: 50px;
+}
+
+.help-buy-index .foot .money .price {
+	font-size: 22px;
+}
+
+.help-buy-index .foot .btn {
+	float: right;
+	border: none;
+	color: #fff;
+	background: #10B6FF;
+	padding: 0;
+	width: 110px;
+	height: 50px;
+	border-radius: 0;
+	font-size: 16px;
+}
+
+
+/* 产品类型 */
+.help-buy-index .chanpin .mui-control-item {
+	padding: 0 10px;
+}
+.help-buy-index .chanpin .mui-control-item {
+	line-height: 30px;
+	border: none;
+}
+
+.help-buy-index  #textarea {
+	border: none;
+	margin-bottom: 0;
+	padding: 0;
+	font-size: 14px;
+	height: 150px;
+}
+
+
+/* 立即下单---选择支付方式弹窗 */
+#pay-pop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 1001;
+	background: rgba(0, 0, 0, .2);
+}
+
+#pay-way {
+	width: 70%;
+	position: absolute;
+	top: calc(50% - 100px);
+	left: 15%;
+	padding-top: 15px;
+	border-radius: 12px;
+	overflow: hidden;
+	background: #fff;
+}
+
+#pay-way .btn-box {
+	overflow: hidden;
+	margin-top: 15px;
+}
+
+#pay-way .btn {
+	width: 50%;
+	height: 40px;
+	float: left;
+	border: none;
+	border-radius: 0;
+}
+
+#pay-way .btn1 {
+	background: #FAFAFA;
+}
+
+#pay-way .btn2 {
+	background: #10B6FF;
+	color: #fff;
+}

@@ -1,0 +1,83 @@
+body {
+	background-color: #fff;
+	padding: 0 15px;
+}
+
+.mui-bar {
+	background-color: #fff;
+	box-shadow: none;
+}
+
+.mui-bar-nav~.mui-content {
+	padding-top: 183px;
+	background-color: #fff;
+}
+
+.mui-input-group .mui-input-row {
+	height: 51px;
+	padding-bottom: 11px;
+	margin-top: 11px;
+}
+
+.mui-input-group:before,
+.mui-input-group::after {
+	height: 0;
+}
+
+.mui-input-row label {
+	font-size: 16px;
+	color: #333;
+	padding: 11px 5px;
+}
+
+.mui-input-row input {
+	font-size: 15px;
+	color: #858585;
+}
+
+.mui-input-group .mui-input-row:after {
+	width: 100%;
+	left: 0;
+	background-color: #DCDCDC;
+}
+
+.mui-input-row input::-webkit-input-placeholder {
+	font-size: 15px;
+	color: #858585;
+}
+
+.btn {
+	text-align: center;
+	margin-top: 120px;
+	padding: 0 2%;
+}
+
+.btn button {
+	padding: 13px 0;
+	width: 100%;
+	font-size: 18px;
+	-webkit-border-radius: 42px;
+	-moz-border-radius: 42px;
+	border-radius: 42px;
+	background-color: #10B6FF;
+	border: none;
+}
+
+.btn p {
+	float: right;
+	margin-right: 20px;
+	margin-top: 13px;
+	color: #333;
+	font-size: 12px;
+}
+
+.btm {
+	position: fixed;
+	left: 0;
+	bottom: 29px;
+	width: 100%;
+	text-align: center;
+	font-size: 12px;
+	color: #10B6FF;
+	margin-bottom: 0;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <link rel="stylesheet" href="/assets/css/admin.css">
+        <link rel="stylesheet" href="/assets/css/pintuer.css">
+		<title></title>
+     
+	</head>
+<body>
+<div class="panel admin-panel">
+
+ <form method="post" class="form-x" action="">  
+
+<div class="panel-head" id="add"><strong><span class="iconfont icon-icon-xiugai"></span>奖惩参数设置</strong></div>
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>一星分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['evaluationscoreone']}" name="evaluationscoreone">
+			<div class="tips" title="">差评一星分数</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>二星分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['evaluationscoretwo']}" name="evaluationscoretwo">
+			<div class="tips" title="">差评二星分数</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>三星分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['evaluationscorethree']}" name="evaluationscorethree">
+			<div class="tips" title="">中评三星分数</div>
+		</div>
+	</div>
+
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>四星分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['evaluationscorefour']}" name="evaluationscorefour">
+			<div class="tips" title="">好评四星分数</div>
+		</div>
+	</div>
+
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>五星分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['evaluationscorefive']}" name="evaluationscorefive">
+			<div class="tips" title="">好评五星分数</div>
+		</div>
+	</div>
+
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>超时分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['overtime']}" name="overtime">
+			<div class="tips" title="">扣除分数</div>
+		</div>
+	</div>
+	
+	<br>
+	<div class="form-group" style="margin-bottom: 0px; padding-bottom: 5px;">
+		<div class="label">
+			<label>投诉分值：</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input w50" value="{$list['complaint']}" name="complaint">
+			<div class="tips" title="">扣除分数</div>
+		</div>
+	</div>
+	 
+	
+	 <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="btn btn-success  size-L radius" type="submit"> 确认修改</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body></html>

@@ -1,0 +1,72 @@
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="__CDN__/assets/css/member-info.css"/>
+<script src="__CDN__/assets/js/frontend/user/plus.js" type="text/javascript" charset="utf-8"></script>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+    <h1 class="mui-title">个人中心</h1>
+</header>
+<div class="mui-content">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">头像</span>
+            {if condition="$userInfo['avatar'] eq ''"}
+            <img class="mui-media-object mui-pull-right" id="avatar" src="__CDN__/assets/img/headimg.png">
+            <input type="file" id="file" accept="image/*" onchange="fileSelected($(this))" style="display:none;">
+            {else /}
+            <img class="mui-media-object mui-pull-right" id="avatar" src="{$userInfo.avatar}">
+            <input type="file" id="file" accept="image/*" onchange="fileSelected($(this))" style="display:none;">
+            {/if}
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">昵称</span>
+            <span class="vv-li-right">{$userInfo.nickname}<span class="iconfont icon-fanhui-copy"></span></span>
+
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">用户等级</span>
+            <span class="vv-li-right">Lv{$userInfo.level}  {$userInfo.name}<span class="iconfont icon-fanhui-copy"></span></span>
+        </li>
+        <li class="mui-table-view-cell">
+            <input type="hidden" id="" value="" />
+            <span class="vv-li-left">性别</span>
+            <span class="vv-li-right"><span class="gender">{if condition="$userInfo['gender']==1"}男{elseif condition="$userInfo['gender']==2"/}女{else /} 保密{/if}</span><span class="iconfont icon-fanhui-copy"></span></span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">手机号</span>
+            <span class="vv-li-right">{$mobile}<span class="iconfont icon-fanhui-copy"></span></span>
+        </li>
+        <li class="mui-table-view-cell">
+            <span class="vv-li-left">密码</span>
+            {if condition="$userInfo['password'] eq md5(md5('vv'.$userInfo['mobile']) . $userInfo['salt'])"}
+            <span style="color:#FF7751;">请修改您的登录密码</span>
+            {/if}
+            <span class="vv-li-right">修改密码<span class="iconfont icon-fanhui-copy"></span></span>
+        </li>
+    </ul>
+</div>
+
+<!-- 性别选择弹出框 -->
+<div id="sex" class="mui-popover mui-popover-bottom mui-popover-action ">
+    <!-- 可选择菜单 -->
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+            <a  id="man">男</a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a  id="woman">女</a>
+        </li>
+    </ul>
+    <!-- 取消菜单 -->
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+            <a href="#sex"><b>取消</b></a>
+        </li>
+    </ul>
+</div>
+
+<div class="f-btn">
+    <button type="button" id="logout">退出当前账号</button>
+</div>
+
+<script src="__CDN__/assets/js/frontend/user/profile.js"></script>

@@ -1,0 +1,118 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<link rel="stylesheet" href="/public/assets/layui/css/layui.css"/>
+
+<script src="/public/assets/layui/layui.js"></script>
+
+<form class="layui-form" action="" method="POST" enctype="multipart/form-data">
+
+    <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="width: 100px;">昵称:</label>
+      <div class="layui-input-block" style="width:350px;">
+        <input type="text" name="nickname"   placeholder="请输入昵称"  autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+            <label class="layui-form-label" style=" width: 100px;">密码:</label>
+            <div class="layui-input-block" style="width:350px;">
+              <input type="text" name="password" placeholder="请输入登录密码"  autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+
+
+          <div class="layui-form-item">
+                <label class="layui-form-label" style="margin-left: 35; width: 100px;">图片:</label>
+                <div class="layui-input-block" style="width:350px;">
+                  <img src="" alt="" disabled="disabled">
+                </div>
+              </div>
+
+
+          <div class="layui-form-item">
+                <label class="layui-form-label" style="margin-left: 35; width: 100px;">手机号:</label>
+                <div class="layui-input-block" style="width:350px;">
+                  <input type="text" name="mobile" placeholder="请输入会员手机号"    autocomplete="off" class="layui-input">
+                </div>
+              </div>
+
+
+              <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-left: 35; width: 100px;">余额:</label>
+                    <div class="layui-input-block" style="width:350px;">
+                      <input type="text" name="rmoney" placeholder="请输入会员余额" autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+
+    <div class="layui-form-item">
+            <label class="layui-form-label" style="margin-left: 35; width: 100px;">会员等级:</label>
+      <div class="layui-input-block" style="width:350px;">
+        <select name="level" lay-filter="aihao">
+          <option value="0">写作</option>
+          <option value="1">阅读</option>
+        </select>
+      </div>
+    </div>
+
+    
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="margin-left: 35; width: 100px;">状态:</label>
+      <div class="layui-input-block" style="width:350px;">
+        <input type="checkbox" name="status" checked lay-skin="switch">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label" style="margin-left: 35; width: 100px;">性别:</label>
+      <div class="layui-input-block" style="width:350px;">
+        <input type="radio" name="gender" value="0" title="保密">
+        <input type="radio" name="gender" value="1" title="男" checked>
+        <input type="radio" name="gender" value="2" title="女">
+      </div>
+    </div>
+
+
+              <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-left: 35; width: 100px;">加入时间:</label>
+                    <div class="layui-input-block" style="width:350px;">
+                      <input type="text" name="jointime"  autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+  </form>
+ 
+  <script>
+  layui.use('form', function(){
+    var form = layui.form;
+    
+    //各种基于事件的操作，下面会有进一步介绍
+  });
+  </script>
+
+  ///////////
+
+  <input type="hidden" value="" id="imgsssss" name="video_img">
+        <div class="row cl" style="margin-top: 45px;">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>选择封面图片：</label>
+            <div class="formControls col-xs-7 col-sm-7">
+                <div class="uploader-thum-container">
+                    <div id="fileList" class="uploader-list"></div>
+                    <div id="filePicker">选择图片</div>
+                    <button type="button" id="btn-star" class="btn btn-default btn-uploadstar radius ml-10">开始上传图片</NOtton>
+                    <div id="inputtishi"></div>
+                </div>
+            </div>
+        </div>

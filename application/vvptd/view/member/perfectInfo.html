@@ -1,0 +1,523 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__CDN__/assets/vvptd/member/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/member/css/login.css"/>
+        <link rel="stylesheet" type="text/css" href="__CDN__/assets/vvptd/layer/need/layer.css"/>
+        <script src="__CDN__/assets/vvptd/layer/layer.js"></script>
+		<style type="text/css">
+			body {
+				padding: 0;
+			}
+			p {
+				margin-bottom: 0;
+				font-size: 12px;
+			}
+			.mui-bar {
+				border-bottom: 1px solid #DCDCDC;
+			}
+			.mui-bar~.mui-content {
+				padding: 77px 6% 0 6%;
+			}
+			.xing {
+				position: relative;
+				top: 3px;
+				color: #FF7751;
+				margin-right: 5px;
+			}
+			.mui-input-group {
+				margin-top: 20px;
+				
+			}
+			.mui-input-group .mui-input-row {
+				height: 36px;
+				margin-top: 0;
+				padding-bottom: 0;
+				
+			}
+			.mui-input-row label {
+				width: 30%;
+				padding: 11px 0;
+				font-size: 13px;
+				color: #333;
+			}
+			.mui-input-row label~input {
+				width: 70%;
+				height: 36px;
+			}
+			.mui-input-group:before {
+				height: 1px;
+				background-color: #dcdcdc;
+			}
+			.mui-radio input[type=radio] {
+				top: 7px;
+			}
+			.mui-radio input[type=radio]:before {
+				font-size: 20px;
+			}
+			.mui-input-row label~input {
+				font-size: 13px;
+			}
+			.mui-input-row label~input::-webkit-input-placeholder {
+				font-size: 13px;
+			}
+			.warranty>p {
+				color: #333333;
+				padding: 15px;
+			}
+			.warranty>div {
+				width: 100%;
+				border: 1px solid #DCDCDC;
+			}
+			.warranty>div:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.baodan, .paizhao {
+				width: 50%;
+				height: 100px;
+				line-height: 100px;
+				text-align: center;
+			}
+			.paizhao {
+				position: relative;
+				background-color: #EEEEEE;
+			}
+			.paizhao div:first-child {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				line-height: 50px;
+				background-color: white;
+				margin: 25px auto;
+			}
+			.paizhao div:last-child {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: none;
+				background-color: #fff;
+			}
+			.paizhao div:last-child img {
+				width: 100%;
+				height: 100%;
+			}
+			.warranty>.explain {
+				margin-top: 10px;
+				border: none;
+				
+			}
+			.mui-btn {
+				width: 100%;
+				height: 50px;
+				background-color: #10B6FF;
+				border-radius: 0;
+				border: none;
+				font-size: 18px;
+				margin-top: 30px;
+			}
+            .files{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                opacity:0;
+            }
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #858585;"></a>
+		    <h1 class="mui-title" style="color: #333333;">完善资料</h1>
+		</header>
+		<div class="mui-content">
+			<div>
+				<p>1.请完善以下资料，以便于信息审核</p>
+				<p>2.认证所需资料不公开给任何组织和个人</p>
+			</div>
+			<form class="mui-input-group">
+			    <div class="mui-input-row">
+			        <label><span class="xing">* </span> 姓名</label>
+			        <input type="text" class="mui-input-clear" id="truename" placeholder="请填写身份证姓名" value="{$data['truename']}">
+			    </div>
+			    <div class="mui-input-row">
+			        <label><span class="xing">* </span> 电话</label>
+			        <input type="text" class="mui-input-clear" id="mobile" placeholder="请填写手机号" value="{$data['mobile']}" disabled>
+			    </div>
+			    <!--<div class="mui-input-row">-->
+			        <!--<label><span class="xing">* </span> 登录密码</label>-->
+			        <!--<input type="text" class="mui-input-clear" value="0000000" id="">-->
+			    <!--</div>-->
+			    <div class="mui-input-row">
+			        <label><span class="xing">* </span> 所在城市</label>
+			        <input type="text" class="mui-input-clear" id="city" placeholder="请填写城市" value="{$data['city']}">
+			    </div>
+			    <div class="mui-input-row">
+			        <label class="mui-pull-left"><span class="xing">* </span> 性别</label>
+			        <div class="mui-pull-left">
+                        {if condition=" $data['gender'] eq 1 "}
+			        	<div class="mui-radio mui-pull-left" style="width: 70px;">
+						    <label>男</label>
+						    <input name="sex" type="radio" class="gender" value="1" checked>
+						</div>
+						<div class="mui-radio mui-pull-left" style="width: 70px;">
+						    <label>女</label>
+						    <input name="sex" type="radio" class="gender" value="2">
+						</div>
+                        {else/}
+                        <div class="mui-radio mui-pull-left" style="width: 70px;">
+                            <label>男</label>
+                            <input name="sex" type="radio" class="gender" value="1" >
+                        </div>
+                        <div class="mui-radio mui-pull-left" style="width: 70px;">
+                            <label>女</label>
+                            <input name="sex" type="radio" class="gender" value="2" checked>
+                        </div>
+                        {/if}
+			        </div>
+			        
+			    </div>
+			    <div class="mui-input-row">
+			        <label><span class="xing">* </span> 身份证号</label>
+			        <input type="text" class="mui-input-clear" id="id_number" value="{$data['id_number']}" placeholder="请填写身份证号码">
+			    </div>
+			    <div class="mui-input-row">
+			        <label><span class="xing">* </span> 现居住地</label>
+			        <input type="text" class="mui-input-clear" id="adress" value="{$data['adress']}" placeholder="请填写现居住地详细地址">
+			    </div>
+			    <div class="mui-input-row">
+			        <label><span class="xing">* </span> 第二联系人</label>
+			        <input type="text" class="mui-input-clear" id="urgent_phone" value="{$data['urgent_phone']}" placeholder="请填写第二联系人的手机号">
+			    </div>
+			</form>
+			<!--保单上传-->
+			<div class="warranty">
+				<p>保单上传</p>
+				<div>
+					<div class="mui-pull-left baodan">
+
+						<span class="iconfont icon-baoxiandan" style="font-size: 63px; color: #C4C9DF;"></span>
+					</div>
+					<div class="mui-pull-left paizhao">
+						<div class="imageup">
+                            <!--<input type="file" class="files" id="file_baodan" accept="image/*">-->
+							<span class="iconfont icon-paizhao" style="font-size: 33px; color: #DCDCDC;"></span>
+						</div>
+						<div class="img baodan_url">
+                            <input type="file" class="files" id="file_baodan" accept="image/*">
+							<img id="baodan" src="{$data['baodan_img']}" alt="" />
+						</div>
+					</div>
+				</div>
+				<div class="explain">
+					<p><span style="float: left;width: 125%;transform: scale(0.75);transform-origin: left;">#请拍摄个人保险单，需保证保单文字清晰且完整，</span></p>
+					<p style="color: #FF7751;"><span style="float: left;width: 125%;transform: scale(0.75);transform-origin: left;">不提供则每日第一单扣除2元作为保费<span style="color: #858585;">#</span></span></p>
+				</div>
+			</div>
+			<!--/保单上传-->
+			<!--个人形象-->
+			<div class="warranty">
+				<p style="padding-left: 0;"><span class="xing">*</span>个人形象照片</p>
+				<div>
+					<div class="mui-pull-left baodan">
+						<img style="margin-top: 5px;" width="100%" src="__CDN__/assets/vvptd/member/img/sfzzhengmian.png" alt="" />
+					</div>
+					<div class="mui-pull-left paizhao">
+						<div class="imageup">
+                            <!--<input type="file" class="files" id="file_xingxiang" accept="image/*">-->
+							<span class="iconfont icon-paizhao" style="font-size: 33px; color: #DCDCDC;"></span>
+						</div>
+						<div class="img xingxiang_url">
+                            <input type="file" class="files" id="file_xingxiang" accept="image/*">
+							<img id="xingxiang" src="{$data['photo']}" alt="" />
+						</div>
+					</div>
+				</div>
+				<div style="border: none;">
+					<p style="color: #FF7751;"><span style="float: left;width: 125%;transform: scale(0.75);transform-origin: left;">#请勿穿着其它平台工作服进行拍照，拍照时请保持面部清晰可见#</span></p>
+				</div>
+			</div>
+			<!--/个人形象-->
+			<!--手持身份证-->
+			<div class="warranty">
+				<p style="padding-left: 0;"><span class="xing">*</span>手持身份证照片</p>
+				<div>
+					<div class="mui-pull-left baodan">
+						<img style="margin-top: 5px;" width="100%" src="__CDN__/assets/vvptd/member/img/shouchisfz.png" alt="" />
+					</div>
+					<div class="mui-pull-left paizhao">
+						<div class="imageup">
+
+							<span class="iconfont icon-paizhao" style="font-size: 33px; color: #DCDCDC;"></span>
+						</div>
+						<div class="img shouchisfz_url">
+                            <input type="file" class="files" id="file_shouchisfz" accept="image/*">
+							<img id="shouchisfz" src="{$data['photo_hand']}" alt="" />
+						</div>
+					</div>
+				</div>
+				<div style="border: none;">
+					<p><span style="float: left;width: 125%;transform: scale(0.75);transform-origin: left;">#请手持身份证进行正面拍摄，确保被拍摄人与身份证的完整性#</span></p>
+				</div>
+			</div>
+			<!--/手持身份证-->
+			<!--身份证正面-->
+			<div class="warranty">
+				<p style="padding-left: 0;"><span class="xing">*</span>身份证正面</p>
+				<div>
+					<div class="mui-pull-left baodan" style="background-color: #BFBFBF;">
+						<img style="margin-top: 10px;" width="80%" src="__CDN__/assets/vvptd/member/img/sfz.png" alt="" />
+					</div>
+					<div class="mui-pull-left paizhao">
+						<div class="imageup">
+
+							<span class="iconfont icon-paizhao" style="font-size: 33px; color: #DCDCDC;"></span>
+						</div>
+						<div class="img shenfenzhengzm_url">
+                            <input type="file" class="files" id="file_shenfenzhengzm" accept="image/*">
+							<img id="shenfenzhengzm" src="{$data['id_card_pos']}" alt="" />
+						</div>
+					</div>
+				</div>
+				<div style="border: none;">
+					<p><span style="float: left;width: 125%;transform: scale(0.75);transform-origin: left;">#请对身份证正面拍摄，身份证完全入境，身份证号码清晰可见#</span></p>
+				</div>
+			</div>
+			<!--/身份证正面-->
+			<!--身份证反面-->
+			<div class="warranty">
+				<p style="padding-left: 0;"><span class="xing">*</span>身份证反面</p>
+				<div>
+					<div class="mui-pull-left baodan" style="background-color: #BFBFBF;">
+						<img style="margin-top: 10px;" width="80%" src="__CDN__/assets/vvptd/member/img/sfzfanmian.png" alt="" />
+					</div>
+					<div class="mui-pull-left paizhao">
+						<div class="imageup">
+
+							<span class="iconfont icon-paizhao" style="font-size: 33px; color: #DCDCDC;"></span>
+						</div>
+						<div class="img shenfenzhengfm_url">
+                            <input type="file" class="files" id="file_shenfenzhengfm" accept="image/*">
+							<img id="shenfenzhengfm" src="{$data['id_card_con']}" alt="" />
+						</div>
+					</div>
+				</div>
+				<div style="border: none;">
+					<p><span style="float: left;width: 125%;transform: scale(0.75);transform-origin: left;">#请对身份证反面拍摄，证件信息清晰可见，身份证过去无效#</span></p>
+				</div>
+			</div>
+			<!--/身份证反面-->
+		</div>
+		<button type="button" class="mui-btn mui-btn-primary subdata">确定提交</button>
+		<script src="__CDN__/assets/vvptd/member/js/mui.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+            $('.img').show();
+		</script>
+		<script>  
+            $('.subdata').on('click',function(){
+                var truename = $('#truename').val();
+                var mobile = $('#mobile').val();
+                var city = $('#city').val();
+                var gender = $('.gender').val();
+                var id_number = $('#id_number').val();
+                var urgent_phone = $('#urgent_phone').val();
+                var address = $('#adress').val();
+                var baodan_img = $('#baodan').attr('src');
+                var photo = $('#xingxiang').attr('src');
+                var photo_hand = $('#shouchisfz').attr('src');
+                var id_card_pos = $('#shenfenzhengzm').attr('src');
+                var id_card_con = $('#shenfenzhengfm').attr('src');
+                mui.ajax('/vvptd/member/perfectInfo',{
+                    type:'post',
+                    data:{
+                        truename:truename,
+                        mobile:mobile,
+                        city:city,
+                        gender:gender,
+                        id_number:id_number,
+                        urgent_phone:urgent_phone,
+                        adress:address,
+                        baodan_img:baodan_img,
+                        photo:photo,
+                        photo_hand:photo_hand,
+                        id_card_pos:id_card_pos,
+                        id_card_con:id_card_con
+                    },
+                    success: function (data) {
+                        if(data.code == 1){
+                            layer.open({
+                                content:'提交成功，请等待审核'
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                            setTimeout(function(){
+                                location.href='';
+                            },500);
+                        }else{
+                            layer.open({
+                                content:data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.open({
+                            content:'网络繁忙'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                })
+            })
+            //报单上传
+            $('#file_baodan').on('change',function(){
+                uplaod(this.files[0],'baodan')
+            })
+            //个人形象
+            $('#file_xingxiang').on('change',function(){
+                uplaod(this.files[0],'xingxiang')
+            })
+            //手持身份证
+            $('#file_shouchisfz').on('change',function(){
+                uplaod(this.files[0],'shouchisfz')
+            })
+            //身份证正面
+            $('#file_shenfenzhengzm').on('change',function(){
+                uplaod(this.files[0],'shenfenzhengzm')
+            })
+            //身份证反面
+            $('#file_shenfenzhengfm').on('change',function(){
+                uplaod(this.files[0],'shenfenzhengfm')
+            })
+            function uplaod(file,imgshow){
+                var formdata = new FormData();
+                formdata.append('file',file);
+                mui.ajax('/vvptd/member/upload',{
+                    type:'post',
+                    data:formdata,
+                    processData:false,
+                    contentType:false,
+                    success: function (data) {
+                        if(data.code == 1){
+                           $('#'+imgshow).attr('src',data.data.url);
+                            $('.'+imgshow+'_url').show();
+                        }else{
+                            layer.open({
+                                content:data.msg
+                                , skin: 'msg'
+                                , time: 2 //2秒后自动关闭
+
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.open({
+                            content:'网络繁忙'
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+
+                        });
+                    }
+                })
+            }
+            function plusReady(){  
+                // 弹出系统选择按钮框  
+                mui("body").on("tap",".imageup",function(){
+                	var id = this.parentNode.getElementsByTagName('img')[0].id;
+                    page.imgUp(id);
+                    this.parentNode.getElementsByTagName('img')[0].style.display = 'block';
+                })  
+                  
+            }  
+//            var page=null;
+//            page={
+//                imgUp:function(id){
+//                    var m=this;
+//                    plus.nativeUI.actionSheet({cancel:"取消",buttons:[
+//                        {title:"拍照"},
+//                        {title:"从相册中选择"}
+//                    ]}, function(e){//1 是拍照  2 从相册中选择
+//                        switch(e.index){
+//                            case 1:appendByCamera(id);break;
+//                            case 2:appendByGallery(id);break;
+//                        }
+//                    });
+//                }
+//                //摄像头
+//            }
+              
+            // 拍照添加文件
+            function appendByCamera(id){
+                plus.camera.getCamera().captureImage(function(e){
+                    console.log(e);
+                    plus.io.resolveLocalFileSystemURL(e, function(entry) { 
+	                    var path = entry.toLocalURL(); 
+	                    document.getElementById(id).src = path;
+                    }, function(e) { 
+                        mui.toast("读取拍照文件错误：" + e.message); 
+                    }); 
+    
+                });    
+            }
+            // 从相册添加文件
+            function appendByGallery(id){
+                plus.gallery.pick(function(path){
+                    document.getElementById(id).src = path; 
+
+                });
+            }
+            
+              
+//          //服务端接口路径
+//          var server = "http://www.test.cn/aaa.php";
+//          //获取图片元素
+//          var files = document.getElementById('headimg');
+//          // 上传文件
+//          function upload(){
+//              console.log(files.src);
+//              var wt=plus.nativeUI.showWaiting();
+//              var task=plus.uploader.createUpload(server,
+//                  {method:"POST"},
+//                  function(t,status){ //上传完成
+//                      if(status==200){
+//                          alert("上传成功："+t.responseText);
+//                          wt.close(); //关闭等待提示按钮
+//                      }else{
+//                          alert("上传失败："+status);
+//                          wt.close();//关闭等待提示按钮
+//                      }
+//                  }
+//              );
+//              //添加其他参数
+//              task.addData("name","test");
+//              task.addFile(files.src,{key:"dddd"});
+//              task.start();
+//          }
+            if(window.plus){  
+                plusReady();  
+            }else{  
+                document.addEventListener("plusready",plusReady,false);  
+            }       
+      
+        
+              
+        </script>  
+	</body>
+
+</html>
